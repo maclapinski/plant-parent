@@ -1,0 +1,52 @@
+table {
+  width: 100%;
+}
+
+table {
+  border: 2px solid black;
+  border-spacing: 0;
+}
+tr {
+  border-spacing: 0;
+}
+td, th {
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  border-left: 1px solid;
+  border-spacing: 0;
+  text-align: center;
+}
+img{
+    height: 50px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.25rem 1rem;
+    text-decoration: none;
+    font: inherit;
+    border: 1px solid #00695c;
+    color: #00695c;
+    background: white;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 15px;
+  }
+  
+  .btn:hover,
+  .btn:active {
+    background-color: #00695c;
+    color: white;
+  }
+  
+  .btn.danger {
+    color: red;
+    border-color: red;
+  }
+  
+  .btn.danger:hover,
+  .btn.danger:active {
+    background: red;
+    color: white;
+  }
