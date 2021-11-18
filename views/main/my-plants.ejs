@@ -1,0 +1,23 @@
+<head>
+  <link rel="stylesheet" href="/css/cart.css" />
+</head>
+
+<body>
+  <main>
+    <% if (plants.length > 0) { %>
+    <ul class="cart__item-list">
+      <% plants.forEach(p => { %>
+      <li class="cart__item">
+        <h1><%= p.name %></h1>
+        <form action="/cart-delete-item" method="POST">
+          <input type="hidden" value="<%= p.id %>" name="productId" />
+          <button class="btn danger" type="submit">Delete</button>
+        </form>
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <h1>No Plants!</h1>
+    <% } %>
+  </main>
+</body>

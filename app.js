@@ -6,6 +6,8 @@ const adminRoutes = require("./routes/admin-routes");
 const userRoutes = require("./routes/main-routes");
 const Plant = require("./models/plant");
 const User = require("./models/user");
+const PlantListItem = require('./models/plant-list-item')
+const PlantList = require('./models/plant-list')
 const sequelize = require("./util/database");
 const app = express();
 
@@ -29,9 +31,13 @@ app.use(userRoutes);
 
 Plant.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 User.hasMany(Plant);
+User.hasOne(PlantList);
+PlantList.belongsTo(User);
+PlantList.belongsToMany(Plant, { through: PlantListItem });
+Plant.belongsToMany(PlantList, { through: PlantListItem });
 
 sequelize
-  // .sync({ force: true })
+ //  .sync({ force: true })
   .sync()
   .then(result => {
     return User.findByPk(1);
@@ -44,8 +50,11 @@ sequelize
     return user;
   })
   .then(user => {
-      app.listen(3005);
     // console.log(user);
+    return user.createPlantList();
+  })
+  .then(cart => {
+    app.listen(3005);
   })
   .catch(err => {
     console.log(err);
