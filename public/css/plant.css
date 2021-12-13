@@ -17,10 +17,6 @@ td, th {
   border-spacing: 0;
   text-align: center;
 }
-img{
-    height: 50px;
-}
-
 .btn {
     display: inline-block;
     padding: 0.25rem 1rem;
@@ -50,3 +46,30 @@ img{
     background: red;
     color: white;
   }
+  .plant-form {
+    width: 20rem;
+    max-width: 90%;
+    margin: auto;
+    display: block;
+}
+
+.plant-item {
+    width: 20rem;
+    max-width: 95%;
+    margin: 1rem;
+}
+
+.plant__title {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.plant__price {
+    text-align: center;
+    color: #4d4d4d;
+    margin-bottom: 0.5rem;
+}
+
+.plant__description {
+    text-align: center;
+}

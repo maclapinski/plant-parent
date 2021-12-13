@@ -1,8 +1,11 @@
 
-<!-- <link rel="stylesheet" href="/css/forms.css">
-<link rel="stylesheet" href="/css/plant.css"> -->
-</head> </head>
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/forms.css">
+<link rel="stylesheet" href="/css/plant.css">
+</head>
+
 <body>
+<%- include('../includes/navigation.ejs') %>
 <main>
     <form class="plant-form" action="/admin/<% if (editing) { %>edit-plant<% } else { %>add-plant<% } %>" method="POST">
         <div class="form-control">
@@ -18,10 +21,10 @@
             <textarea name="description" id="description" rows="5"><% if (editing) { %><%= plant.description %><% } %></textarea>
         </div>
         <% if (editing) { %>
-            <input type="hidden" value="<%= plant.id %>" name="plantId">
+            <input type="hidden" value="<%= plant._id %>" name="plantId">
         <% } %>
 
         <button class="btn" type="submit"><% if (editing) { %>Update plant<% } else { %>Add plant<% } %></button>
     </form>
 </main>  
-</body>
+<%- include('../includes/end.ejs') %>

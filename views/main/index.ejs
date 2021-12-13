@@ -1,72 +1,9 @@
+<%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/plant.css" />
-<h1>Hello from the admin dashboard</h1>
-<a href="/admin">Admin utils</a>
+</head>
 <body>
+    <%- include('../includes/navigation.ejs') %>
   <main>
-    <h1>All Plants</h1>
-    <% if (plants.length > 0) { %>
-
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Image</th>
-        <th>Edit</th>
-      </tr>
-      <% for (let plant of plants) { %>
-      <tr>
-        <td><h1 class="plant__title"><%= plant.name %></h1></td>
-
-        <td><p class="plant__description"><%= plant.description %></p></td>
-        <td><img src="<%= plant.imageUrl %>" alt="<%= plant.name %>" /></td>
-        <td>
-          <a href="/admin/edit-plant/<%= plant.id %>?edit=true" class="btn"
-            >Edit</a
-          >
-          <form action="/admin/delete-plant" method="POST">
-            <input type="hidden" value="<%= plant.id %>" name="plantId" />
-            <button class="btn" type="submit">Delete</button>
-          </form>
-          <form action="/add-to-plants" method="POST">
-            <input type="hidden" value="<%= plant.id %>" name="plantId" />
-            <button class="btn" type="submit">Add to My Plants</button>
-          </form>
-        </td>
-      </tr>
-
-      <% } %>
-    </table>
-    <% } else { %>
-    <h1>No plants Found!</h1>
-    <% } %>
-<h1>My plants</h1>
-    <% if (myPlants.length > 0) { %>
-
-    <table>
-      <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Image</th>
-        <th>Edit</th>
-      </tr>
-      <% for (let plant of myPlants) { %>
-      <tr>
-        <td><h1 class="plant__title"><%= plant.name %></h1></td>
-
-        <td><p class="plant__description"><%= plant.description %></p></td>
-        <td><img src="<%= plant.imageUrl %>" alt="<%= plant.name %>" /></td>
-        <td>
-          <form action="/delete-from-plant-list" method="POST">
-            <input type="hidden" value="<%= plant.id %>" name="plantId" />
-            <button class="btn" type="submit">Delete</button>
-          </form>
-        </td>
-      </tr>
-
-      <% } %>
-    </table>
-    <% } else { %>
-    <h1>No plants Found in My Plant List!</h1>
-    <% } %>
+    <h1>Plant Parent is a portal for plant lovers!</h1>
   </main>
-</body>
+  <%- include('../includes/end.ejs') %>

@@ -4,7 +4,7 @@
 <body>
     <%- include('../includes/navigation.ejs') %>
   <main>
-    <h1>My Plants</h1>
+    <h1>Admin Dashboard</h1>
     <% if (plants.length > 0) { %>
 
         <div class="grid">
@@ -25,8 +25,10 @@
                         </p>
                     </div>
                     <div class="card__actions">
-                        
-                        <%- include('../includes/delete-plant.ejs', {plant: plant, action: "/delete-from-plant-list"}) %>
+                      <a href="/admin/edit-plant/<%= plant._id %>?edit=true" class="btn"
+                        >Edit</a
+                      >
+                        <%- include('../includes/delete-plant.ejs', {plant: plant, action: "/admin/delete-plant"}) %>
                     </div>
                 </article>
                 <% } %>
