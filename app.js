@@ -2,10 +2,11 @@ const path = require('path');
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const errorController = require('./controllers/error');
-const mongoConnect = require('./util/database').mongoConnect;
-const User = require('./models/user')
+const password = require('./util/dbpass');
+ const User = require('./models/user');
 
 const app = express();
 
@@ -19,9 +20,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res, next) => {
-  User.findById('61b2626b153cfe03139f28c1')
+  User.findById('61b8f4edc1313006019d9cd1')
     .then(user => {
-      req.user = new User(user.username, user.email, user.plantList, user._id);
+      req.user = user;
       next();
     })
     .catch(err => console.log(err));
@@ -30,6 +31,22 @@ app.use((req, res, next) => {
 app.use('/admin', adminRoutes);
 app.use(userRoutes);
 
-mongoConnect(() => {
-  app.listen(3005);
-});
+mongoose
+  .connect(
+    `mongodb+srv://macieklap:${password}@plantparentdb.tfx53.mongodb.net/plantParent?retryWrites=true&w=majority`
+  )
+  .then(result => {
+    User.findOne().then(user => {
+      if (!user) {
+        const user = new User({
+          name: 'Max',
+          email: 'max@test.com',
+          plantList: [
+          ]
+        });
+        user.save();
+      }
+    });
+    app.listen(3005);
+  })
+  .catch();

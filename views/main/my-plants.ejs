@@ -8,25 +8,25 @@
     <% if (plants.length > 0) { %>
 
         <div class="grid">
-            <% for (let plant of plants) { %>
+            <% for (let p of plants) { %>
                 <article class="card plant-item">
                     <header class="card__header">
                         <h1 class="plant__title">
-                            <%= plant.name %>
+                            <%= p.plant.name %>
                         </h1>
                     </header>
                     <div class="card__image">
-                        <img src="<%= plant.imageUrl %>" alt="<%= plant.title %>">
+                        <img src="<%= p.plant.imageUrl %>" alt="<%= p.plant.title %>">
                     </div>
                     <div class="card__content">
 
                         <p class="plant__description">
-                            <%= plant.description %>
+                            <%= p.plant.description %>
                         </p>
                     </div>
                     <div class="card__actions">
                         
-                        <%- include('../includes/delete-plant.ejs', {plant: plant, action: "/delete-from-plant-list"}) %>
+                        <%- include('../includes/delete-plant.ejs', {plant: p.plant, action: "/delete-from-plant-list"}) %>
                     </div>
                 </article>
                 <% } %>

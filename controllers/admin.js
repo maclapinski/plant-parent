@@ -1,7 +1,7 @@
 const Plant = require('../models/plant');
 
 exports.getAdminPage = (req, res, next) => {
-  Plant.fetchAll()
+  Plant.find()
     .then((plants) => {
       res.render('admin/admin', {
         plants: plants,
@@ -45,7 +45,12 @@ exports.postAddPlant = (req, res, next) => {
   const name = req.body.name;
   const imageUrl = req.body.imageUrl;
   const description = req.body.description;
-  const plant = new Plant(name, description, imageUrl, null, req.user._id);
+  const plant = new Plant({
+    name: name,
+    description: description,
+    imageUrl: imageUrl,
+    userId: req.user,
+  });
 
   plant
     .save()
@@ -59,7 +64,7 @@ exports.postAddPlant = (req, res, next) => {
 
 exports.postDeletePlant = (req, res, next) => {
   const plantId = req.body.plantId;
-  Plant.deleteById(plantId)
+  Plant.findByIdAndDelete(plantId)
     .then(() => {
       res.redirect('/admin/');
     })
@@ -72,15 +77,16 @@ exports.postEditPlant = (req, res, next) => {
   const updatedImageUrl = req.body.imageUrl;
   const updatedDesc = req.body.description;
 
-  const plant = new Plant(updatedName, updatedDesc, updatedImageUrl, plantId);
-  plant
-    .save()
+
+  Plant.findById(plantId)
+    .then(plant => {
+      plant.name = updatedName;
+      plant.description = updatedDesc;
+      plant.imageUrl = updatedImageUrl;
+      return plant.save();
+    })
     .then((result) => {
       res.redirect('/admin/');
     })
     .catch((err) => console.log(err));
-};
-
-exports.getEditPlants = (req, res, next) => {
-  res.render('admin/edit-plants');
 };

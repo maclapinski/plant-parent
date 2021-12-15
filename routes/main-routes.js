@@ -4,11 +4,11 @@ const mainController = require("../controllers/main");
 const router = express.Router();
 
 router.get("/", mainController.getIndexPage);
-router.get('/my-plants', mainController.getMyPlants)
-router.get('/plants', mainController.getPlants)
+ router.get('/user-plants', mainController.getUserPlantList)
+ router.get('/plants', mainController.getPlants)
 
-router.post('/add-to-plants', mainController.postAddToPlants)
-router.post('/delete-from-plant-list', mainController.postDeleteFromPlantList)
+ router.post('/add-to-plant-list', mainController.postAddToUserPlantList)
+ router.post('/delete-from-plant-list', mainController.postDeleteFromUserPlantList)
 
 
 module.exports = router;

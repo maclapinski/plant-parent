@@ -26,7 +26,7 @@
                     </div>
                     <div class="card__actions">
                         
-                        <%- include('../includes/add-to-my-plants.ejs', {plant: plant}) %>
+                        <%- include('../includes/add-to-user-plants.ejs', {plant: plant}) %>
                     </div>
                 </article>
                 <% } %>
@@ -57,7 +57,7 @@
             <input type="hidden" value="<%= plant._id %>" name="plantId" />
             <button class="btn" type="submit">Delete</button>
           </form>
-          <form action="/add-to-plants" method="POST">
+          <form action="/add-to-plant-list" method="POST">
             <input type="hidden" value="<%= plant._id %>" name="plantId" />
             <button class="btn" type="submit">Add to My Plants</button>
           </form>
