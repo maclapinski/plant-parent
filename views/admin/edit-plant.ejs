@@ -1,30 +1,81 @@
-
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/css/forms.css">
-<link rel="stylesheet" href="/css/plant.css">
+<link rel="stylesheet" href="/css/forms.css" />
+<link rel="stylesheet" href="/css/plant.css" />
 </head>
 
 <body>
-<%- include('../includes/navigation.ejs') %>
-<main>
-    <form class="plant-form" action="/admin/<% if (editing) { %>edit-plant<% } else { %>add-plant<% } %>" method="POST">
-        <div class="form-control">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" value="<% if (editing) { %><%= plant.name %><% } %>">
-        </div>
-        <div class="form-control">
-            <label for="imageUrl">Image URL</label>
-            <input type="text" name="imageUrl" id="imageUrl" value="<% if (editing) { %><%= plant.imageUrl %><% } %>">
-        </div>
-        <div class="form-control">
-            <label for="description">Description</label>
-            <textarea name="description" id="description" rows="5"><% if (editing) { %><%= plant.description %><% } %></textarea>
-        </div>
-        <% if (editing) { %>
-            <input type="hidden" value="<%= plant._id %>" name="plantId">
-        <% } %>
+  <%- include('../includes/navigation.ejs') %>
+  <main>
+    <form
+      class="plant-form"
+      action="/admin/<% if (editing) { %>edit-plant<% } else { %>add-plant<% } %>"
+      method="POST"
+    >
+      <div class="form-control">
+        <label for="name">Name</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          value="<% if (editing) { %><%= plant.name %><% } %>"
+        />
+      </div>
 
-        <button class="btn" type="submit"><% if (editing) { %>Update plant<% } else { %>Add plant<% } %></button>
+      <div class="form-control">
+        <label for="imageUrl">Image URL</label>
+        <input
+          type="text"
+          name="imageUrl"
+          id="imageUrl"
+          value="<% if (editing) { %><%= plant.imageUrl %><% } %>"
+        />
+      </div>
+
+      <div class="form-control">
+        <label for="description">Description</label>
+        <textarea name="description" id="description" rows="5">
+<% if (editing) { %><%= plant.description %><% } %></textarea
+        >
+      </div>
+
+      <fieldset>
+        <label class="" for="light">Light</label>      
+        <input type="checkbox" name="light" value="low" id='low'><label class="" for="low">Low</label>        
+        <input type="checkbox" name="light" value="medium"id='medium'>   <label class="" for="medium">Medium</label>     
+        <input type="checkbox" name="light" value="bright"id='bright'>                <label class="" for="bright">Bright</label>     
+    </fieldset> 
+    
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="difficulty"
+          >Difficulty</label
+        >
+        <div class="col-md-8">
+          <select class="form-control" id="experience" name="difficulty">
+            <option value="">Select a filter</option>
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="pets">Pets</label>
+        <div class="col-md-8">
+          <select class="form-control" id="pets" name="pets">
+            <option value="">Select a filter</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+      </div>
+      <% if (editing) { %>
+      <input type="hidden" value="<%= plant._id %>" name="plantId" />
+      <% } %>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button class="btn" type="submit">
+        <% if (editing) { %>Update plant<% } else { %>Add plant<% } %>
+      </button>
     </form>
-</main>  
-<%- include('../includes/end.ejs') %>
+  </main>
+  <%- include('../includes/end.ejs') %>
+</body>

@@ -23,7 +23,7 @@ exports.getEditPlant = (req, res, next) => {
       editing: false,
     });
   }
-  
+
   const plantId = req.params.plantId;
 
   Plant.findById(plantId)
@@ -45,11 +45,16 @@ exports.postAddPlant = (req, res, next) => {
   const name = req.body.name;
   const imageUrl = req.body.imageUrl;
   const description = req.body.description;
+  const light = req.body.light;
+  const difficulty = req.body.difficulty;
+  const isSafeForPets = req.body.pets;
   const plant = new Plant({
     name: name,
     description: description,
     imageUrl: imageUrl,
-    userId: req.user,
+    light: light,
+    difficulty: difficulty,
+    isSafeForPets: isSafeForPets,
   });
 
   plant
@@ -77,9 +82,8 @@ exports.postEditPlant = (req, res, next) => {
   const updatedImageUrl = req.body.imageUrl;
   const updatedDesc = req.body.description;
 
-
   Plant.findById(plantId)
-    .then(plant => {
+    .then((plant) => {
       plant.name = updatedName;
       plant.description = updatedDesc;
       plant.imageUrl = updatedImageUrl;

@@ -1,5 +1,4 @@
 const Plant = require('../models/plant');
-const User = require('../models/user');
 
 exports.getIndexPage = (req, res, next) => {
   Plant.find()
@@ -7,8 +6,8 @@ exports.getIndexPage = (req, res, next) => {
       res.render('main/index', {
         path: '/',
         pageTitle: 'Index',
-        myPlants: plants,
         plants: plants,
+        errorMessage: req.flash('error'),
       });
     })
     .catch((err) => console.log(err));
@@ -38,24 +37,16 @@ exports.getUserPlantList = (req, res, next) => {
         path: '/user-plants',
         pageTitle: 'My Plants',
         plants: plants,
+        errorMessage: req.flash('error'),
       });
     })
     .catch((err) => console.log(err));
 };
-
-exports.getCart = (req, res, next) => {
-  req.user
-    .populate('cart.items.productId')
-    .execPopulate()
-    .then((user) => {
-      const products = user.cart.items;
-      res.render('shop/cart', {
-        path: '/cart',
-        pageTitle: 'Your Cart',
-        products: products,
-      });
-    })
-    .catch((err) => console.log(err));
+exports.getSearch = (req, res, next) => {
+  res.render('main/search', {
+    path: '/search',
+    pageTitle: 'Search',
+  });
 };
 
 exports.postAddToUserPlantList = (req, res, next) => {
@@ -77,4 +68,52 @@ exports.postDeleteFromUserPlantList = (req, res, next) => {
     console.log(result);
     res.redirect('/user-plants');
   });
+};
+
+exports.postSearch = (req, res, next) => {
+  const difficulty = req.body.difficulty;
+  const light = req.body.light;
+  const petSafe = req.body.pets;
+
+  let difficultyList = [];
+  let lightList = [];
+  let lightQuery;
+  let difficultyQuery;
+  let query;
+
+  if (typeof light === 'string') {
+    lightQuery = { light: light };
+  } else {
+    for (item of light) {
+      const object = { light: item };
+      lightList.push(object);
+    }
+    lightQuery = { $or: lightList };
+  }
+
+  if (typeof difficulty === 'string') {
+    difficultyQuery = { difficulty: difficulty };
+  } else {
+    for (item of difficulty) {
+      const object = { difficulty: item };
+      difficultyList.push(object);
+    }
+    difficultyQuery = { $or: difficultyList };
+  }
+
+  if (req.body.pets === 'true') {
+    query = { $and: [difficultyQuery, lightQuery, { isSafeForPets: petSafe }] };
+  } else {
+    query = { $and: [difficultyQuery, lightQuery] };
+  }
+
+  Plant.find(query)
+    .then((plants) => {
+      res.render('main/plants', {
+        path: '/plants',
+        pageTitle: 'Search Results',
+        plants: plants,
+      });
+    })
+    .catch((err) => console.log(err));
 };

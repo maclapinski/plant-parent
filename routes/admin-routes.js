@@ -1,15 +1,16 @@
 const express = require('express');
-const path = require('path');
+
 const adminController = require('../controllers/admin');
+const isAuth = require('../middleware/is-auth');
+
 const router = express.Router();
 
-router.get('/', adminController.getAdminPage);
-// router.get('/edit-plants', adminController.getEditPlants);
- router.get('/edit-plant/:plantId', adminController.getEditPlant);
- router.get('/edit-plant/', adminController.getEditPlant);
+router.get('/', isAuth, adminController.getAdminPage);
+router.get('/edit-plant/:plantId', isAuth, adminController.getEditPlant);
+router.get('/edit-plant/', isAuth, adminController.getEditPlant);
 
- router.post('/add-plant', adminController.postAddPlant);
- router.post('/edit-plant', adminController.postEditPlant);
- router.post('/delete-plant', adminController.postDeletePlant);
+router.post('/add-plant', isAuth, adminController.postAddPlant);
+router.post('/edit-plant', isAuth, adminController.postEditPlant);
+router.post('/delete-plant', isAuth, adminController.postDeletePlant);
 
 module.exports = router;

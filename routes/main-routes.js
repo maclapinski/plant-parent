@@ -1,14 +1,17 @@
 const express = require("express");
-const path = require("path");
-const mainController = require("../controllers/main");
 const router = express.Router();
 
-router.get("/", mainController.getIndexPage);
- router.get('/user-plants', mainController.getUserPlantList)
- router.get('/plants', mainController.getPlants)
+const mainController = require("../controllers/main");
+const isAuth = require('../middleware/is-auth');
 
- router.post('/add-to-plant-list', mainController.postAddToUserPlantList)
- router.post('/delete-from-plant-list', mainController.postDeleteFromUserPlantList)
+router.get("/", mainController.getIndexPage);
+ router.get('/user-plants', isAuth, mainController.getUserPlantList)
+ router.get('/plants', mainController.getPlants)
+ router.get('/search', mainController.getSearch)
+
+ router.post('/add-to-plant-list', isAuth, mainController.postAddToUserPlantList)
+ router.post('/delete-from-plant-list', isAuth, mainController.postDeleteFromUserPlantList)
+ router.post('/search', mainController.postSearch)
 
 
 module.exports = router;

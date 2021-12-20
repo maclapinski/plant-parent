@@ -17,6 +17,7 @@
             <label for="description">Description</label>
             <textarea name="description" id="description" rows="5"><% if (editing) { %><%= plant.description %><% } %></textarea>
         </div>
+        
         <% if (editing) { %>
             <input type="hidden" value="<%= plant.id %>" name="plantId">
         <% } %>

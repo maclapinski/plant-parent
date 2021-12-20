@@ -1,0 +1,59 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/plant.css" />
+</head>
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <main>
+    <h1>Search</h1>
+
+    <form
+      class="form-horizontal"
+      id="myForm"
+      action="/search"
+      method="POST"
+      role="form"
+    >
+      <fieldset>
+        <label class="" for="light">Difficulty</label>
+
+        <input type="checkbox" name="difficulty" value="easy" id="easy" />
+        <label class="" for="easy">Easy</label>
+
+        <input type="checkbox" name="difficulty" value="medium" id="medium" />
+        <label class="" for="medium">Medium</label>
+
+        <input type="checkbox" name="difficulty" value="advanced" id="advanced"/>
+        <label class="" for="advanced">Advanced</label>
+      </fieldset>
+
+      <fieldset>
+        <label class="" for="light">Light</label>
+        <input type="checkbox" name="light" value="low" id="low" /><label
+          class=""
+          for="low"
+          >Low</label
+        >
+        <input type="checkbox" name="light" value="medium" id="medium" />
+        <label class="" for="medium">Medium</label>
+        <input type="checkbox" name="light" value="bright" id="bright" />
+        <label class="" for="bright">Bright</label>
+      </fieldset>
+
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="pets">Pets</label>
+        <div class="col-md-8">
+          <select class="form-control" id="pets" name="pets">
+            <option value="">Select a filter</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+          </select>
+        </div>
+      </div>
+
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button class="btn" type="submit">Submit  </button>
+
+    </form>
+  </main>
+  <%- include('../includes/end.ejs') %>
+</body>
