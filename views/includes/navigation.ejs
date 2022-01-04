@@ -1,20 +1,37 @@
 <div class="backdrop"></div>
 <header class="main-header">
   <button id="side-menu-toggle">Menu</button>
+  <div class="main-header__logo">
+    <img src="/images/logo-nav-green.png" alt="" />
+  </div>
   <nav class="main-header__nav">
     <ul class="main-header__item-list">
       <li class="main-header__item">
-        <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
+        <a class="<%= path === '/' ? 'active' : '' %>" val="Home" href="/"
+          >Home</a
+        >
       </li>
       <li class="main-header__item">
-        <a class="<%= path === '/plants' ? 'active' : '' %>" href="/plants"
+        <a
+          class="<%= path === '/plants' ? 'active' : '' %>"
+          val="Plants"
+          href="/plants"
           >Plants</a
+        >
+      </li>
+      <li class="main-header__item">
+        <a
+          class="<%= path === '/search' ? 'active' : '' %>"
+          val="Search"
+          href="/search"
+          >Search</a
         >
       </li>
       <li class="main-header__item">
         <a
           class="<%= path === '/user-plants' ? 'active' : '' %>"
           href="/user-plants"
+          val="My Plants"
           >My Plants</a
         >
       </li>
@@ -23,33 +40,54 @@
         <a
           class="<%= path === '/admin/edit-plant' ? 'active' : '' %>"
           href="/admin/edit-plant"
-          >Add Product
+          val="Add Plant"
+          >Add Plant
         </a>
       </li>
-      <% } %>
+      <% } %> <% if(isAdmin) {%>
       <li class="main-header__item">
-        <a class="<%= path === '/admin' ? 'active' : '' %>" href="/admin"
+        <a
+          class="<%= path === '/admin' ? 'active' : '' %>"
+          href="/admin"
+          val="Admin Dashboard"
           >Admin Dashboard
         </a>
       </li>
+      <% } %>
     </ul>
     <ul class="main-header__item-list">
       <% if (!isAuthenticated) { %>
       <li class="main-header__item">
-        <a class="<%= path === '/login' ? 'active' : '' %>" href="/login"
+        <a
+          class="<%= path === '/login' ? 'active' : '' %>"
+          href="/login"
+          val="Login"
           >Login</a
         >
       </li>
       <li class="main-header__item">
-        <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup"
+        <a
+          class="<%= path === '/signup' ? 'active' : '' %>"
+          href="/signup"
+          val="Sign Up"
+          id='Sign Up'
           >Sign Up</a
         >
       </li>
       <% } else { %>
       <li class="main-header__item">
+        <a
+          class="<%= path === '/profilep' ? 'active' : '' %>"
+          href="/profile"
+          val="ML Profile"
+          >Profile</a
+        >
+
+      </li>
+      <li class="main-header__item">
         <form action="/logout" method="post">
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-          <button type="submit">Logout</button>
+          <button val="Logout" type="submit">Logout</button>
         </form>
       </li>
       <% } %>
@@ -67,6 +105,11 @@
         >Plants</a
       >
     </li>
+    <li class="mobile-nav__item">
+      <a class="<%= path === '/search' ? 'active' : '' %>" href="/search"
+        >Search</a
+      >
+    </li>
     <% if (isAuthenticated) { %>
     <li class="mobile-nav__item">
       <a
@@ -79,7 +122,7 @@
       <a
         class="<%= path === '/admin/add-product' ? 'active' : '' %>"
         href="/admin/add-product"
-        >Add Product
+        >Add Plant
       </a>
     </li>
     <li class="mobile-nav__item">

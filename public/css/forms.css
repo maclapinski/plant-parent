@@ -21,3 +21,35 @@
 .form-control textarea:focus {
   outline-color: #00695c;
 }
+
+.form-control .input {
+  display: flex;
+  align-items: baseline;
+  position: relative;
+}
+.form-control .input-email {
+  
+}
+
+
+.form-control .input .fa-check-circle,
+.form-control .input .fa-times-circle {
+  display: none;
+  position: absolute;
+  top: 0.3rem;
+  left: 102%;
+}
+
+.form-control .input .fa-check-circle {
+  color: green;
+}
+.form-control .input .fa-times-circle {
+  color: red;
+}
+
+/* 
+input[type=email], 
+input[type=password] {
+
+  color: red
+} */

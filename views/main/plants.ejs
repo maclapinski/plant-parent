@@ -25,8 +25,15 @@
                         </p>
                     </div>
                     <div class="card__actions">
-                        
-                        <%- include('../includes/add-to-user-plants.ejs', {plant: plant}) %>
+                        <% if (userPlants.includes(plant._id.toString())) { %> 
+                        <div class="text-container"> <p>Your Plant</p> </div>
+                        <% } else{ %>
+                            <form action="/add-to-plant-list" method="post">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button class="btn" type="submit" >Add to My Plants</button>
+                            <input type="hidden" name="plantId" value="<%= plant._id %>">
+                        </form>
+                             <% } %>
                     </div>
                 </article>
                 <% } %>

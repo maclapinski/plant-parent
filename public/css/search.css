@@ -1,0 +1,11 @@
+.search-panel{
+    min-width: 21rem;
+}
+.container-image{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+.container-image .search-image{
+    height: 60vh;
+}

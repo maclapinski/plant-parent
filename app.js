@@ -29,6 +29,7 @@ const authRoutes = require('./routes/auth');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(
   session({
     secret: 'my secret',
@@ -54,6 +55,8 @@ app.use((req, res, next) => {
 
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.session.isLoggedIn;
+  res.locals.userAvatar = req.user ?`https://ui-avatars.com/api/?name=${req.user.firstName}+${req.user.lastName}&rounded=true` : '';
+  res.locals.isAdmin = req.user ? req.user.isAdmin : false;
   res.locals.csrfToken = req.csrfToken();
   next();
 });
