@@ -75,10 +75,9 @@ app.use(errorController.get404);
 
 mongoose
   .connect(MONGODB_URI)
-  .then((result) => {
-    // https
-    //   .createServer({ key: privateKey, cert: certificate }, app)
-    //   .listen(process.env.PORT || 3005);
-    app.listen(process.env.PORT || 3005);
+  .then(result => {
+      app.listen(process.env.PORT || 3005);
   })
-  .catch();
+  .catch(err => {
+    console.log(err);
+  });
