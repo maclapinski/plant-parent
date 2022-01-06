@@ -6,6 +6,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
     "connect-flash": "^0.1.1",
     "connect-mongodb-session": "^3.1.1",
     "csurf": "^1.11.0",
@@ -13,6 +14,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "express-validator": "^6.14.0",
+    "helmet": "^5.0.1",
     "mongodb": "^4.2.1",
     "mongoose": "^6.1.1",
     "mysql2": "^2.3.3",
@@ -20,10 +22,10 @@
     "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^2.0.15"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "start:dev": "nodemon app.js"
   },
   "author": "Mac Lapinski",
   "license": "ISC"

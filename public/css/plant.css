@@ -23,8 +23,8 @@ th {
   padding: 0.25rem 1rem;
   text-decoration: none;
   font: inherit;
-  border: 1px solid #00695c;
-  color: #00695c;
+  border: 1px solid #28a745;
+  color: #28a745;
   background: white;
   border-radius: 3px;
   cursor: pointer;
@@ -33,7 +33,7 @@ th {
 
 .btn:hover,
 .btn:active {
-  background-color: #00695c;
+  background-color: #28a745;
   color: white;
 }
 
@@ -62,12 +62,6 @@ th {
 .plant__title {
   font-size: 1.2rem;
   text-align: center;
-}
-
-.plant__price {
-  text-align: center;
-  color: #4d4d4d;
-  margin-bottom: 0.5rem;
 }
 
 .plant__description {

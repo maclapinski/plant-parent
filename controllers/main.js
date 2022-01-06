@@ -16,20 +16,18 @@ exports.getIndexPage = (req, res, next) => {
 exports.getPlants = (req, res, next) => {
   Plant.find()
     .then((plants) => {
-      // console.log(
-      //   plants[2]._id.toString() === req.user.plantList[0].plant.toString()
-      // );
-      // console.log(plants);
-      // console.log(req.user.plantList);
       const usrPlants = [];
-      for (item of req.user.plantList) {
-        usrPlants.push(item.plant.toString());
+      if (req.user) {
+        for (item of req.user.plantList) {
+          usrPlants.push(item.plant.toString());
+        }
       }
+
       res.render('main/plants', {
         path: '/plants',
         pageTitle: 'All Plants',
         plants: plants,
-        userPlants: usrPlants
+        userPlants: usrPlants,
       });
     })
     .catch((err) => console.log(err));

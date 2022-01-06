@@ -5,9 +5,10 @@
 <body>
   <%- include('../includes/navigation.ejs') %>
   <main>
-    <h1>Search</h1>
-    <div class="container">
+    
+    <div class="container container-row">
       <div class="search-panel">
+        <h1>Search</h1>
         <form
           class="form-horizontal"
           id="plantSearchForm"
@@ -15,7 +16,7 @@
           method="POST"
           role="form"
         >
-          <label class="" for="light">Difficulty</label>
+          <label class="label" for="light">Difficulty</label>
           <fieldset>
             <input type="checkbox" name="difficulty" value="easy" id="easy" <%=
             oldInput.easy %> />
@@ -30,7 +31,7 @@
             <label class="" for="advanced">Advanced</label>
           </fieldset>
 
-          <label class="" for="light">Light</label>
+          <label class="label" for="light">Light</label>
           <fieldset>
             <input type="checkbox" name="light" value="low" id="low" <%=
             oldInput.lowLight %>/>
@@ -46,8 +47,8 @@
           </fieldset>
 
           <div class="form-group">
-            <label class="col-md-4 control-label" for="pets">Pets</label>
-            <div class="col-md-8">
+            <label class="label" for="pets">Pets</label>
+            <div class="">
               <input type="checkbox" name="petSafe" value="true" id="pet" <%=
               oldInput.petSafe === true ? 'checked' : '' %>/>
               <label class="" for="petSafe">Pet Friendly</label>

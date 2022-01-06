@@ -7,16 +7,23 @@ const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
+const helmet = require('helmet');
+const compression = require('compression');
 
 const errorController = require('./controllers/error');
 const PASSWORD = require('./util/dbpass');
  const User = require('./models/user');
+const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${
+  process.env.MONGO_PASSWORD
+}@plantparentdb.tfx53.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 
 const app = express();
 const store = new MongoDBStore({
-  uri: `mongodb+srv://macieklap:${PASSWORD}@plantparentdb.tfx53.mongodb.net/sessions`,
+  uri: MONGODB_URI,
   collection: 'sessions'
 });
+
+
 
 const csrfProtection = csrf();
 
@@ -26,6 +33,9 @@ app.set('views', 'views');
 const adminRoutes = require('./routes/admin-routes');
 const mainRoutes = require('./routes/main-routes');
 const authRoutes = require('./routes/auth');
+
+app.use(helmet());
+app.use(compression());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -68,10 +78,11 @@ app.use(authRoutes);
 app.use(errorController.get404);
 
 mongoose
-  .connect(
-    `mongodb+srv://macieklap:${PASSWORD}@plantparentdb.tfx53.mongodb.net/plantParent?retryWrites=true&w=majority`
-  )
+  .connect(MONGODB_URI)
   .then(result => {
-    app.listen(3005);
+    // https
+    //   .createServer({ key: privateKey, cert: certificate }, app)
+    //   .listen(process.env.PORT || 3005);
+      app.listen(process.env.PORT || 3005);
   })
   .catch();

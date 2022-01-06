@@ -1,6 +1,12 @@
 .search-panel{
     min-width: 21rem;
 }
+.search-panel .label {
+    font-weight: 600;
+}
+.search-panel .btn {
+    margin: 1rem 0;
+}
 .container-image{
     display: flex;
     justify-content: center;
