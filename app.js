@@ -11,7 +11,8 @@ const compression = require('compression');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
-const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@plantparentdb.tfx53.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
+// const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@plantparentdb.tfx53.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
+const MONGODB_URI = process.env.MONGO_CONNECTION_STRING;
 
 const app = express();
 const store = new MongoDBStore({
