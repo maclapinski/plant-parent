@@ -10,7 +10,6 @@ const flash = require('connect-flash');
 const compression = require('compression');
 
 const errorController = require('./controllers/error');
-const PASSWORD = require('./util/dbpass');
 const User = require('./models/user');
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@plantparentdb.tfx53.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 
