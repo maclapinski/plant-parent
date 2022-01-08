@@ -61,7 +61,7 @@ exports.getEditPlant = (req, res, next) => {
 
 exports.postAddPlant = (req, res, next) => {
   const name = req.body.name;
-  const imageUrl = req.body.imageUrl;
+  const image = req.body.image;
   const description = req.body.description;
   const light = req.body.light;
   const difficulty = req.body.difficulty;
@@ -69,7 +69,7 @@ exports.postAddPlant = (req, res, next) => {
   const plant = new Plant({
     name: name,
     description: description,
-    imageUrl: imageUrl,
+    image: image,
     light: light,
     difficulty: difficulty,
     isSafeForPets: isSafeForPets,
@@ -99,14 +99,14 @@ exports.postDeletePlant = (req, res, next) => {
 exports.postEditPlant = (req, res, next) => {
   const plantId = req.body.plantId;
   const updatedName = req.body.name;
-  const updatedImageUrl = req.body.imageUrl;
+  const updatedImageUrl = req.body.image;
   const updatedDesc = req.body.description;
 
   Plant.findById(plantId)
     .then((plant) => {
       plant.name = updatedName;
       plant.description = updatedDesc;
-      plant.imageUrl = updatedImageUrl;
+      plant.image = updatedImageUrl;
       return plant.save();
     })
     .then((result) => {
