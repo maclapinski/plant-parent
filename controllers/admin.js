@@ -1,12 +1,20 @@
 const Plant = require('../models/plant');
 
 exports.getAdminPage = (req, res, next) => {
+  let successMsg = req.flash('success');
+
+  if (successMsg.length > 0) {
+    successMsg = successMsg[0];
+  } else {
+    successMsg = null;
+  }
   Plant.find()
     .then((plants) => {
       res.render('admin/admin', {
         plants: plants,
         pageTitle: 'Admin Dashboard',
         path: '/admin',
+        successMessage: successMsg
       });
     })
     .catch((err) => {
@@ -16,11 +24,20 @@ exports.getAdminPage = (req, res, next) => {
 
 exports.getEditPlant = (req, res, next) => {
   const editMode = req.query.edit;
+  let successMsg = req.flash('success');
+
+  if (successMsg.length > 0) {
+    successMsg = successMsg[0];
+  } else {
+    successMsg = null;
+  }
+
   if (!editMode) {
     return res.render('admin/edit-plant', {
       path: 'admin/edit-plant',
       pageTitle: 'Edit Plant',
       editing: false,
+      successMessage: successMsg
     });
   }
 
@@ -36,6 +53,7 @@ exports.getEditPlant = (req, res, next) => {
         path: '/admin/edit-plant',
         editing: editMode,
         plant: plant,
+        successMessage: successMsg
       });
     })
     .catch((err) => console.log(err));
@@ -60,7 +78,8 @@ exports.postAddPlant = (req, res, next) => {
   plant
     .save()
     .then((result) => {
-      res.redirect('/admin/');
+      req.flash('success', 'Plant added to database.');
+      res.redirect('/admin/edit-plant');
     })
     .catch((err) => {
       console.log(err);
@@ -71,6 +90,7 @@ exports.postDeletePlant = (req, res, next) => {
   const plantId = req.body.plantId;
   Plant.findByIdAndDelete(plantId)
     .then(() => {
+      req.flash('success', 'Plant deleted from the database.');
       res.redirect('/admin/');
     })
     .catch((err) => console.log(err));
@@ -90,6 +110,7 @@ exports.postEditPlant = (req, res, next) => {
       return plant.save();
     })
     .then((result) => {
+      req.flash('success', 'Plant updated successfully.');
       res.redirect('/admin/');
     })
     .catch((err) => console.log(err));

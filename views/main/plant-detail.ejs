@@ -1,0 +1,36 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/forms.css">
+<link rel="stylesheet" href="/css/auth.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+  <main class="centered">
+    <div class="container">
+      <h1><%= plant.title %></h1>
+      <hr />
+      <div class="image">
+        <img src="<%= plant.imageUrl %>" alt="<%= plant.title %>" />
+      </div>
+      <div class="row">
+        <p class="label">Difficulty:</p>
+        <p class="value"><%= plant.difficulty %></p>
+      </div>
+      <div class="row">
+        <p class="label">Light: </p>
+        <p class="value">   
+                            <i title="low"class="fas fa-cloud <%= plant.light.includes('low') ? "active" : "inactive"%>  "></i> 
+                            <i title="medium"class="fas fa-cloud-sun <%= plant.light.includes('medium') ? "active" : "inactive"%>  "></i> 
+                            <i title="bright"class="fas fa-sun <%= plant.light.includes('bright') ? "active" : "inactive"%>  "></i> 
+        </p>
+        
+      </div>
+      <div class="row">
+        <p class="label">Pet-Friendly:</p>
+        <p class="value"><%= plant.isSafeForPets ? "Yes" : "No"%></p>
+      </div>
+      <p><%= plant.description %></p>
+      <% if (isAuthenticated) { %> <%- include('../includes/add-to-user-plants.ejs', {plant: plant}) %> <% } %>
+    </div>
+  </main>
+<%- include('../includes/end.ejs') %>

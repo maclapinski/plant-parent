@@ -32,6 +32,21 @@ exports.getPlants = (req, res, next) => {
     })
     .catch((err) => console.log(err));
 };
+exports.getPlant = (req, res, next) => {
+  const plantId = req.params.plantId;
+  Plant.findById(plantId).then((plant) => {
+    res.render('main/plant-detail', {
+      plant: plant,
+      pageTitle: plant.name,
+      path: '/plants',
+    });
+  })
+  .catch((err) => {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  });
+};
 
 exports.getUserPlantList = (req, res, next) => {
   req.user

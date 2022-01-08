@@ -2,44 +2,52 @@
 <link rel="stylesheet" href="/css/plant.css" />
 </head>
 <body>
-    <%- include('../includes/navigation.ejs') %>
+  <%- include('../includes/navigation.ejs') %>
   <main>
     <h1>All Plants</h1>
     <% if (plants.length > 0) { %>
 
-        <div class="grid">
-            <% for (let plant of plants) { %>
-                <article class="card plant-item">
-                    <header class="card__header">
-                        <h1 class="plant__title">
-                            <%= plant.name %>
-                        </h1>
-                    </header>
-                    <div class="card__image">
-                        <img src="<%= plant.imageUrl %>" alt="<%= plant.title %>">
-                    </div>
-                    <div class="card__content">
-
-                        <p class="plant__description">
-                            <%= plant.description %>
-                        </p>
-                    </div>
-                    <div class="card__actions">
-                        <% if (userPlants.includes(plant._id.toString())) { %> 
-                        <div class="text-container"> <p>Your Plant</p> </div>
-                        <% } else{ %>
-                            <form action="/add-to-plant-list" method="post">
-                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                            <button class="btn" type="submit" >Add to My Plants</button>
-                            <input type="hidden" name="plantId" value="<%= plant._id %>">
-                        </form>
-                             <% } %>
-                    </div>
-                </article>
-                <% } %>
+    <div class="grid">
+      <% for (let plant of plants) { %>
+      <article class="card plant-item">
+        <header class="card__header">
+          <h1 class="plant__title"><%= plant.name %></h1>
+        </header>
+        <div class="card__image">
+          <img src="<%= plant.imageUrl %>" alt="<%= plant.title %>" />
         </div>
+        <div class="card__content">
+          <div class="row">
+            <p class="label">Difficulty:</p>
+            <p class="value"><%= plant.difficulty %></p>
+          </div>
+          <div class="row">
+            <p class="label">Light:</p>
+            <p class="value"><%= plant.light.toString() %></p>
+          </div>
+          <div class="row">
+            <p class="label">Pet-Friendly:</p>
+            <p class="value"><%= plant.isSafeForPets ? "Yes" : "No"%></p>
+          </div>
+        </div>
+        <div class="card__actions">
+            <a href="/plants/<%= plant._id %>" class="btn">Details</a>
+          <% if (userPlants.includes(plant._id.toString())) { %>
+          <div class="text-container"><p>Your Plant</p></div>
+          <% } else{ %>
+          <form action="/add-to-plant-list" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button class="btn" type="submit">Add to My Plants</button>
+            <input type="hidden" name="plantId" value="<%= plant._id %>" />
+          </form>
+          <% } %>
+        </div>
+      </article>
+      <% } %>
+    </div>
     <% } else { %>
     <h1>No plants Found!</h1>
     <% } %>
   </main>
   <%- include('../includes/end.ejs') %>
+</body>

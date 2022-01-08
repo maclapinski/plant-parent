@@ -239,6 +239,27 @@ p {
   border-radius: 7px;
 }
 
+
+.row {
+  display: flex;
+}
+
+.value {
+  padding-left: 5px;
+}
+.value .active {
+  color: #28a745;
+}
+.value .inactive {
+  color: #bec2cf;
+}
+
+.label {
+  font-weight: 600;
+}
+
+
+
 .card__header,
 .card__content {
   padding: 1rem;
@@ -268,8 +289,9 @@ p {
 }
 
 .card__actions button,
+.card__actions .text-container,
 .card__actions a {
-  margin: 0 0.25rem;
+  margin: 0.5rem 0.25rem;
 }
 
 .btn {
