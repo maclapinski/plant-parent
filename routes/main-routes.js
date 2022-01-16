@@ -8,6 +8,8 @@ router.get('/', mainController.getIndexPage);
 router.get('/user-plants', isAuth, mainController.getUserPlantList);
 router.get('/plants', mainController.getPlants);
 router.get('/plants/:plantId', mainController.getPlant);
+router.get('/subscribe', mainController.getSubscribe);
+router.get('/unsubscribe/:token', mainController.getUnsubscribe);
 router.get('/search', mainController.getSearch);
 router.get('/profile', mainController.getProfile);
 
@@ -22,5 +24,6 @@ router.post(
   mainController.postDeleteFromUserPlantList
 );
 router.post('/search', mainController.postSearch);
+router.post('/subscribe', mainController.postSubscribe);
 
 module.exports = router;

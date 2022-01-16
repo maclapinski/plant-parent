@@ -1,31 +1,121 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/css/forms.css">
-<link rel="stylesheet" href="/css/auth.css">
+<link rel="stylesheet" href="/css/forms.css" />
+<link rel="stylesheet" href="/css/auth.css" />
+
 </head>
 
 <body>
-   <%- include('../includes/navigation.ejs') %>
-
-   <main>
+  <%- include('../includes/navigation.ejs') %>
+  <div id="fb-root"></div>
+  <script
+    async
+    defer
+    crossorigin="anonymous"
+    src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=488335626048727&autoLogAppEvents=1"
+    nonce="nvDl4CBH"
+  ></script>
+  <main>
     <% if (errMessage) { %>
-        <div class="user-message user-message--error"><%= errMessage %></div>
+    <div class="user-message user-message--error"><%= errMessage %></div>
     <% } %>
-    <form class="login-form" action="/login" method="POST">
-        <div class="form-control">
+    <div class="login-container">
+      <div class="third-party-login card">
+        <div class="login-button-container" onclick="googleClicked(this)">
+          <a href="/google" title="Google Login">
+            <div class="abcRioButton abcRioButtonLightBlue">
+              <div class="abcRioButtonContentWrapper">
+                <div class="abcRioButtonIcon" style="padding: 8px">
+                  <div
+                    style="width: 18px; height: 18px"
+                    class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"
+                  >
+                    <svg
+                      version="1.1"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="18px"
+                      height="18px"
+                      viewBox="0 0 48 48"
+                      class="abcRioButtonSvg google"
+                    >
+                      <g>
+                        <path
+                          fill="#EA4335"
+                          d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+                        ></path>
+                        <path
+                          fill="#4285F4"
+                          d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+                        ></path>
+                        <path
+                          fill="#FBBC05"
+                          d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+                        ></path>
+                        <path
+                          fill="#34A853"
+                          d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+                        ></path>
+                        <path fill="none" d="M0 0h48v48H0z"></path>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+                <span style="font-size: 13px; line-height: 34px" class="abcRioButtonContents"
+                  ><span>Sign in with Google</span></span
+                >
+                <!-- <img src="/images/Spinner-1s-40px.svg" alt=""> -->
+              </div>
+            </div>
+          </a>
+          <img class="spinner" src="/images/Spinner-1s-40px.svg" alt="Loading spinner" />
+        </div>
+
+        <div class="login-button-container" onclick="facebookClicked(this)">
+          <a href="/facebook" title="Facebook Login">
+            <div class="abcRioButton abcRioButtonLightBlue">
+              <div class="abcRioButtonContentWrapper">
+                <div class="abcRioButtonIcon" style="padding: 8px">
+                  <div
+                    style="width: 18px; height: 18px"
+                    class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"
+                  >
+                    <img class="facebook" src="/images/Facebook_f_logo_(2021).svg.png" alt="facebook logo" />
+                  </div>
+                </div>
+                <span style="font-size: 13px; line-height: 34px" class="abcRioButtonContents"
+                  ><span>Sign in with Facebook</span></span
+                >
+              </div>
+            </div> </a
+          ><img class="spinner" src="/images/Spinner-1s-40px.svg" alt="Loading spinner" />
+        </div>
+      </div>
+      <div class="login card">
+        <form class="login-form" action="/login" method="POST">
+          <div class="form-control">
             <label for="email">E-Mail</label>
-            <div class="input "><input type="email" name="email" id="email"><i class="fas fa-times-circle email-fail"></i><i class="fas fa-check-circle email-pass"></i></div>
-        </div>
-        <div class="form-control">
+            <div class="input">
+              <input type="email" name="email" id="email" /><i class="fas fa-times-circle email-fail"></i
+              ><i class="fas fa-check-circle email-pass"></i>
+            </div>
+          </div>
+          <div class="form-control">
             <label for="password">Password</label>
-            <input type="password" name="password" id="login-password">
-            <button class="btn" id='show-password' type="button">Show Password</button>
+            <div class="input">
+              <input class="password" type="password" name="password" id="login-password" /><i
+                class="far fa-eye-slash togglePassword"
+                onclick="togglePassword(this)"
+              ></i>
+            </div>
+          </div>
+          <input id="token" type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button class="btn" type="submit">Login</button>
+        </form>
+        <div class="centered">
+          <a href="/reset">Reset Password</a>
         </div>
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-        <button class="btn" type="submit">Login</button>     
-    </form>
-    <div class="centered">
-        <a href="/reset">Reset Password</a>
+      </div>
     </div>
-</main>
-  
-<%- include('../includes/end.ejs') %>
+  </main>
+
+  <%- include('../includes/end.ejs') %>
+</body>

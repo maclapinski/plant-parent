@@ -1,6 +1,42 @@
+.login-container{
+  display: flex;
+  margin: 1rem;
+  justify-content: center;
+}
+
+.login-button-container {
+  display: flex;
+  position: relative;
+  height: fit-content;
+  margin: 1rem 0;
+}
+.login-button-container a {
+  width: 100%;
+}
+
+.spinner{
+  position: absolute;
+    right: 0;
+    height: 36px;
+    display: none;
+}
+
+.login{
+  margin: 2rem;
+  padding: 2rem;
+}
+
+.third-party-login{
+  margin: 2rem;
+  padding: 2rem;
+}
+
 .login-form {
-  width: 20rem;
-  max-width: 90%;
+  width: 18rem;
   margin: auto;
   display: block;
+}
+
+.login-form .btn {
+  float: right;
 }

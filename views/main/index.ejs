@@ -3,10 +3,21 @@
 <body>
   <%- include('../includes/navigation.ejs') %>
   <main>
+    <% if (successMessage) { %>
+      <div class="user-message user-message--success"><%= successMessage %></div>
+  <% } %>
+    <% if (errorMessage) { %>
+      <div class="user-message user-message--error"><%= errorMessage %></div>
+  <% } %>
     <div class="container container-row">
       <div class="container__text">
         <h1 class="display-4">How to Become a Plant Parent</h1>
-        <p class="lead">
+        
+        <form action="/subscribe" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button class="btn" onclick="toggleSpinner()" type="submit">Subscribe</button>
+      </form>
+        <p class="lead" onclick="toggleSpinner()">
           The house plants we grow come from a huge range of habitats and
           ecologies around the worlds. Their home can be a reinforces floor or a
           mountaintop. they can survive in a bleakest desert and the wettest

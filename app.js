@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
+const passport = require('passport')
 const flash = require('connect-flash');
 const compression = require('compression');
 
@@ -13,6 +14,9 @@ const errorController = require('./controllers/error');
 const User = require('./models/user');
 // const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@plantparentdb.tfx53.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 const MONGODB_URI = process.env.MONGO_CONNECTION_STRING;
+
+// Passport config
+ require('./config/passport')(passport)
 
 const app = express();
 const store = new MongoDBStore({
@@ -32,6 +36,7 @@ const authRoutes = require('./routes/auth');
 app.use(compression());
 
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(
@@ -42,6 +47,10 @@ app.use(
     store: store,
   })
 );
+// Passport middleware
+ app.use(passport.initialize())
+ app.use(passport.session())
+
 app.use(csrfProtection);
 app.use(flash());
 
@@ -64,6 +73,7 @@ app.use((req, res, next) => {
     : '';
   res.locals.isAdmin = req.user ? req.user.isAdmin : false;
   res.locals.csrfToken = req.csrfToken();
+
   next();
 });
 

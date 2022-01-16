@@ -25,14 +25,14 @@
             </div>
             <div class="form-control">
                 <label for="password">Password</label>
-                <div class="input "><input type="password" name="password" id="password"><i class="fas fa-times-circle password-fail"></i><i class="fas fa-check-circle password-pass"></i></div>
-                <button class="btn"  id='show-password' type="button">Show Password</button>
+                <div class="input "><input type="password" name="password" id="password" class="password"><i class="far fa-eye-slash togglePassword" onclick="togglePassword(this)"></i><i class="fas fa-times-circle password-fail"></i><i class="fas fa-check-circle password-pass"></i></div>
+                
                 <p>Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character</p>
             </div>
             <div class="form-control">
                 <label for="confirmPassword">Confirm Password</label>
-                <div class="input "><input type="password" name="confirmPassword" id="confirmPassword"><i class="fas fa-times-circle confirmPassword-fail"></i><i class="fas fa-check-circle confirmPassword-pass"></i></div>
-                <button class="btn" id='show-confirm-password' type="button">Show Password</button>
+                <div class="input "><input type="password" name="confirmPassword" id="confirmPassword" class="password"><i class="far fa-eye-slash togglePassword" onclick="togglePassword(this)"></i><i class="fas fa-times-circle confirmPassword-fail"></i><i class="fas fa-check-circle confirmPassword-pass"></i></div>
+                
             </div>
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
             <button class="btn" type="submit">Sign Up</button>

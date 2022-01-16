@@ -15,6 +15,7 @@
   border: 1px solid #a1a1a1;
   font: inherit;
   border-radius: 2px;
+  padding: 7px;
 }
 
 .form-control input:focus,
@@ -27,8 +28,14 @@
   align-items: baseline;
   position: relative;
 }
-.form-control .input-email {
-  
+.form-control .togglePassword {
+  position: absolute;
+    right: 2px;
+    top: 2px;
+    padding: 7px;
+}
+.form-control .password {
+  padding-right: 40px;
 }
 
 
@@ -36,7 +43,7 @@
 .form-control .input .fa-times-circle {
   display: none;
   position: absolute;
-  top: 0.3rem;
+  top: 9px;
   left: 102%;
 }
 

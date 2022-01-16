@@ -8,6 +8,7 @@ exports.getAdminPage = (req, res, next) => {
   } else {
     successMsg = null;
   }
+  
   Plant.find()
     .then((plants) => {
       res.render('admin/admin', {
@@ -25,6 +26,7 @@ exports.getAdminPage = (req, res, next) => {
 exports.getEditPlant = (req, res, next) => {
   const editMode = req.query.edit;
   let successMsg = req.flash('success');
+  const plantId = req.params.plantId;
 
   if (successMsg.length > 0) {
     successMsg = successMsg[0];
@@ -40,8 +42,6 @@ exports.getEditPlant = (req, res, next) => {
       successMessage: successMsg
     });
   }
-
-  const plantId = req.params.plantId;
 
   Plant.findById(plantId)
     .then((plant) => {
@@ -88,6 +88,7 @@ exports.postAddPlant = (req, res, next) => {
 
 exports.postDeletePlant = (req, res, next) => {
   const plantId = req.body.plantId;
+
   Plant.findByIdAndDelete(plantId)
     .then(() => {
       req.flash('success', 'Plant deleted from the database.');

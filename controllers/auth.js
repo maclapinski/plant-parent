@@ -1,5 +1,4 @@
 const crypto = require('crypto');
-
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
@@ -17,6 +16,7 @@ const transporter = nodemailer.createTransport(
 
 exports.getLogin = (req, res, next) => {
   let errMsg = req.flash('error');
+
   if (errMsg.length > 0) {
     errMsg = errMsg[0];
   } else {
@@ -34,8 +34,29 @@ exports.getLogin = (req, res, next) => {
   });
 };
 
+exports.getGoogleCallback = (req, res) => {
+    req.session.isLoggedIn = true;
+    req.session.user = req.body.user;
+    req.session.save((err) => {
+      console.log(err);
+    });
+    res.redirect("/")
+
+};
+
+exports.getFacebookCallback = (req, res) => {
+    req.session.isLoggedIn = true;
+    req.session.user = req.body.user;
+    req.session.save((err) => {
+      console.log(err);
+    });
+    res.redirect("/")
+
+};
+
 exports.getSignup = (req, res, next) => {
   let errMsg = req.flash('error');
+
   if (errMsg.length > 0) {
     errMsg = errMsg[0];
   } else {
@@ -61,6 +82,7 @@ exports.postLogin = (req, res, next) => {
   const password = req.body.password;
 
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
     return res.status(422).render('auth/login', {
       path: '/login',
@@ -125,6 +147,7 @@ exports.postSignup = (req, res, next) => {
   const password = req.body.password;
 
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
     console.log(errors.array());
     return res.status(422).render('auth/signup', {
@@ -141,7 +164,6 @@ exports.postSignup = (req, res, next) => {
       validationErrors: errors.array(),
     });
   }
-
   bcrypt
     .hash(password, 12)
     .then((hashedPassword) => {
@@ -169,6 +191,7 @@ exports.postSignup = (req, res, next) => {
 };
 
 exports.postLogout = (req, res, next) => {
+  req.logout();
   req.session.destroy((err) => {
     console.log(err);
     res.redirect('/');
@@ -184,11 +207,13 @@ exports.getReset = (req, res, next) => {
   } else {
     errMsg = null;
   }
+
   if (successMsg.length > 0) {
     successMsg = successMsg[0];
   } else {
     successMsg = null;
   }
+
   res.render('auth/reset', {
     path: '/reset',
     pageTitle: 'Reset Password',
@@ -214,7 +239,7 @@ exports.postReset = (req, res, next) => {
         user.resetTokenExpiration = Date.now() + 3600000;
         req.flash(
           'success',
-          'Check your mailbox and click on the link to reset your password. Note that it may take few minutes for the email to reach your mailbox.'
+          'Check your mailbox and click the link to reset your password. Note that it may take few minutes for the email to reach your mailbox.'
         );
         res.redirect('/reset');
         transporter.sendMail({
@@ -226,7 +251,6 @@ exports.postReset = (req, res, next) => {
           <p>Click this <a href="http://localhost:3005/reset/${token}">link</a> to set a new password.</p>
         `,
         });
-        console.log('password reset sent to ', req.body.email);
         return user.save();
       })
       .catch((err) => {
@@ -240,6 +264,7 @@ exports.postReset = (req, res, next) => {
 
 exports.getNewPassword = (req, res, next) => {
   const token = req.params.token;
+
   User.findOne({ resetToken: token, resetTokenExpiration: { $gt: Date.now() } })
     .then((user) => {
       let errMsg = req.flash('error');

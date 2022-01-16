@@ -67,12 +67,24 @@
             <h1 class="plant__title"><%= plant.name %></h1>
           </header>
           <div class="card__image">
-            <img src="<%= plant.image %>" alt="<%= plant.title %>" />
+            <img src="/images/plants/<%= plant.image %>" alt="<%= plant.title %>" />
           </div>
           <div class="card__content">
-            <p class="plant__description"><%= plant.description %></p>
+            <div class="row">
+              <p class="label">Difficulty:</p>
+              <p class="value"><%= plant.difficulty %></p>
+            </div>
+            <div class="row">
+              <p class="label">Light:</p>
+              <p class="value"><%= plant.light.toString() %></p>
+            </div>
+            <div class="row">
+              <p class="label">Pet-Friendly:</p>
+              <p class="value"><%= plant.isSafeForPets ? "Yes" : "No"%></p>
+            </div>
           </div>
           <div class="card__actions">
+            <a href="/plants/<%= plant._id %>" class="btn">Details</a>
             <%- include('../includes/add-to-user-plants.ejs', {plant: plant}) %>
           </div>
         </article>

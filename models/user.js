@@ -1,33 +1,48 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   email: {
     type: String,
-    required: true,
+    required: false,
   },
-  firstName: {
+  googleId: {
     type: String,
-    required: true,
+    required: false,
   },
-  lastName: {
+  facebookId: {
     type: String,
-    required: true,
+    required: false,
+  },
+  image: {
+    type: String,
+    required: false,
   },
   password: {
     type: String,
-    required: true,
+    required: false,
+  },
+  firstName: {
+    type: String,
+  },
+  lastName: {
+    type: String,
+  },
+  displayName: {
+    type: String,
+  },
+  plantList: [{ plant: { type: Schema.Types.ObjectId, ref: "Plant", required: true } }],
+  isAdmin: {
+    type: Boolean,
+    default: false,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
   resetToken: String,
   resetTokenExpiration: Date,
-  plantList: [
-    { plant: { type: Schema.Types.ObjectId, ref: 'Plant', required: true } },
-  ],
-  isAdmin:{
-    type: Boolean,
-    default:false
-  }
 });
 
 userSchema.methods.addToUserPlantList = function (plant) {
@@ -53,4 +68,4 @@ userSchema.methods.deleteFromUserPlantList = function (plantId) {
   return this.save();
 };
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model("User", userSchema);
