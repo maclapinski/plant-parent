@@ -308,7 +308,7 @@ exports.postSubscribe = (req, res, next) => {
             subject: "Newsletter Subscription",
             html: `
                   <p>Thank you for subscribing to our newsletter!</p>
-                  <p>You can unsubscribe anytime by clicking <a href="http://localhost:3005/unsubscribe/${token}">unsubscribe</a>.</p>
+                  <p>You can unsubscribe anytime by clicking <a href="https://plant-parent-app.herokuapp.com/unsubscribe/${token}">unsubscribe</a>.</p>
                 `,
           });
           console.log("subscription confirmation sent to ", email);
@@ -349,7 +349,7 @@ exports.getUnsubscribe = (req, res, next) => {
                 <h2>Sorry to see you go.</h2>
                 <p>You have successfully unsubscribed from our newsletter.</p>
                 <p>Your email address has also been removed from our mailing list. You will receive no more emails from us.</p>
-                <p>If you have unsubscribed by mistake, please feel free to <a href="http://localhost:3005/subscribe/">subscribe</a> at any time.</p>
+                <p>If you have unsubscribed by mistake, please feel free to <a href="https://plant-parent-app.herokuapp.com/subscribe/">subscribe</a> at any time.</p>
                 `,
           });
         })

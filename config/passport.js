@@ -41,7 +41,7 @@ module.exports = function (passport) {
       {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: "http://localhost:3005/facebook/callback",
+        callbackURL: "https://plant-parent-app.herokuapp.com/facebook/callback",
         profileFields: ['id', 'displayName', 'photos', 'email']
       },
       async function (accessToken, refreshToken, profile, done) {
