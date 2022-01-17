@@ -1,42 +1,140 @@
-.login-container{
+.login-container {
   display: flex;
-  margin: 1rem;
+  margin: 1rem auto;
   justify-content: center;
+  flex-direction: column;
+  width: fit-content;
+}
+.login-container h1 {
+  margin: 0 1rem;
+}
+.login-container span {
+  text-align: center;
+}
+.login-container .container-reset-pass {
+  margin-top: 21px;
+}
+.login-container .divider {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 20px 0px;
+}
+.login-container .divider-text::before,
+.divider-text::after {
+  display: inline-block;
+  width: 8rem;
+  content: "";
+  flex: 0 1 100%;
+  border-bottom: 1px solid rgb(184, 196, 194);
+  margin: 4px 10px;
+}
+.login-container .google-auth {
+  margin-bottom: 1rem;
 }
 
 .login-button-container {
   display: flex;
   position: relative;
   height: fit-content;
-  margin: 1rem 0;
 }
 .login-button-container a {
   width: 100%;
 }
 
-.spinner{
+.spinner {
   position: absolute;
-    right: 0;
-    height: 36px;
-    display: none;
+  right: 0;
+  height: 36px;
+  display: none;
 }
 
-.login{
-  margin: 2rem;
+.login {
+  margin: 1rem;
   padding: 2rem;
 }
 
-.third-party-login{
-  margin: 2rem;
+.login p {
+  margin-top: 0.7rem;
+  margin-bottom: 0;
+}
+
+.third-party-login {
+  margin: 1rem;
   padding: 2rem;
+  height: fit-content;
 }
 
 .login-form {
-  width: 18rem;
+  max-width: 18rem;
   margin: auto;
   display: block;
 }
 
 .login-form .btn {
   float: right;
+}
+
+.abcRioButton {
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 25%);
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
+  transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
+  -webkit-user-select: none;
+  -webkit-appearance: none;
+  background-color: #fff;
+  background-image: none;
+  color: #262626;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: auto;
+  height: 36px;
+  padding: 0 1rem;
+}
+
+.abcRioButtonContentWrapper {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.abcRioButtonLightBlue {
+  background-color: #fff;
+  color: #757575;
+}
+.abcRioButtonIcon {
+  float: left;
+  padding: 8px;
+}
+.abcRioButtonIconImage img {
+  width: 18px;
+  height: 18px;
+}
+.abcRioButtonContents {
+  font-family: Roboto, arial, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.21px;
+  margin-left: 6px;
+  margin-right: 6px;
+  vertical-align: top;
+  line-height: 39px;
+}
+
+element.style {
+  height: 36px;
+  width: 120px;
+}
+
+.abcRioButton:hover {
+  box-shadow: 0 0 3px 3px rgb(66 133 244 / 30%);
 }

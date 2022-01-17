@@ -29,13 +29,17 @@ form {
 p {
   line-height: 1.2rem;
 }
+a{
+  color: #1d9f44;
+  text-decoration: none;
+}
 
 .centered {
   text-align: center;
 }
 
 .align-center {
-  align-items: center;
+  align-items: center; 
 }
 
 .image {
@@ -347,66 +351,7 @@ p {
   }
 }
 
-.abcRioButton {
-  border-radius: 3px;
-  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 25%);
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-transition: background-color .218s,border-color .218s,box-shadow .218s;
-  transition: background-color .218s,border-color .218s,box-shadow .218s;
-  -webkit-user-select: none;
-  -webkit-appearance: none;
-  background-color: #fff;
-  background-image: none;
-  color: #262626;
-  cursor: pointer;
-  outline: none;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  vertical-align: middle;
-  white-space: nowrap;
-  width: auto;
-  height: 36px;
-  padding: 0 2rem;
-}
 
-.abcRioButtonContentWrapper {
-  height: 100%;
-  width: 100%;
-  display: flex;
-}
-
-.abcRioButtonLightBlue {
-  background-color: #fff;
-  color: #757575;
-}
-.abcRioButtonIcon {
-  float: left;
-  padding: 8px;
-}
-.abcRioButtonIconImage img {
-  width: 18px;
-  height: 18px;
-}
-.abcRioButtonContents {
-  font-family: Roboto,arial,sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: .21px;
-  margin-left: 6px;
-  margin-right: 6px;
-  vertical-align: top;
-}
-
-element.style {
-  height: 36px;
-  width: 120px;
-}
-
-.abcRioButton:hover {
-  box-shadow: 0 0 3px 3px rgb(66 133 244 / 30%);
-}
 
 .avatar{
   border-radius: 50px;
