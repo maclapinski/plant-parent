@@ -7,6 +7,10 @@ const subscriberSchema = new Schema({
     type: String,
     required: true,
   },
+  subscriptionDate: {
+    type: Date,
+    default: Date.now,
+  },
   subscriptionToken: String,
 });
 

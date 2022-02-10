@@ -39,6 +39,14 @@ exports.getIndexPage = (req, res, next) => {
     successMessage: successMsg,
   });
 };
+exports.getPrivacyPolicy = (req, res, next) => {
+  let successMsg = req.flash("success");
+  let errMsg = req.flash("error");
+  res.render("main/privacy-policy", {
+    path: "/privacy-policy",
+    pageTitle: "Privacy Policy",
+  });
+};
 
 exports.getPlants = async (req, res, next) => {
   const usrPlants = [];

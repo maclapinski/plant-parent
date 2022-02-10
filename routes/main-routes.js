@@ -15,6 +15,7 @@ router.get('/search', mainController.getSearch);
 router.get('/profile', mainController.getProfile);
 router.get('/premium', mainController.getPremium);
  router.get('/premium/success/:token', mainController.getPremiumSuccess);
+ router.get('/privacy-policy', mainController.getPrivacyPolicy);
 // router.get('/premium/cancel', mainController.getPremium);
 
 router.post(
