@@ -24,11 +24,12 @@
     "nodemon": "^2.0.15",
     "passport": "^0.5.2",
     "passport-facebook": "^3.0.0",
-    "passport-google-oauth20": "^2.0.0"
+    "passport-google-oauth20": "^2.0.0",
+    "stripe": "^8.201.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "app.js",
+    "start": "nodemon app.js",
     "start-server": "node app.js",
     "start:dev": "nodemon app.js"
   },

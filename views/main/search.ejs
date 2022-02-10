@@ -79,13 +79,18 @@
               <p class="value"><%= plant.light.toString() %></p>
             </div>
             <div class="row">
-              <p class="label">Pet-Friendly:</p>
-              <p class="value"><%= plant.isSafeForPets ? "Yes" : "No"%></p>
+              <p class="label">Pet-Safe:</p>
+              <p class="value"><%= plant.petSafe ? "Yes" : "No"%></p>
             </div>
           </div>
           <div class="card__actions">
             <a href="/plants/<%= plant._id %>" class="btn">Details</a>
-            <%- include('../includes/add-to-user-plants.ejs', {plant: plant}) %>
+            <% if (isAuthenticated) { if (userPlants.includes(plant._id.toString())) { %>
+              <div class="text-container"><p>Your Plant</p></div>
+              <% } else { %> <%- include('../includes/add-to-user-plant-list.ejs', {plant: plant}) %> <% if
+              (userWishList.includes(plant._id.toString())) { %>
+              <div class="text-container"><p>On your wish list</p></div>
+              <% } else { %> <%- include('../includes/add-to-user-wish-list.ejs', {plant: plant}) %> <% }} } %>
           </div>
         </article>
         <% } %> </div><% } else { %>
@@ -102,4 +107,4 @@
     </div>
   </main>
   <%- include('../includes/end.ejs') %>
-</body>
+

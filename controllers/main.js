@@ -1,8 +1,12 @@
 const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const sendgridTransport = require("nodemailer-sendgrid-transport");
+const stripe = require("stripe")(
+  "sk_test_51KOpmTJ4zi1Q2DNBMCPL6hi0XRrp16NzOBFKRiVXNtRwtjutF2Ikjoc6eNfvIm2yzcVNXhW2kgnPQHi4gIHHtFRV00mZ4HY8FD"
+);
 
 const Plant = require("../models/plant");
+const User = require("../models/user");
 const Subscriber = require("../models/subscriber");
 
 const transporter = nodemailer.createTransport(
@@ -28,72 +32,99 @@ exports.getIndexPage = (req, res, next) => {
   } else {
     errMsg = null;
   }
-
-  Plant.find()
-    .then((plants) => {
-      res.render("main/index", {
-        path: "/",
-        pageTitle: "Index",
-        plants: plants,
-        errorMessage: errMsg,
-        successMessage: successMsg,
-      });
-    })
-    .catch((err) => console.log(err));
+  res.render("main/index", {
+    path: "/",
+    pageTitle: "Index",
+    errorMessage: errMsg,
+    successMessage: successMsg,
+  });
 };
 
-exports.getPlants = (req, res, next) => {
-  Plant.find()
-    .then((plants) => {
-      const usrPlants = [];
-      if (req.user) {
-        for (item of req.user.plantList) {
-          usrPlants.push(item.plant.toString());
+exports.getPlants = async (req, res, next) => {
+  const usrPlants = [];
+  const usrWishList = [];
+  try {
+    const plants = await Plant.find();
+
+    if (req.user) {
+      for (item of req.user.plantList) {
+        usrPlants.push(item.plant.toString());
+      }
+      for (item of req.user.wishList) {
+        usrWishList.push(item.plant.toString());
+      }
+    }
+    res.render("main/plants", {
+      path: "/plants",
+      pageTitle: "All Plants",
+      plants: plants,
+      userPlants: usrPlants,
+      userWishList: usrWishList,
+      deleteFromWishList: req.deleteFromWishList ? true : false,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+exports.getPlant = async (req, res, next) => {
+  const plantId = req.params.plantId;
+  let inUsrPlants = false;
+
+  try {
+    const plant = await Plant.findById(plantId);
+
+    if (req.user) {
+      for (item of req.user.plantList) {
+        if (item.plant.toString() === plantId) {
+          inUsrPlants = true;
         }
       }
-
-      res.render("main/plants", {
-        path: "/plants",
-        pageTitle: "All Plants",
-        plants: plants,
-        userPlants: usrPlants,
-      });
-    })
-    .catch((err) => console.log(err));
-};
-
-exports.getPlant = (req, res, next) => {
-  const plantId = req.params.plantId;
-  Plant.findById(plantId)
-    .then((plant) => {
-      res.render("main/plant-detail", {
-        plant: plant,
-        pageTitle: plant.name,
-        path: "/plants",
-      });
-    })
-    .catch((err) => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
+    }
+    res.render("main/plant-details", {
+      plant: plant,
+      pageTitle: plant.name,
+      path: "",
+      deleteFromWishList: req.deleteFromWishList ? true : false,
+      isInUserPlants: inUsrPlants,
     });
+  } catch (err) {
+    const error = new Error(err);
+    error.httpStatusCode = 500;
+    return next(error);
+  }
 };
 
-exports.getUserPlantList = (req, res, next) => {
-  req.user
-    .populate("plantList.plant")
-    // .execPopulate()
-    .then((user) => {
-      const plants = user.plantList;
-      res.render("main/user-plants", {
-        path: "/user-plants",
-        pageTitle: "My Plants",
-        plants: plants,
-        errorMessage: req.flash("error"),
-      });
-    })
-    .catch((err) => console.log(err));
+exports.getUserWishList = async (req, res, next) => {
+  try {
+    const user = await req.user.populate("wishList.plant");
+    const plants = user.wishList;
+    res.render("main/user-wish-list", {
+      path: "/user-wish-list",
+      pageTitle: "My Wishlist",
+      plants: plants,
+      errorMessage: req.flash("error"),
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
+
+exports.getUserPlantList = async (req, res, next) => {
+  try {
+    const user = await req.user.populate("plantList.plant");
+    const plants = user.plantList;
+    res.render("main/user-plant-list", {
+      path: "/user-plant-list",
+      pageTitle: "My Plants",
+      plants: plants,
+      errorMessage: req.flash("error"),
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 exports.getSearch = (req, res, next) => {
   let errMsg = req.flash("error");
   const plants = req.body.plants ? req.body.plants : [];
@@ -123,16 +154,86 @@ exports.getSearch = (req, res, next) => {
 
 exports.getProfile = (req, res, next) => {
   const user = req.user;
-console.log(user.photos)
   user.avatar = user.image
     ? user.image
-    : user.image ? user.image : `https://ui-avatars.com/api/?name=${user.firstName}+${user.lastName}&rounded=true`;
+    : `https://ui-avatars.com/api/?name=${user.firstName}+${user.lastName}&rounded=true`;
   res.render("main/profile", {
     path: "/profile",
     pageTitle: "User Profile",
     user: user,
     errorMessage: req.flash("error"),
   });
+};
+
+exports.getPremium = (req, res, next) => {
+  const user = req.user;
+  crypto.randomBytes(32, (err, buffer) => {
+    if (err) {
+      console.log(err);
+      return res.redirect("/subscribe");
+    }
+    const token = buffer.toString("hex");
+    User.findOne({
+      _id: user._id,
+    })
+      .then((user) => {
+        user.setPremiumToken(token);
+      })
+      .then((result) => {
+        const items = [
+          {
+            name: "Premium membership",
+            description:
+              "Premium membership gives the user access to user forum. CAUTION! THIS IS JUST A TEST. USE FAKE CREDIT CARD DETAILS",
+            amount: 99,
+            currency: "usd",
+            quantity: 1,
+          },
+        ];
+
+        return stripe.checkout.sessions.create({
+          payment_method_types: ["card"],
+          line_items: items,
+          success_url: req.protocol + "://" + req.get("host") + "/premium/success/" + token, // => http://localhost:3000
+          cancel_url: req.protocol + "://" + req.get("host") + "/premium/cancel",
+        });
+      })
+      .then((session) => {
+        res.render("main/premium", {
+          path: "/premium",
+          pageTitle: "Premium membership details",
+          sessionId: session.id,
+        });
+      })
+      .catch((err) => {
+        const error = new Error(err);
+        error.httpStatusCode = 500;
+        console.log(err);
+        return next(error);
+      });
+  });
+};
+
+exports.getPremiumSuccess = (req, res, next) => {
+  const token = req.params.token;
+  User.findOne({ premiumSubscriptionToken: token, premiumSubscriptionTokenExpiration: { $gt: Date.now() } })
+    .then((user) => {
+      user.isPremium = true;
+      user.premiumSubscriptionToken = undefined;
+      user.premiumSubscriptionTokenExpiration = undefined;
+      return user.save();
+    })
+    .then(() => {
+      res.render("main/premium-success", {
+        path: "/premium",
+        pageTitle: "Premium Membership Success",
+      });
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.getSubscribe = (req, res, next) => {
@@ -152,21 +253,74 @@ exports.getSubscribe = (req, res, next) => {
 
 exports.postAddToUserPlantList = (req, res, next) => {
   const plantId = req.body.plantId;
+  let onUserWishList = false;
+  const referer = req.headers.referer.split(req.headers.origin)[1];
+
+  for (item of req.user.wishList) {
+    if (item.plant.toString() === plantId) {
+      onUserWishList = true;
+    }
+  }
+
   Plant.findById(plantId)
     .then((plant) => {
       return req.user.addToUserPlantList(plant);
     })
     .then((result) => {
-      res.redirect("/user-plants");
+      if (onUserWishList) {
+        req.user.deleteFromUserWishList(plantId);
+      }
     })
-    .catch((err) => console.log(err));
+    .then((result) => {
+      res.redirect(referer);
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
+};
+exports.postAddToUserWishList = (req, res, next) => {
+  const plantId = req.body.plantId;
+  Plant.findById(plantId)
+    .then((plant) => {
+      return req.user.addToUserWishList(plant);
+    })
+    .then((result) => {
+      res.redirect("/user-wish-list");
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
-exports.postDeleteFromUserPlantList = (req, res, next) => {
-  const plantId = req.body.plantId;
-  return req.user.deleteFromUserPlantList(plantId).then((result) => {
-    res.redirect("/user-plants");
-  });
+exports.deleteFromUserWishList = (req, res, next) => {
+  const plantId = req.params.plantId;
+
+  return req.user
+    .deleteFromUserWishList(plantId)
+    .then(() => {
+      console.log("DESTROYED PLANT");
+      res.status(200).json({ message: "Success!" });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Deleting Plant failed." });
+    });
+};
+exports.deleteFromUserPlantList = (req, res, next) => {
+  const plantId = req.params.plantId;
+
+  return req.user
+    .deleteFromUserPlantList(plantId)
+    .then(() => {
+      console.log("DESTROYED PLANT");
+      res.status(200).json({ message: "Success!" });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Deleting Plant failed." });
+    });
 };
 
 exports.postSearch = (req, res, next) => {
@@ -184,7 +338,17 @@ exports.postSearch = (req, res, next) => {
   let medium = "";
   let advanced = "";
   let query;
-  
+  const usrPlants = [];
+  const usrWishList = [];
+
+  if (req.user) {
+    for (item of req.user.plantList) {
+      usrPlants.push(item.plant.toString());
+    }
+    for (item of req.user.wishList) {
+      usrWishList.push(item.plant.toString());
+    }
+  }
 
   if (typeof light === "object") {
     for (item of light) {
@@ -229,7 +393,7 @@ exports.postSearch = (req, res, next) => {
   }
 
   if (petSafe) {
-    query = { $and: [difficultyQuery, lightQuery, { isSafeForPets: petSafe }] };
+    query = { $and: [difficultyQuery, lightQuery, { petSafe: petSafe }] };
   } else {
     query = { $and: [difficultyQuery, lightQuery] };
   }
@@ -258,6 +422,8 @@ exports.postSearch = (req, res, next) => {
         pageTitle: "Search Results",
         errMessage: null,
         plants: plants,
+        userPlants: usrPlants,
+        userWishList: usrWishList,
         oldInput: {
           lowLight: lowLight,
           mediumLight: mediumLight,
@@ -269,7 +435,11 @@ exports.postSearch = (req, res, next) => {
         },
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.postSubscribe = (req, res, next) => {
@@ -353,7 +523,11 @@ exports.getUnsubscribe = (req, res, next) => {
                 `,
           });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          const error = new Error(err);
+          error.httpStatusCode = 500;
+          return next(error);
+        });
     })
     .catch((err) => {
       const error = new Error(err);

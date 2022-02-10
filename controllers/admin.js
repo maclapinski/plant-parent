@@ -1,21 +1,21 @@
-const Plant = require('../models/plant');
+const Plant = require("../models/plant");
 
 exports.getAdminPage = (req, res, next) => {
-  let successMsg = req.flash('success');
+  let successMsg = req.flash("success");
 
   if (successMsg.length > 0) {
     successMsg = successMsg[0];
   } else {
     successMsg = null;
   }
-  
+
   Plant.find()
     .then((plants) => {
-      res.render('admin/admin', {
+      res.render("admin/admin", {
         plants: plants,
-        pageTitle: 'Admin Dashboard',
-        path: '/admin',
-        successMessage: successMsg
+        pageTitle: "Admin Dashboard",
+        path: "/admin",
+        successMessage: successMsg,
       });
     })
     .catch((err) => {
@@ -25,7 +25,7 @@ exports.getAdminPage = (req, res, next) => {
 
 exports.getEditPlant = (req, res, next) => {
   const editMode = req.query.edit;
-  let successMsg = req.flash('success');
+  let successMsg = req.flash("success");
   const plantId = req.params.plantId;
 
   if (successMsg.length > 0) {
@@ -35,28 +35,32 @@ exports.getEditPlant = (req, res, next) => {
   }
 
   if (!editMode) {
-    return res.render('admin/edit-plant', {
-      path: 'admin/edit-plant',
-      pageTitle: 'Edit Plant',
+    return res.render("admin/edit-plant", {
+      path: "admin/edit-plant",
+      pageTitle: "Edit Plant",
       editing: false,
-      successMessage: successMsg
+      successMessage: successMsg,
     });
   }
 
   Plant.findById(plantId)
     .then((plant) => {
       if (!plant) {
-        return res.render('admin/edit-plant', { editing: false });
+        return res.render("admin/edit-plant", { editing: false });
       }
-      res.render('admin/edit-plant', {
-        pageTitle: 'Edit Plant',
-        path: '/admin/edit-plant',
+      res.render("admin/edit-plant", {
+        pageTitle: "Edit Plant",
+        path: "/admin/edit-plant",
         editing: editMode,
         plant: plant,
-        successMessage: successMsg
+        successMessage: successMsg,
       });
     })
-    .catch((err) => console.log(err));
+        .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };
 
 exports.postAddPlant = (req, res, next) => {
@@ -65,36 +69,38 @@ exports.postAddPlant = (req, res, next) => {
   const description = req.body.description;
   const light = req.body.light;
   const difficulty = req.body.difficulty;
-  const isSafeForPets = req.body.pets;
+  const petSafe = req.body.pets;
   const plant = new Plant({
     name: name,
     description: description,
     image: image,
     light: light,
     difficulty: difficulty,
-    isSafeForPets: isSafeForPets,
+    petSafe: petSafe,
   });
 
   plant
     .save()
     .then((result) => {
-      req.flash('success', 'Plant added to database.');
-      res.redirect('/admin/edit-plant');
+      req.flash("success", "Plant added to database.");
+      res.redirect("/admin/edit-plant");
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-exports.postDeletePlant = (req, res, next) => {
-  const plantId = req.body.plantId;
+exports.deletePlant = (req, res, next) => {
+  const plantId = req.params.plantId;
 
-  Plant.findByIdAndDelete(plantId)
+  return Plant.findByIdAndDelete(plantId)
     .then(() => {
-      req.flash('success', 'Plant deleted from the database.');
-      res.redirect('/admin/');
+      console.log("DESTROYED PLANT");
+      res.status(200).json({ message: "Success!" });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      res.status(500).json({ message: "Deleting PLant failed." });
+    });
 };
 
 exports.postEditPlant = (req, res, next) => {
@@ -102,17 +108,27 @@ exports.postEditPlant = (req, res, next) => {
   const updatedName = req.body.name;
   const updatedImageUrl = req.body.image;
   const updatedDesc = req.body.description;
+  const updatedLight = req.body.light;
+  const updatedDifficulty = req.body.difficulty;
+  const updatedPetSafe = req.body.pets;
 
   Plant.findById(plantId)
     .then((plant) => {
       plant.name = updatedName;
       plant.description = updatedDesc;
       plant.image = updatedImageUrl;
+      plant.light = updatedLight;
+      plant.difficulty = updatedDifficulty;
+      plant.petSafe = updatedPetSafe;
       return plant.save();
     })
     .then((result) => {
-      req.flash('success', 'Plant updated successfully.');
-      res.redirect('/admin/');
+      req.flash("success", "Plant updated successfully.");
+      res.redirect("/admin/");
     })
-    .catch((err) => console.log(err));
+        .catch((err) => {
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
+    });
 };

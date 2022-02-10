@@ -1,0 +1,38 @@
+<%- include('../includes/head.ejs') %>
+<link rel="stylesheet" href="/css/plant.css">
+</head>
+
+<body>
+   <%- include('../includes/navigation.ejs') %>
+  <main class="centered">
+    <div class="container plant__details card">
+      <h1><%= plant.name %></h1>
+      <div class="image">
+        <img src="/images/plants/<%= plant.image %>" alt="<%= plant.title %>" />
+      </div>
+      <div class="row">
+        <p class="label">Difficulty:</p>
+        <p class="value"><%= plant.difficulty %></p>
+      </div>
+      <div class="row">
+        <p class="label">Light: </p>
+        <div class="value">
+          <% if(plant.light.includes('low')) { %> <i title="low" class="fas fa-cloud"></i>
+          <p>low</p>
+          <% } %> <% if(plant.light.includes('medium')) { %> <i title="medium" class="fas fa-cloud-sun"></i>
+          <p>medium</p>
+          <% } %> <% if(plant.light.includes('bright')) { %> <i title="bright" class="fas fa-sun"></i>
+          <p>bright</p>
+          <% } %>
+        </div>
+        
+      </div>
+      <div class="row">
+        <p class="label">Pet-Safe:</p>
+        <p class="value"><%= plant.petSafe ? "Yes" : "No"%></p>
+      </div>
+      <p><%= plant.description %></p>
+      <% if (isAuthenticated) { if(isInUserPlants) {%> <div class="text-container"><p>Your Plant</p></div> <%} else { %>  <%- include('../includes/add-to-user-plant-list.ejs', {plant: plant}) %> <%} } %>
+    </div>
+  </main>
+<%- include('../includes/end.ejs') %>

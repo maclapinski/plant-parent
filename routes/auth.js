@@ -20,7 +20,7 @@ router.get(
 );
 // @desc    Auth with Facebook
 // @route   GET /auth/facebook
-router.get("/facebook", passport.authenticate('facebook'));
+router.get("/facebook", passport.authenticate("facebook"));
 
 // @desc    Facebook auth callback
 // @route   GET /auth/facebook/callback
@@ -46,12 +46,8 @@ router.post(
   [
     body("email")
       .isEmail()
-      .withMessage("Please enter a valid email address.")
+      .withMessage("Invalid email address.")
       .normalizeEmail({ gmail_remove_dots: false }),
-    body("password", "Password has to be valid.")
-      .isLength({ min: 8 })
-      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
-      .trim(),
   ],
   authController.postLogin
 );
@@ -59,6 +55,18 @@ router.post(
 router.post(
   "/signup",
   [
+    body("firstName")
+      .trim()
+      .isLength({ min: 2 })
+      .withMessage("First Name must be 2 characters long")
+      .isAlpha()
+      .withMessage("First Name must be alphabetic"),
+    body("lastName")
+      .trim()
+      .isLength({ min: 2 })
+      .withMessage("First Name must be 2 characters long")
+      .isAlpha()
+      .withMessage("First Name must be alphabetic"),
     body("email")
       .isEmail()
       .withMessage("Please enter a valid email.")
@@ -76,7 +84,6 @@ router.post(
     )
       .isLength({ min: 8 })
       .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
-
       .trim(),
     body("confirmPassword")
       .trim()
@@ -97,7 +104,28 @@ router.get("/reset", authController.getReset);
 router.post("/reset", authController.postReset);
 
 router.get("/reset/:token", authController.getNewPassword);
+router.get("/new-password", authController.getNewPassword);
 
-router.post("/new-password", authController.postNewPassword);
+router.post(
+  "/new-password",
+  [
+    body(
+      "password",
+      "Please enter a password with minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character."
+    )
+      .isLength({ min: 8 })
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
+      .trim(),
+    body("confirmPassword")
+      .trim()
+      .custom((value, { req }) => {
+        if (value !== req.body.password) {
+          throw new Error("Passwords have to match!");
+        }
+        return true;
+      }),
+  ],
+  authController.postNewPassword
+);
 
 module.exports = router;

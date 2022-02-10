@@ -12,6 +12,6 @@ router.get('/edit-plant/', isAuth, isAdmin, adminController.getEditPlant);
 
 router.post('/add-plant', isAuth, isAdmin, adminController.postAddPlant);
 router.post('/edit-plant', isAuth, isAdmin, adminController.postEditPlant);
-router.post('/delete-plant', isAuth, isAdmin, adminController.postDeletePlant);
+router.delete('/delete-plant/:plantId', isAuth, isAdmin, adminController.deletePlant);
 
 module.exports = router;

@@ -9,7 +9,7 @@ module.exports = function (passport) {
       {
         clientID: process.env.GOOGLE_CLIENT_ID,
         clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "https://plant-parent-app.herokuapp.com/google/callback",
+        callbackURL: "https://plant-parent-app.herokuapp.com/auth/google/callback",
       },
       async (accessToken, refreshToken, profile, done) => {
         const newUser = new User({
@@ -41,11 +41,10 @@ module.exports = function (passport) {
       {
         clientID: process.env.FACEBOOK_APP_ID,
         clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: "https://plant-parent-app.herokuapp.com/facebook/callback",
+        callbackURL: "https://plant-parent-app.herokuapp.com/auth/facebook/callback",
         profileFields: ['id', 'displayName', 'photos', 'email']
       },
       async function (accessToken, refreshToken, profile, done) {
-        console.log(profile);
         const newUser = new User({
           facebookId: profile.id,
           email: profile.email,

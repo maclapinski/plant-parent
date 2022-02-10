@@ -1,43 +1,56 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/plant.css" />
-</head>
+<!-- </head> -->
 <body>
-    <%- include('../includes/navigation.ejs') %>
+  <%- include('../includes/navigation.ejs') %>
   <main>
     <h1>Admin Dashboard</h1>
     <% if (successMessage) { %>
-        <div class="user-message user-message--success"><%= successMessage %></div>
-    <% } %>
-    <% if (plants.length > 0) { %>
+    <div class="user-message user-message--success"><%= successMessage %></div>
+    <% } %> <% if (plants.length > 0) { %>
 
-        <div class="grid">
-            <% for (let plant of plants) { %>
-                <article class="card plant-item">
-                    <header class="card__header">
-                        <h1 class="plant__title">
-                            <%= plant.name %>
-                        </h1>
-                    </header>
-                    <div class="card__image">
-                        <img src="/images/plants/<%= plant.image %>" alt="<%= plant.title %>">
-                    </div>
-                    <div class="card__content">
-
-                        <p class="plant__description">
-                            <%= plant.description %>
-                        </p>
-                    </div>
-                    <div class="card__actions">
-                      <a href="/admin/edit-plant/<%= plant._id %>?edit=true" class="btn"
-                        >Edit</a
-                      >
-                        <%- include('../includes/delete-plant.ejs', {plant: plant, action: "/admin/delete-plant"}) %>
-                    </div>
-                </article>
-                <% } %>
+    <div class="grid">
+      <% for (let plant of plants) { %>
+      <article class="card plant-item">
+        <header class="card__header">
+          <h1 class="plant__title"><%= plant.name %></h1>
+        </header>
+        <div class="card__image">
+          <img src="/images/plants/<%= plant.image %>" alt="<%= plant.title %>" />
         </div>
+        <div class="card__content">
+          <div class="row">
+            <p class="label">Difficulty:</p>
+            <p class="value"><%= plant.difficulty %></p>
+          </div>
+          <div class="row">
+            <p class="label">Light:</p>
+            <div class="value">
+              <% if(plant.light.includes('low')) { %> <i title="low" class="fas fa-cloud"></i>
+              <p>low</p>
+              <% } %> <% if(plant.light.includes('medium')) { %> <i title="medium" class="fas fa-cloud-sun"></i>
+              <p>medium</p>
+              <% } %> <% if(plant.light.includes('bright')) { %> <i title="bright" class="fas fa-sun"></i>
+              <p>bright</p>
+              <% } %>
+            </div>
+          </div>
+          <div class="row">
+            <p class="label">Pet-Safe:</p>
+            <p class="value"><%= plant.petSafe ? "Yes" : "No"%></p>
+          </div>
+
+        </div>
+        <div class="card__actions">
+          <a href="/admin/edit-plant/<%= plant._id %>?edit=true" class="btn">Edit</a>
+          <%- include('../includes/delete-plant.ejs', {plant: plant, action: "/admin/delete-plant"}) %>
+        </div>
+      </article>
+      <% } %>
+    </div>
     <% } else { %>
     <h1>No plants Found!</h1>
     <% } %>
   </main>
   <%- include('../includes/end.ejs') %>
+

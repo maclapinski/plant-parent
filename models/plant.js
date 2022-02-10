@@ -24,7 +24,11 @@ const plantSchema = new Schema({
     type: [String],
     required: true,
   },
-  isSafeForPets: {
+  petSafe: {
+    type: Boolean,
+    required: false,
+  },
+  petSafe: {
     type: Boolean,
     required: true,
   },

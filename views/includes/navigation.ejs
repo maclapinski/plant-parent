@@ -2,7 +2,7 @@
 <header class="main-header">
   <button id="side-menu-toggle">Menu</button>
   <div class="main-header__logo">
-    <img src="/images/logo-nav-green.png" alt="" />
+    <a href="/"><img src="/images/logo-nav-green.png" alt="" /></a>
   </div>
   <nav class="main-header__nav">
     <ul class="main-header__item-list">
@@ -30,10 +30,18 @@
       <% if (isAuthenticated) { %>
       <li class="main-header__item">
         <a
-          class="<%= path === '/user-plants' ? 'active' : '' %>"
-          href="/user-plants"
+          class="<%= path === '/user-plant-list' ? 'active' : '' %>"
+          href="/user-plant-list"
           val="My Plants"
           >My Plants</a
+        >
+      </li>
+      <li class="main-header__item">
+        <a
+          class="<%= path === '/user-wish-list' ? 'active' : '' %>"
+          href="/user-wish-list"
+          val="My Wish List"
+          >My Wish List</a
         >
       </li>
       <% } %> 
@@ -62,7 +70,7 @@
       <li class="main-header__item">
         <a
           class="<%= path === '/login' ? 'active' : '' %>"
-          href="/login"
+          href="/auth/login"
           val="Login"
           >Login</a
         >
@@ -70,7 +78,7 @@
       <li class="main-header__item">
         <a
           class="<%= path === '/signup' ? 'active' : '' %>"
-          href="/signup"
+          href="/auth/signup"
           val="Sign Up"
           id='Sign Up'
           >Sign Up</a
@@ -87,7 +95,7 @@
 
       </li>
       <li class="main-header__item">
-        <form action="/logout" method="post">
+        <form action="/auth/logout" method="post">
           <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <button val="Logout" type="submit">Logout</button>
         </form>
@@ -100,35 +108,35 @@
 <nav class="mobile-nav">
   <ul class="mobile-nav__item-list">
     <li class="mobile-nav__item">
-      <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
+      <a tabindex="-1" aria-hidden="true" class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
     </li>
     <li class="mobile-nav__item">
-      <a class="<%= path === '/plants' ? 'active' : '' %>" href="/plants"
+      <a tabindex="-1" aria-hidden="true" class="<%= path === '/plants' ? 'active' : '' %>" href="/plants"
         >Plants</a
       >
     </li>
     <li class="mobile-nav__item">
-      <a class="<%= path === '/search' ? 'active' : '' %>" href="/search"
+      <a tabindex="-1" aria-hidden="true" class="<%= path === '/search' ? 'active' : '' %>" href="/search"
         >Search</a
       >
     </li>
     <% if (isAuthenticated) { %>
     <li class="mobile-nav__item">
-      <a
-        class="<%= path === '/user-plants' ? 'active' : '' %>"
-        href="/user-plants"
+      <a tabindex="-1" aria-hidden="true"
+        class="<%= path === '/user-plant-list' ? 'active' : '' %>"
+        href="/user-plant-list"
         >My Plants</a
       >
     </li>
     <li class="mobile-nav__item">
-      <a
+      <a tabindex="-1" aria-hidden="true"
         class="<%= path === '/admin/add-product' ? 'active' : '' %>"
         href="/admin/add-product"
         >Add Plant
       </a>
     </li>
     <li class="mobile-nav__item">
-      <a
+      <a tabindex="-1" aria-hidden="true"
         class="<%= path === '/admin/products' ? 'active' : '' %>"
         href="/admin/products"
         >Admin Products
@@ -136,19 +144,19 @@
     </li>
     <% } %> <% if (!isAuthenticated) { %>
     <li class="mobile-nav__item">
-      <a class="<%= path === '/login' ? 'active' : '' %>" href="/login"
+      <a tabindex="-1" aria-hidden="true" class="<%= path === '/login' ? 'active' : '' %>" href="/auth/login"
         >Login</a
       >
     </li>
     <li class="mobile-nav__item">
-      <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup"
+      <a tabindex="-1" aria-hidden="true" class="<%= path === '/signup' ? 'active' : '' %>" href="/auth/signup"
         >Sign Up</a
       >
     </li>
     <% } else { %>
       
       <li class="mobile-nav__item">
-        <a
+        <a tabindex="-1" aria-hidden="true"
           class="<%= path === '/profile' ? 'active' : '' %>"
           href="/profile"
           >Profile</a
@@ -156,7 +164,7 @@
 
       </li>
     <li class="mobile-nav__item">
-      <form action="/logout" method="post">
+      <form action="/auth/logout" method="post">
         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <button type="submit">Logout</button>
       </form>

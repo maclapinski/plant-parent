@@ -6,15 +6,15 @@
 .form-control input,
 .form-control textarea {
   display: block;
-  width: 100%;
   margin-bottom: 0.25rem;
+  width: 100%;
 }
 
 .form-control input,
 .form-control textarea {
   border: 1px solid #a1a1a1;
-  font: inherit;
   border-radius: 2px;
+  font: inherit;
   padding: 7px;
 }
 
@@ -24,27 +24,33 @@
 }
 
 .form-control .input {
-  display: flex;
   align-items: baseline;
+  display: flex;
   position: relative;
 }
 .form-control .togglePassword {
+  background-color: transparent;
+  border: none;
+  border-radius: 3px;
+  font-size: 1.05rem;
+  height: 32px;
+  padding: 7px;
+  padding-top: 9px;
   position: absolute;
-    right: 2px;
-    top: 2px;
-    padding: 7px;
+  right: 0px;
+  top: 1px;
+  width: 35px;
 }
 .form-control .password {
   padding-right: 40px;
 }
 
-
 .form-control .input .fa-check-circle,
 .form-control .input .fa-times-circle {
   display: none;
+  left: 102%;
   position: absolute;
   top: 9px;
-  left: 102%;
 }
 
 .form-control .input .fa-check-circle {
@@ -53,10 +59,3 @@
 .form-control .input .fa-times-circle {
   color: red;
 }
-
-/* 
-input[type=email], 
-input[type=password] {
-
-  color: red
-} */

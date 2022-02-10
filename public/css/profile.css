@@ -1,0 +1,15 @@
+.card-profile {
+  max-width: 400px;
+}
+.profile__card-header {
+  display: flex;
+  align-items: center;
+}
+.profile__card-header .header-title {
+  position: relative;
+  margin-left: 2rem;
+}
+.profile__card-header .header-subtitle {
+  margin: 0;
+  position: absolute;
+}

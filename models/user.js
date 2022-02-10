@@ -33,6 +33,7 @@ const userSchema = new Schema({
     type: String,
   },
   plantList: [{ plant: { type: Schema.Types.ObjectId, ref: "Plant", required: true } }],
+  wishList: [{ plant: { type: Schema.Types.ObjectId, ref: "Plant", required: true } }],
   isAdmin: {
     type: Boolean,
     default: false,
@@ -41,14 +42,20 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  isPremium:  {
+    type: Boolean,
+    default: false,
+  },
+  premiumSubscriptionToken: String,
+  premiumSubscriptionTokenExpiration: Date,
   resetToken: String,
   resetTokenExpiration: Date,
 });
 
-userSchema.methods.addToUserPlantList = function (plant) {
+userSchema.methods.addToUserPlantList = function (plant, deleteFromWishList) {
   let updatedPlantList;
   const listPlantIndex = this.plantList.findIndex((item) => {
-    return item.toString() === plant._id.toString();
+    return item.plant._id.toString() === plant._id.toString();
   });
   if (listPlantIndex < 0) {
     updatedPlantList = [...this.plantList, { plant: plant._id }];
@@ -59,12 +66,41 @@ userSchema.methods.addToUserPlantList = function (plant) {
   return this.save();
 };
 
+userSchema.methods.addToUserWishList = function (plant) {
+  let updatedWishList;
+  const listPlantIndex = this.wishList.findIndex((item) => {
+    return item.toString() === plant._id.toString();
+  });
+  if (listPlantIndex < 0) {
+    updatedWishList = [...this.wishList, { plant: plant._id }];
+  } else {
+    updatedWishList = this.wishList;
+  }
+  this.wishList = updatedWishList;
+  return this.save();
+};
+
 userSchema.methods.deleteFromUserPlantList = function (plantId) {
   const updatedPlantList = this.plantList.filter((p) => {
     return p.plant.toString() !== plantId.toString();
   });
 
   this.plantList = updatedPlantList;
+  return this.save();
+};
+
+userSchema.methods.deleteFromUserWishList = function (plantId) {
+  const updatedWishList = this.wishList.filter((p) => {
+    return p.plant.toString() !== plantId.toString();
+  });
+
+  this.wishList = updatedWishList;
+  return this.save();
+};
+
+userSchema.methods.setPremiumToken = function (token) {
+  this.premiumSubscriptionToken = token;
+  this.premiumSubscriptionTokenExpiration = Date.now() + 3600000;
   return this.save();
 };
 

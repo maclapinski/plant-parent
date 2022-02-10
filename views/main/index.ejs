@@ -1,8 +1,9 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/plant.css" />
 <body>
+  <a class="skip-main" href="#main">Skip to main content</a>
   <%- include('../includes/navigation.ejs') %>
-  <main>
+  <main id='main'>
     <% if (successMessage) { %>
       <div class="user-message user-message--success"><%= successMessage %></div>
   <% } %>
@@ -84,4 +85,4 @@
     </div>
   </main>
   <%- include('../includes/end.ejs') %>
-</body>
+

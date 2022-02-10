@@ -23,20 +23,29 @@
           </div>
           <div class="row">
             <p class="label">Light:</p>
-            <p class="value"><%= plant.light.toString() %></p>
+            <div class="value">
+              <% if(plant.light.includes('low')) { %> <i title="low" class="fas fa-cloud"></i>
+              <p>low</p>
+              <% } %> <% if(plant.light.includes('medium')) { %> <i title="medium" class="fas fa-cloud-sun"></i>
+              <p>medium</p>
+              <% } %> <% if(plant.light.includes('bright')) { %> <i title="bright" class="fas fa-sun"></i>
+              <p>bright</p>
+              <% } %>
+            </div>
           </div>
           <div class="row">
-            <p class="label">Pet-Friendly:</p>
-            <p class="value"><%= plant.isSafeForPets ? "Yes" : "No"%></p>
+            <p class="label">Pet-Safe:</p>
+            <p class="value"><%= plant.petSafe ? "Yes" : "No"%></p>
           </div>
         </div>
         <div class="card__actions">
-            <a href="/plants/<%= plant._id %>" class="btn">Details</a>
-          <% if (userPlants.includes(plant._id.toString())) { %>
+          <a href="/plants/<%= plant._id %>" class="btn">Details</a>
+          <% if (isAuthenticated) { if (userPlants.includes(plant._id.toString())) { %>
           <div class="text-container"><p>Your Plant</p></div>
-          <% } else { %>
-            <%- include('../includes/add-to-user-plants.ejs', {plant: plant}) %>
-          <% } %>
+          <% } else { %> <%- include('../includes/add-to-user-plant-list.ejs', {plant: plant}) %> <% if
+          (userWishList.includes(plant._id.toString())) { %>
+          <div class="text-container"><p>On your wish list</p></div>
+          <% } else { %> <%- include('../includes/add-to-user-wish-list.ejs', {plant: plant}) %> <% }} } %>
         </div>
       </article>
       <% } %>
@@ -46,4 +55,4 @@
     <% } %>
   </main>
   <%- include('../includes/end.ejs') %>
-</body>
+
