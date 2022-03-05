@@ -1,0 +1,99 @@
+<a class="plant-card" href="/plants/<%= plant._id %>">
+  <header class="card__header">
+    <h1 class="plant__title"><%= plant.name %></h1>
+    <div class="add-to-wishlist_container btn" onclick="toggleWishList(this)">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <input type="hidden" value="<%= plant._id %>" name="plantId" />
+      <svg
+        class="<%= userWishList.includes(plant._id.toString()) ? 'checked' : '' %>"
+        width="22"
+        height="19"
+        viewBox="0 0 22 19"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11 17.8812L2.41415 9.01375C1.10265 7.65924 0.656087 5.64167 1.27423 3.82676C2.42301 0.453883 6.50754 -0.589841 9.04264 1.79781L10.6572 3.31845L11 3.64132L11.3428 3.31845L12.9574 1.79781C15.4925 -0.58984 19.577 0.453883 20.7258 3.82676C21.3439 5.64167 20.8973 7.65924 19.5858 9.01375L11 17.8812Z"
+        />
+      </svg>
+    </div>
+  </header>
+  <div class="card__image">
+    <img src="/images/plants/<%= plant.image %>" alt="<%= plant.title %>" />
+  </div>
+  <div class="card__content">
+    <div class="row">
+      <div class="icon">
+        <svg width="19" height="18" viewBox="0 0 19 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16.6602" cy="2.25" r="2.25" fill="#FCCC1F" />
+          <circle cx="16.6602" cy="11.25" r="2.25" fill="#FCCC1F" />
+          <circle cx="11.8555" cy="6.75" r="2.25" fill="#FCCC1F" />
+          <circle cx="11.8555" cy="15.75" r="1.75" stroke="#FCCC1F" />
+          <circle cx="7.05273" cy="2.25" r="1.75" stroke="#FCCC1F" />
+          <circle cx="7.05273" cy="11.25" r="1.75" stroke="#FCCC1F" />
+          <circle cx="2.25" cy="6.75" r="1.75" stroke="#FCCC1F" />
+          <circle cx="2.25" cy="15.75" r="1.75" stroke="#FCCC1F" />
+        </svg>
+      </div>
+      <p class="label">DIFFICULTY</p>
+      <p class="value"><%= plant.difficulty %></p>
+    </div>
+    <div class="row">
+      <div class="icon">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M17.6 11.7333V10.2667H22V11.7333H17.6ZM16.1847 4.77687L18.26 2.703L19.2969 3.73998L17.2216 5.81528L16.1847 4.77687ZM11 16.1333C8.16493 16.1333 5.86667 13.8351 5.86667 11C5.86667 8.16347 8.16493 5.86667 11 5.86667C13.8351 5.86667 16.1333 8.16347 16.1333 11C16.1333 13.8351 13.8351 16.1333 11 16.1333ZM11 7.32447C8.97013 7.32447 7.326 8.97013 7.326 11C7.326 13.0299 8.9716 14.674 11 14.674C13.0284 14.674 14.674 13.0299 14.674 11C14.674 8.97013 13.0284 7.32447 11 7.32447ZM10.2667 0H11.7333V4.4H10.2667V0ZM2.70307 18.2585L4.77841 16.1846L5.81533 17.223L3.74147 19.2969L2.70307 18.2585ZM2.70307 3.73998L3.74147 2.703L5.81533 4.77687L4.77841 5.81528L2.70307 3.73998ZM4.4 11.7333H0V10.2667H4.4V11.7333ZM11.7333 22H10.2667V17.6H11.7333V22ZM19.2969 18.2585L18.26 19.2969L16.1847 17.223L17.2216 16.1846L19.2969 18.2585Z"
+            fill="#FCCC1F"
+          />
+          <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M11.0176 11.4616L11.0229 11.433L13.4798 13.7749C14.2369 13.0981 14.7135 12.1139 14.7135 11.0185C14.7135 8.97727 13.0588 7.32252 11.0176 7.32239V11.4616Z"
+            fill="#FCCC1F"
+          />
+        </svg>
+      </div>
+      <p class="label">LIGHT</p>
+      <div class="value">
+        <p>
+          <% if(plant.light.includes('low') && plant.light.includes('medium')) { %> Low<%=
+          plant.light.includes('medium') ? ' / ' : ""%> <% } %> <% if(plant.light.includes('medium')){ %> Medium<%=
+          plant.light.includes('bright') ? ' / ' : ""%> <% } %> <% if(plant.light.includes('bright')) { %> Bright <% }
+          %>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="icon">
+        <svg width="18" height="17" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M10.2161 5.66667C9.5066 5.66667 6.46066 5.73679 4.5 8.71073V5.66667C4.5 3.79171 2.98617 2.26667 1.125 2.26667C0.503789 2.26667 0 2.77419 0 3.4C0 4.02581 0.503789 4.53333 1.125 4.53333C1.74516 4.53333 2.25 5.04192 2.25 5.66667V14.7333C2.25 15.9835 3.25898 17 4.5 17H10.6875C10.9983 17 11.25 16.7464 11.25 16.4333V15.8667C11.25 15.2409 10.7462 14.7333 10.125 14.7333H9L13.5 11.3333V16.4333C13.5 16.7464 13.7517 17 14.0625 17H15.1875C15.4983 17 15.75 16.7464 15.75 16.4333V9.13254C15.3882 9.2271 15.0156 9.29333 14.625 9.29333C12.452 9.29333 10.6341 7.73323 10.2161 5.66667ZM15.75 2.26667H13.5L11.25 0V4.76C11.25 6.63779 12.761 8.16 14.625 8.16C16.489 8.16 18 6.63779 18 4.76V0L15.75 2.26667ZM13.2188 5.1C12.908 5.1 12.6562 4.84642 12.6562 4.53333C12.6562 4.22025 12.908 3.96667 13.2188 3.96667C13.5295 3.96667 13.7812 4.22025 13.7812 4.53333C13.7812 4.84642 13.5295 5.1 13.2188 5.1ZM16.0312 5.1C15.7205 5.1 15.4688 4.84642 15.4688 4.53333C15.4688 4.22025 15.7205 3.96667 16.0312 3.96667C16.342 3.96667 16.5938 4.22025 16.5938 4.53333C16.5938 4.84642 16.342 5.1 16.0312 5.1Z"
+            fill="#FCCC1F"
+          />
+        </svg>
+      </div>
+      <p class="label">PET-SAFE</p>
+      <p class="value"><%= plant.petSafe ? "yes" : "no"%></p>
+    </div>
+  </div>
+  <div class="card__actions">
+    <% if (isAuthenticated) { if (!userPlants.includes(plant._id.toString()) && showAddBtn) { %>
+    <button type="button" class="actions__btn btn" onclick="addToMyPlants(this)">
+      Add to My Plants <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <input type="hidden" value="<%= plant._id %>" name="plantId" />
+    </button>
+    <%} else { %>
+    <div class="actions__message">
+      <svg width="25" height="19" viewBox="0 0 25 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M8.4911 18.2766L0.366101 10.1516C-0.122034 9.66351 -0.122034 8.87206 0.366101 8.38387L2.13383 6.6161C2.62196 6.12792 3.41346 6.12792 3.9016 6.6161L9.37499 12.0894L21.0984 0.366101C21.5865 -0.122034 22.378 -0.122034 22.8662 0.366101L24.6339 2.13387C25.122 2.62201 25.122 3.41346 24.6339 3.90165L10.2589 18.2767C9.77069 18.7648 8.97924 18.7648 8.4911 18.2766Z"
+          fill="#0D986A"
+        />
+      </svg>
+      <p>My Plant</p>
+    </div>
+    <% } }%>
+  </div>
+</a>

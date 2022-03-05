@@ -56,8 +56,9 @@ app.use(flash());
 
 app.use((req, res, next) => {
   res.locals.csrfToken = req.csrfToken();
+  res.locals.avatar = req.session.user ? req.session.user.image : '';
   res.locals.isAuthenticated = req.session.isLoggedIn;
-  res.locals.isAdmin = req.user ? req.user.isAdmin : false;
+  res.locals.isAdmin = req.session.user ? req.session.user.isAdmin : false;
 
   next();
 });

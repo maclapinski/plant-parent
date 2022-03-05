@@ -1,33 +1,306 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/plant.css" />
+<link rel="stylesheet" href="/css/search-bar.css" />
 <body>
   <a class="skip-main" href="#main">Skip to main content</a>
   <%- include('../includes/navigation.ejs') %>
-  <main id='main'>
+  <main id="main">
     <% if (successMessage) { %>
-      <div class="user-message user-message--success"><%= successMessage %></div>
-  <% } %>
-    <% if (errorMessage) { %>
-      <div class="user-message user-message--error"><%= errorMessage %></div>
-  <% } %>
+    <div class="user-message user-message--success"><%= successMessage %></div>
+    <% } %> <% if (errorMessage) { %>
+    <div class="user-message user-message--error"><%= errorMessage %></div>
+    <% } %>
+    <section class="home">
+   
+      <div class="container">   <div
+      aria-labelledby="search-block-tab-true-STAYS"
+      id="search-tabpanel"
+      role="tabpanel"
+      tabindex="0"
+      class="search-tabpanel"
+      data-panel-bounds="true"
+    >
+      <div class="_1c7nvmy">
+        <div class="_dd55nf9">
+          <div class="experiance_search" onclick="toggleInputBox(this)">
+            <label class="_koumzdh" id="experience" for="bigsearch-query-location-input"
+              ><div class="_gor68n">
+                <div class="_wtz1co">EXPERIENCE</div>
+                <div class="_uh2dzp">How experienced are you?</div>
+              </div></label
+            ><span id="bigsearch-query-location-description" class="_1u9fru1"
+              >Przejdź dalej, aby uzyskać proponowane wyniki</span
+            >
+            <!-- <div class="_g5308cs"> -->
+            <div class="_16takj0" data-testid="structured-search-input-field-query-panel" style="margin-left: 0px">
+              <section>
+                <div class="_3hmsj">
+                  <div
+                    class="_11dv6d8"
+                    role="dialog"
+                    aria-label="Szukaj sugestii"
+                    id="bigsearch-query-location-listbox"
+                    tabindex="-1"
+                  >
+                    <div
+                      role="group"
+                      class="_1s4do1s"
+                      aria-labelledby="FLEXIBLE_DESTINATIONS-w-dowolnym-miejscu--w-dowolnym-czasie"
+                    >
+                      <div class="_1o1qnrqo" id="FLEXIBLE_DESTINATIONS-w-dowolnym-miejscu--w-dowolnym-czasie">
+                        <span class="_h7snkc">W&nbsp;dowolnym miejscu, w&nbsp;dowolnym czasie</span>
+                      </div>
+                      <div>
+                        <div
+                          role="link"
+                          tabindex="0"
+                          id="bigsearch-query-location-suggestion-0"
+                          data-index="0"
+                          data-testid="option-0"
+                          class="_15pbdpi"
+                        >
+                          <div class="_1nuqap5">
+                            <div aria-hidden="true">
+                              <video
+                                autoplay=""
+                                crossorigin="anonymous"
+                                playsinline=""
+                                poster="https://a0.muscache.com/pictures/04c0a34f-9880-48b7-a69c-49011f602a35.jpg"
+                                preload="auto"
+                                width="28"
+                                height="28"
+                              >
+                                <source
+                                  src="https://a0.muscache.com/videos/vopt/13/e1/13e14ffc-822c-5e84-aa58-d6a6527dc218/13e14ffc822c5e84aa58d6a6527dc218.mp4?impolicy=low_quality"
+                                  type="video/mp4"
+                                />
+                              </video>
+                            </div>
+                            <div class="_1825a1k"><div class="_ywgikl">Elastyczne wyszukiwanie</div></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <!-- </div> -->
+            <span aria-atomic="true" aria-live="polite" role="status" class="_krjbj"></span>
+          </div>
+        </div>
+        <div class="_43mycv"></div>
+        <div class="_1l6jpwo">
+          <div class="_j8gg2a" onclick="toggleInputBox(this)">
+            <div
+              role="button"
+              tabindex="0"
+              class="_1akb2mdw"
+              aria-expanded="false"
+              data-testid="structured-search-input-field-split-dates-0"
+            >
+              <div class="_seuyf">
+                <div class="_wtz1co">LIGHT</div>
+                <div class="_uh2dzp">How bright is the spot?</div>
+              </div>
+            </div>
+          </div>
+          <div class="_16takj0" data-testid="structured-search-input-field-query-panel" style="margin-left: 0px">
+            <section>
+              <div class="_3hmsj">
+                <div
+                  class="_11dv6d8"
+                  role="dialog"
+                  aria-label="Szukaj sugestii"
+                  id="bigsearch-query-location-listbox"
+                  tabindex="-1"
+                >
+                  <div
+                    role="group"
+                    class="_1s4do1s"
+                    aria-labelledby="FLEXIBLE_DESTINATIONS-w-dowolnym-miejscu--w-dowolnym-czasie"
+                  >
+                    <div>
+                      <div
+                        role="link"
+                        tabindex="0"
+                        id="bigsearch-query-location-suggestion-0"
+                        data-index="0"
+                        data-testid="option-0"
+                        class="_15pbdpi"
+                      >
+                        <div class="_1nuqap5">
+                          <!-- <input type="checkbox" name="petSafe" value="true" id="pet"/>  -->
+                          <div style="display: flex">
+                            <fieldset>
+                              <div>
+                                <input type="checkbox" name="light" value="low" id="low" />
+                                <label class="" for="low">Low</label>
+                              </div>
+                              <div>
+                                <input type="checkbox" name="light" value="medium" id="medium" />
+                                <label class="" for="medium">Medium</label>
+                              </div>
+                              <div>
+                                <input type="checkbox" name="light" value="bright" id="bright" />
+                                <label class="" for="bright">Bright</label>
+                              </div>
+                            </fieldset>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div class="_43mycv"></div>
+        <div class="_1yulsurh">
+          <div
+            onclick="toggleInputBox(this)"
+            role="button"
+            tabindex="0"
+            class="_37ivfdq"
+            aria-expanded="false"
+            data-testid="structured-search-input-field-guests-button"
+          >
+            <div class="_seuyf">
+              <div class="_wtz1co">PETS</div>
+              <div class="_uh2dzp">Do you have pets?</div>
+            </div>
+          </div>
+          <div class="_16takj0" data-testid="structured-search-input-field-query-panel" style="margin-left: 0px">
+            <section>
+              <div class="_3hmsj">
+                <div
+                  class="_11dv6d8"
+                  role="dialog"
+                  aria-label="Szukaj sugestii"
+                  id="bigsearch-query-location-listbox"
+                  tabindex="-1"
+                >
+                  <div
+                    role="group"
+                    class="_1s4do1s"
+                    aria-labelledby="FLEXIBLE_DESTINATIONS-w-dowolnym-miejscu--w-dowolnym-czasie"
+                  >
+                    <div>
+                      <div
+                        role="link"
+                        tabindex="0"
+                        id="bigsearch-query-location-suggestion-0"
+                        data-index="0"
+                        data-testid="option-0"
+                        class="_15pbdpi"
+                      >
+                        <div class="_1nuqap5">
+                          <!-- <input type="checkbox" name="petSafe" value="true" id="pet"/>  -->
+                          <div>
+                            <div class="form-check">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="petSafe"
+                                value="true"
+                                id="flexRadioDefault1"
+                                autocompleted=""
+                              />
+                              <label class="form-check-label" for="flexRadioDefault1"> Yes </label>
+                            </div>
+                            <div class="form-check">
+                              <input
+                                class="form-check-input"
+                                type="radio"
+                                name="petSafe"
+                                value="false"
+                                id="flexRadioDefault2"
+                                checked
+                                autocompleted=""
+                              />
+                              <label class="form-check-label" for="flexRadioDefault2"> No </label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          <div class="_w64aej">
+            <button class="_sxfp92z" type="button">
+              <div class="_1hb5o3s">
+                <div class="_14lk9e14">
+                  <svg
+                    viewBox="0 0 32 32"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                    role="presentation"
+                    focusable="false"
+                    style="
+                      display: block;
+                      fill: none;
+                      height: 16px;
+                      width: 16px;
+                      stroke: currentcolor;
+                      stroke-width: 4;
+                      overflow: visible;
+                    "
+                  >
+                    <g fill="none">
+                      <path
+                        d="m13 24c6.0751322 0 11-4.9248678 11-11 0-6.07513225-4.9248678-11-11-11-6.07513225 0-11 4.92486775-11 11 0 6.0751322 4.92486775 11 11 11zm8-3 9 9"
+                      ></path>
+                    </g>
+                  </svg>
+                </div>
+                <div class="_c5qlo1f">Szukaj</div>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+        <div class="container__text">
+          <h1 class="display-4">How to Become a Plant Parent</h1>
+
+          <form action="/subscribe" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+            <button class="btn" onclick="toggleSpinner()" type="submit">Subscribe</button>
+          </form>
+          <p class="lead" onclick="toggleSpinner()">
+            The house plants we grow come from a huge range of habitats and ecologies around the worlds. Their home can
+            be a reinforces floor or a mountaintop. they can survive in a bleakest desert and the wettest swamps, and it
+            is these conditions we need to emulate at home if the plants are to thrive.
+          </p>
+          <p>
+            Plant Parent helps you find perfect plants for your home environment and manage your plants by keeping all
+            the information about your plants in one place.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <div class="container container-row">
       <div class="container__text">
         <h1 class="display-4">How to Become a Plant Parent</h1>
-        
+
         <form action="/subscribe" method="post">
-          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
           <button class="btn" onclick="toggleSpinner()" type="submit">Subscribe</button>
-      </form>
+        </form>
         <p class="lead" onclick="toggleSpinner()">
-          The house plants we grow come from a huge range of habitats and
-          ecologies around the worlds. Their home can be a reinforces floor or a
-          mountaintop. they can survive in a bleakest desert and the wettest
-          swamps, and it is these conditions we need to emulate at home if the
-          plants are to thrive. 
-          
-        </p><p>Plant Parent helps you find perfect plants for your home environment
-          and manage your plants by keeping all the information about your
-          plants in one place.</p>
+          The house plants we grow come from a huge range of habitats and ecologies around the worlds. Their home can be
+          a reinforces floor or a mountaintop. they can survive in a bleakest desert and the wettest swamps, and it is
+          these conditions we need to emulate at home if the plants are to thrive.
+        </p>
+        <p>
+          Plant Parent helps you find perfect plants for your home environment and manage your plants by keeping all the
+          information about your plants in one place.
+        </p>
       </div>
       <div class="container__image">
         <img src="/images/cat_plants2.jpg" alt="" />
@@ -37,52 +310,43 @@
       <div class="container align-center">
         <h2 class="card-title">Find a perfect baby-plant</h2>
         <p class="card-text">
-          Confused what kind of plant is the best fit for your home? Make first
-          step to become a plant parent and click the search button
+          Confused what kind of plant is the best fit for your home? Make first step to become a plant parent and click
+          the search button
         </p>
         <p class="lead">
-          <a class="btn btn-outline-success" href="/search" role="button"
-            >Search</a
-          >
+          <a class="btn btn-outline-success" href="/search" role="button">Search</a>
         </p>
       </div>
       <div class="container">
         <h4 class="card-title">Light</h4>
         <p class="card-text">
-          This is a crucial source of energy for all plants. Although the amount
-          of light an individual plant needs varies, all plants require some
-          during the day. The majority of plants we grow in our homes need
-          bright, indirect light rather than direct sunlight, but there are
-          plenty than prefer a shadier spot. The amount of light a room receives
-          depends on the size of the windows, whether the light source is direct
-          or indirect.
+          This is a crucial source of energy for all plants. Although the amount of light an individual plant needs
+          varies, all plants require some during the day. The majority of plants we grow in our homes need bright,
+          indirect light rather than direct sunlight, but there are plenty than prefer a shadier spot. The amount of
+          light a room receives depends on the size of the windows, whether the light source is direct or indirect.
         </p>
       </div>
       <div class="container">
         <h4 class="card-title">Watering</h4>
         <p class="card-text">
-          Many plants, particulary those from the tropics, require a warm, moist
-          atmosphere, with vapour levels in the air that are much higher than we
-          can achieve normally in our centrally heated homes. Without the
-          appropriate humidity level, plant leaves shrivel, turn brown and drop
-          off, and growth can be stuned. Steamy bathrooms and kitchen are the
-          obvious choice for plants such as these.
+          Many plants, particulary those from the tropics, require a warm, moist atmosphere, with vapour levels in the
+          air that are much higher than we can achieve normally in our centrally heated homes. Without the appropriate
+          humidity level, plant leaves shrivel, turn brown and drop off, and growth can be stuned. Steamy bathrooms and
+          kitchen are the obvious choice for plants such as these.
         </p>
       </div>
       <div class="container">
         <br />
         <h4 class="card-title">Temperature</h4>
         <p class="card-text">
-          Almost all house plants like temperatures that are warm during the day
-          and cooler at night. Some such a tropical plants want a hotter spot,
-          while others such as palms and carnivotous plnants prefer life a
-          little cooler. However, none likes dramatic swing of hot or cold, so
-          avoid any draughts near doors and windowsills and keep plants away
-          from ovens, radiators, fires and heaters. Note that some plants may
-          need a cooler winter temperature, to promote flowering.
+          Almost all house plants like temperatures that are warm during the day and cooler at night. Some such a
+          tropical plants want a hotter spot, while others such as palms and carnivotous plnants prefer life a little
+          cooler. However, none likes dramatic swing of hot or cold, so avoid any draughts near doors and windowsills
+          and keep plants away from ovens, radiators, fires and heaters. Note that some plants may need a cooler winter
+          temperature, to promote flowering.
         </p>
       </div>
     </div>
   </main>
   <%- include('../includes/end.ejs') %>
-
+</body>

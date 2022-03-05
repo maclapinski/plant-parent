@@ -1,110 +1,19 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/css/plant.css" />
-<link rel="stylesheet" href="/css/search.css" />
+<link rel="stylesheet" href="/css/profile.css" />
+<link rel="stylesheet" href="/css/search-bar.css" />
+<link rel="stylesheet" href="/styles/css/search.css" />
+<link rel="stylesheet" href="/styles/css/plant-card.css" />
 </head>
 <body>
-  <%- include('../includes/navigation.ejs') %>
   <main>
-    
-    <div class="container container-row">
-      <div class="search-panel">
-        <h1>Search</h1>
-        <form
-          class="form-horizontal"
-          id="plantSearchForm"
-          action="/search"
-          method="POST"
-          role="form"
-        >
-          <label class="label" for="light">Difficulty</label>
-          <fieldset>
-            <input type="checkbox" name="difficulty" value="easy" id="easy" <%=
-            oldInput.easy %> />
-            <label class="" for="easy">Easy</label>
-
-            <input type="checkbox" name="difficulty" value="medium" id="medium"
-            <%= oldInput.medium %>/>
-            <label class="" for="medium">Medium</label>
-
-            <input type="checkbox" name="difficulty" value="advanced"
-            id="advanced" <%= oldInput.advanced %>/>
-            <label class="" for="advanced">Advanced</label>
-          </fieldset>
-
-          <label class="label" for="light">Light</label>
-          <fieldset>
-            <input type="checkbox" name="light" value="low" id="low" <%=
-            oldInput.lowLight %>/>
-            <label class="" for="low">Low</label>
-
-            <input type="checkbox" name="light" value="medium" id="medium" <%=
-            oldInput.mediumLight %>/>
-            <label class="" for="medium">Medium</label>
-
-            <input type="checkbox" name="light" value="bright" id="bright" <%=
-            oldInput.brightLight %>/>
-            <label class="" for="bright">Bright</label>
-          </fieldset>
-
-          <div class="form-group">
-            <label class="label" for="pets">Pets</label>
-            <div class="">
-              <input type="checkbox" name="petSafe" value="true" id="pet" <%=
-              oldInput.petSafe === true ? 'checked' : '' %>/>
-              <label class="" for="petSafe">Pet Friendly</label>
-            </div>
-          </div>
-
-          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-          <button class="btn" type="submit">Submit</button>
-        </form>
+    <div class="wrapper">
+      <%- include('../includes/header.ejs') %> <%- include('../includes/search-bar.ejs') %> <% if (plants.length > 0) {
+      %>
+      <div class="grid">
+        <% for (let plant of plants) { %> <%- include('../includes/plant-card.ejs', {plant: plant, showAddBtn: true}) %> <% } %>
       </div>
-
-      
-        <% if (plants.length > 0) { %><div class="grid"> <% for (let plant of plants) { %>
-        <article class="card plant-item">
-          <header class="card__header">
-            <h1 class="plant__title"><%= plant.name %></h1>
-          </header>
-          <div class="card__image">
-            <img src="/images/plants/<%= plant.image %>" alt="<%= plant.title %>" />
-          </div>
-          <div class="card__content">
-            <div class="row">
-              <p class="label">Difficulty:</p>
-              <p class="value"><%= plant.difficulty %></p>
-            </div>
-            <div class="row">
-              <p class="label">Light:</p>
-              <p class="value"><%= plant.light.toString() %></p>
-            </div>
-            <div class="row">
-              <p class="label">Pet-Safe:</p>
-              <p class="value"><%= plant.petSafe ? "Yes" : "No"%></p>
-            </div>
-          </div>
-          <div class="card__actions">
-            <a href="/plants/<%= plant._id %>" class="btn">Details</a>
-            <% if (isAuthenticated) { if (userPlants.includes(plant._id.toString())) { %>
-              <div class="text-container"><p>Your Plant</p></div>
-              <% } else { %> <%- include('../includes/add-to-user-plant-list.ejs', {plant: plant}) %> <% if
-              (userWishList.includes(plant._id.toString())) { %>
-              <div class="text-container"><p>On your wish list</p></div>
-              <% } else { %> <%- include('../includes/add-to-user-wish-list.ejs', {plant: plant}) %> <% }} } %>
-          </div>
-        </article>
-        <% } %> </div><% } else { %>
-          
-          <div class="container-image">
-            <% if (errMessage) { %>
-            <div class="user-message user-message--error"><%= errMessage %></div>
-            <% } else{ %>
-            <img class="search-image"src="/images/shelf.png" alt="">
-            <% } %>  
-          </div>
-          
-        <% } %>  
+      <% } %>
     </div>
   </main>
-  <%- include('../includes/end.ejs') %>
-
+  <%- include('../includes/subscribe-footer.ejs') %> <%- include('../includes/end.ejs') %>
+</body>

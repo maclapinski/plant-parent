@@ -1,0 +1,108 @@
+@import url("https://fonts.googleapis.com/css?family=Hind:400,600,700");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Hind, Helvetica", sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #fff;
+  flex-direction: column;
+  display: flex;
+}
+
+main {
+  width: 100%;
+}
+
+fieldset {
+  border: none;
+  margin: 0;
+  padding: 0.2rem 0;
+}
+
+form {
+  display: inline;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input {
+  background-color: #fff !important;
+  border: 0.125rem solid #757575;
+  height: 1.125rem;
+  position: relative;
+  width: 1.125rem;
+}
+
+input[type="checkbox"]:checked {
+  background-color: green !important;
+  color: green !important;
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 1400px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 0.6fr));
+  justify-content: space-around;
+  margin: 30px auto 50px;
+  width: 100%;
+  max-width: 1100px;
+}
+.actions__btn {
+  height: 37px;
+  border: none;
+  width: fit-content;
+  padding: 5px 20px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #124c5f;
+  text-align: center;
+  &:hover {
+    background-color: darken($color: #124c5f, $amount: 4%);
+  }
+}
+.actions__message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p {
+    // margin: ;
+  }
+  svg {
+    margin-right: 15px;
+  }
+}
+
+
+@media screen and (min-width: 758px) {
+  .grid {
+     width: 92%;
+  }
+}
+@media screen and (min-width: 900px) {
+  .grid {
+     width: 80%;
+  }
+}
+@media screen and (min-width: 1036px) {
+  .grid {
+    width: 100%;
+  }
+}

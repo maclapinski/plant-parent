@@ -5,6 +5,7 @@ const mainController = require('../controllers/main');
 const isAuth = require('../middleware/is-auth');
 
 router.get('/', mainController.getIndexPage);
+router.get('/new', mainController.getNewIndexPage);
 router.get('/user-plant-list', isAuth, mainController.getUserPlantList);
 router.get('/user-wish-list', isAuth, mainController.getUserWishList);
 router.get('/plants', mainController.getPlants);
@@ -19,12 +20,12 @@ router.get('/premium', mainController.getPremium);
 // router.get('/premium/cancel', mainController.getPremium);
 
 router.post(
-  '/add-to-plant-list',
+  '/add-to-plant-list/:plantId',
   isAuth,
   mainController.postAddToUserPlantList
 );
 router.post(
-  '/add-to-wish-list',
+  '/add-to-wish-list/:plantId',
   isAuth,
   mainController.postAddToUserWishList
 );

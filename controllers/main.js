@@ -39,6 +39,28 @@ exports.getIndexPage = (req, res, next) => {
     successMessage: successMsg,
   });
 };
+exports.getNewIndexPage = (req, res, next) => {
+  let successMsg = req.flash("success");
+  let errMsg = req.flash("error");
+
+  if (successMsg.length > 0) {
+    successMsg = successMsg[0];
+  } else {
+    successMsg = null;
+  }
+
+  if (errMsg.length > 0) {
+    errMsg = errMsg[0];
+  } else {
+    errMsg = null;
+  }
+  res.render("main/new_index", {
+    path: "/",
+    pageTitle: "Index",
+    errorMessage: errMsg,
+    successMessage: successMsg,
+  });
+};
 exports.getPrivacyPolicy = (req, res, next) => {
   let successMsg = req.flash("success");
   let errMsg = req.flash("error");
@@ -122,10 +144,13 @@ exports.getUserPlantList = async (req, res, next) => {
   try {
     const user = await req.user.populate("plantList.plant");
     const plants = user.plantList;
+    console.log(plants)
     res.render("main/user-plant-list", {
       path: "/user-plant-list",
       pageTitle: "My Plants",
       plants: plants,
+      userPlants: plants,
+      userWishList: [],
       errorMessage: req.flash("error"),
     });
   } catch (err) {
@@ -288,6 +313,7 @@ exports.postAddToUserPlantList = (req, res, next) => {
       return next(error);
     });
 };
+
 exports.postAddToUserWishList = (req, res, next) => {
   const plantId = req.body.plantId;
   Plant.findById(plantId)
@@ -301,6 +327,22 @@ exports.postAddToUserWishList = (req, res, next) => {
       const error = new Error(err);
       error.httpStatusCode = 500;
       return next(error);
+    });
+};
+
+exports.postAddToUserWishList = (req, res, next) => {
+  const plantId = req.params.plantId;
+
+  Plant.findById(plantId)
+    .then((plant) => {
+      return req.user.addToUserWishList(plant);
+    })
+    .then(() => {
+      console.log("ADDED PLANT");
+      res.status(200).json({ message: "Success!" });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "Deleting Plant failed." });
     });
 };
 

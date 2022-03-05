@@ -91,7 +91,6 @@ exports.getSignup = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -165,6 +164,7 @@ exports.postSignup = (req, res, next) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const password = req.body.password;
+  const image = `https://ui-avatars.com/api/?name=${firstName}+${lastName}&rounded=true&background=0D986A&color=fff`;
 
   const errors = validationResult(req);
 
@@ -192,6 +192,7 @@ exports.postSignup = (req, res, next) => {
         email: email,
         firstName: firstName,
         lastName: lastName,
+        image: image,
         password: hashedPassword,
         plantList: [],
       });
@@ -375,6 +376,7 @@ exports.postNewPassword = (req, res, next) => {
       })
       .then((result) => {
         req.session.isLoggedIn = false;
+        req.session.isAdmin = false;
 
         return req.session.save((err) => {
           if (err) {
