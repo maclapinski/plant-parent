@@ -187,9 +187,9 @@ exports.getSearch = (req, res, next) => {
 
 exports.getProfile = (req, res, next) => {
   const user = req.user;
-  user.avatar = user.image
-    ? user.image
-    : `https://ui-avatars.com/api/?name=${user.firstName}+${user.lastName}&rounded=true`;
+
+console.log(user.plantList.length)
+console.log(user.wishList.length)
   res.render("main/profile", {
     path: "/profile",
     pageTitle: "User Profile",

@@ -1,0 +1,65 @@
+.profile__main {
+  max-width: 800px;
+  margin: 0 auto;
+  a{
+      cursor: pointer;
+      text-decoration: underline;
+  }
+  .header {
+  }
+  .profile__container {
+    display: flex;
+    .profile__card {
+      padding: 10px;
+      border-radius: 20px;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      min-width: 300px;
+      height: fit-content;
+      align-items: center;
+      margin: 30px;
+      .avatar {
+        border-radius: 50px;
+        margin: 20px;
+        width: auto;
+      }
+      .upgrade__btn{
+          margin: 15px auto;
+          background-color: #ffffff;
+          border: 2px solid #124c5f;
+          color: #124c5f;
+          font-weight: 600;
+          font-size: 1rem;
+          &:hover{
+               background-color: #124c5f;
+          border: 2px solid #ffffff;
+          color: #ffffff;
+          }
+      }
+      .stats {
+          margin: 15px auto;
+        .row {
+          height: fit-content;
+          align-items: center;
+          margin: 3px 0;
+          .icon {
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            svg {
+              stroke: #000000;
+              height: 100%;
+              margin: auto;
+            }
+          }
+          p {
+            margin: 5px 0;
+          }
+        }
+      }
+    }
+    .profile__details {
+    }
+  }
+}

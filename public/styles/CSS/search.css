@@ -109,23 +109,4 @@
 .subscribe_footer-container .subscribe .email-input_container .email-submit_btn:hover {
   background-color: #104252;
 }
-
-.subscribe_footer-container footer {
-  align-items: center;
-  border-top: 2px solid #d4d4d4;
-  color: #222222;
-  display: flex;
-  height: 70px;
-  width: 100%;
-}
-
-.subscribe_footer-container footer .footer_container {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-}
-
-.subscribe_footer-container footer .footer_container .footer-contact_link:hover {
-  text-decoration: underline;
-}
 /*# sourceMappingURL=search.css.map */

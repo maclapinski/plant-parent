@@ -1,0 +1,29 @@
+<%- include('../includes/head.ejs') %>
+<!-- <link rel="stylesheet" href="/css/plant.css" /> -->
+<link rel="stylesheet" href="/css/profile.css" />
+</head>
+<body>
+  <%- include('../includes/navigation.ejs') %>
+  <main>
+    <h1>User Profile</h1>
+    <article class="card card-profile">
+      <header class="card__header profile__card-header">
+        <img class="avatar" src="<%= user.avatar %>" alt="User avatar" />
+        <div class="header-title">
+          <h1 class="">
+          <% if (user.displayName) { %><%= user.displayName %><% } else{ %> <%= user.firstName + " " + user.lastName %>
+          <% } %>
+        </h1>
+        <% if(user.isPremium) {%><p class="header-subtitle"> <i class="fas fa-star"></i> Premium Member</p><% } %> 
+        </div>
+        
+      </header>
+      <div class="card__content">
+        <p class=""><%= user.email%></p>
+        <% if(!user.isPremium) {  %> <a class="btn" href="/premium">Premium Membership</a> <% } %> 
+        <a href="/auth/new-password" class="btn">Change Password</a>
+      </div>
+    </article>
+  </main>
+  <%- include('../includes/end.ejs') %>
+

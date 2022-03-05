@@ -91,7 +91,6 @@
   font-weight: 600;
   display: flex;
   padding-left: 5px;
-  text-transform: capitalize;
 }
 
 .plant-card .card__content .value p {
