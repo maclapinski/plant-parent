@@ -55,8 +55,8 @@ app.use(csrfProtection);
 app.use(flash());
 
 app.use((req, res, next) => {
-  console.log('user from app ***************************************')
-  console.log(req.session.user)
+  console.log('session from app ***************************************')
+  console.log(req.session)
   res.locals.csrfToken = req.csrfToken();
   res.locals.avatar = req.session.user ? req.session.user.image : '';
   console.log('avatar from app ***************************************')
