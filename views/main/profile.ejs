@@ -12,7 +12,7 @@
         </div>
         <div class="profile__container">
           <div class="profile__card">
-            <div class="avatar"><img src=" <%= avatar  %>  " alt="User avatar" /></div>
+            <div class="avatar"><img src=" <%= user.image  %>  " alt="User avatar" /></div>
             <!-- <div class="avatar"><img src="/images/avatar.png  " alt="User avatar" /></div> -->
             <a href="">Update Photo</a>
             <% if(user.isPremium) {%><p class="profile-premium__notification"> <i class="fas fa-star"></i> Premium Member</p><% } else { %>
