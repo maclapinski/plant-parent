@@ -45,6 +45,7 @@ exports.getLogin = (req, res, next) => {
 
 exports.getGoogleCallback = (req, res) => {
   req.session.isLoggedIn = true;
+  console.log('user from auth *********************************************')
   console.log(req.body.user)
   req.session.user = req.body.user;
   req.session.save((err) => {
