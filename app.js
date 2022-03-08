@@ -58,7 +58,8 @@ app.use((req, res, next) => {
   console.log('user from app ***************************************')
   console.log(req.session.user)
   res.locals.csrfToken = req.csrfToken();
-  res.locals.avatar = req.session.user.image;
+  res.locals.avatar = req.session.user ? req.session.user.image : '';
+  console.log('avatar from app ***************************************')
   console.log(res.locals.avatar)
   res.locals.isAuthenticated = req.session.isLoggedIn;
   res.locals.isAdmin = req.session.user ? req.session.user.isAdmin : false;
