@@ -75,6 +75,7 @@
       font-weight: 600;
       display: flex;
       padding-left: 5px;
+      text-transform: capitalize;
       p {
         text-transform: capitalize;
       }
@@ -83,8 +84,10 @@
       margin-right: 10px;
     }
   }
-  .card__actions {
+  .actions {
     padding: 1rem;
     text-align: center;
+    display: flex;
+    justify-content: end;
   }
 }

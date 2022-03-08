@@ -9,7 +9,7 @@ router.get('/new', mainController.getNewIndexPage);
 router.get('/user-plant-list', isAuth, mainController.getUserPlantList);
 router.get('/user-wish-list', isAuth, mainController.getUserWishList);
 router.get('/plants', mainController.getPlants);
-router.get('/plants/:plantId', mainController.getPlant);
+router.get('/plant-details/:plantId', mainController.getPlantDetails);
 router.get('/subscribe', mainController.getSubscribe);
 router.get('/unsubscribe/:token', mainController.getUnsubscribe);
 router.get('/search', mainController.getSearch);

@@ -1,7 +1,5 @@
 <%- include('../includes/head.ejs') %>
 <link rel="stylesheet" href="/css/search-bar.css" />
-<link rel="stylesheet" href="/css/css/search.css" />
-<link rel="stylesheet" href="/css/css/plant-card.css" />
 </head>
 <body>
   <main>
@@ -9,10 +7,11 @@
       <%- include('../includes/header.ejs') %> <%- include('../includes/search-bar.ejs') %> <% if (plants.length > 0) {
       %>
       <div class="grid">
-        <% for (let plant of plants) { %> <%- include('../includes/plant-card.ejs', {plant: plant, showAddBtn: true}) %> <% } %>
+        <% for (let plant of plants) { %> <%- include('../includes/plant-card.ejs', {plant: plant, showAddBtn: true, showWishListBtn: true}) %> <% } %>
       </div>
       <% } %>
     </div>
   </main>
-  <%- include('../includes/subscribe-footer.ejs') %> <%- include('../includes/end.ejs') %>
+  <%- include('../includes/footer.ejs') %>
+   <%- include('../includes/end.ejs') %>
 </body>

@@ -39,9 +39,8 @@
             <p class="label">Pet-Safe:</p>
             <p class="value"><%= plant.petSafe ? "Yes" : "No"%></p>
           </div>
-
         </div>
-        <div class="card__actions">
+        <div class="actions">
           <a href="/admin/edit-plant/<%= plant._id %>?edit=true" class="btn">Edit</a>
           <%- include('../includes/delete-plant.ejs', {plant: plant, action: "/admin/delete-plant"}) %>
         </div>
@@ -53,4 +52,4 @@
     <% } %>
   </main>
   <%- include('../includes/end.ejs') %>
-
+</body>

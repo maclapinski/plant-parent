@@ -1,11 +1,14 @@
 .profile__main {
   max-width: 800px;
   margin: 0 auto;
-  a{
-      cursor: pointer;
-      text-decoration: underline;
+  a {
+    cursor: pointer;
+    text-decoration: underline;
   }
   .header {
+    h1 {
+      font-size: 3rem;
+    }
   }
   .profile__container {
     display: flex;
@@ -20,31 +23,39 @@
       align-items: center;
       margin: 30px;
       .avatar {
-        border-radius: 50px;
         margin: 20px;
         width: auto;
+        img{
+          border-radius: 50%;
+        }
       }
-      .upgrade__btn{
-          margin: 15px auto;
-          background-color: #ffffff;
-          border: 2px solid #124c5f;
-          color: #124c5f;
-          font-weight: 600;
-          font-size: 1rem;
-          &:hover{
-               background-color: #124c5f;
+      .profile-premium__notification{
+        i{
+          color: #fcd604;
+        }
+      }
+      .upgrade__btn {
+        margin: 15px auto;
+        background-color: #ffffff;
+        border: 2px solid #124c5f;
+        color: #124c5f;
+        font-weight: 600;
+        font-size: 1rem;
+        &:hover {
+          background-color: #124c5f;
           border: 2px solid #ffffff;
           color: #ffffff;
-          }
+        }
       }
       .stats {
-          margin: 15px auto;
+        margin: 15px auto;
         .row {
           height: fit-content;
           align-items: center;
           margin: 3px 0;
           .icon {
             margin-right: 15px;
+            width: 22px;
             display: flex;
             align-items: center;
             svg {
@@ -60,6 +71,20 @@
       }
     }
     .profile__details {
+      .name {
+        h1 {
+          font-size: 2rem;
+        }
+      }
+      .about{
+
+      }
+      .email{
+        display: flex;
+        svg{
+          margin: auto 15px auto 0;
+        }
+      }
     }
   }
 }

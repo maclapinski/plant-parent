@@ -38,7 +38,7 @@
             <p class="value"><%= p.plant.petSafe ? "Yes" : "No"%></p>
           </div>
         </div>
-        <div class="card__actions">
+        <div class="actions">
           <a href="/plants/<%= p.plant._id %>" class="btn">Details</a>
           <%- include('../includes/delete-plant.ejs', {plant: p.plant, action: "/delete-from-plant-list"}) %>
         </div>

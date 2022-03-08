@@ -97,7 +97,7 @@ exports.getPlants = async (req, res, next) => {
   }
 };
 
-exports.getPlant = async (req, res, next) => {
+exports.getPlantDetails = async (req, res, next) => {
   const plantId = req.params.plantId;
   let inUsrPlants = false;
 
@@ -188,8 +188,7 @@ exports.getSearch = (req, res, next) => {
 exports.getProfile = (req, res, next) => {
   const user = req.user;
 
-console.log(user.plantList.length)
-console.log(user.wishList.length)
+console.log(user)
   res.render("main/profile", {
     path: "/profile",
     pageTitle: "User Profile",
@@ -285,10 +284,9 @@ exports.getSubscribe = (req, res, next) => {
 };
 
 exports.postAddToUserPlantList = (req, res, next) => {
-  const plantId = req.body.plantId;
+  const plantId = req.params.plantId;
   let onUserWishList = false;
-  const referer = req.headers.referer.split(req.headers.origin)[1];
-
+  
   for (item of req.user.wishList) {
     if (item.plant.toString() === plantId) {
       onUserWishList = true;
@@ -304,29 +302,12 @@ exports.postAddToUserPlantList = (req, res, next) => {
         req.user.deleteFromUserWishList(plantId);
       }
     })
-    .then((result) => {
-      res.redirect(referer);
+    .then(() => {
+      console.log("ADDED PLANT");
+      res.status(200).json({ message: "Success!" });
     })
     .catch((err) => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
-    });
-};
-
-exports.postAddToUserWishList = (req, res, next) => {
-  const plantId = req.body.plantId;
-  Plant.findById(plantId)
-    .then((plant) => {
-      return req.user.addToUserWishList(plant);
-    })
-    .then((result) => {
-      res.redirect("/user-wish-list");
-    })
-    .catch((err) => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
+      res.status(500).json({ message: "Adding Plant failed." });
     });
 };
 
@@ -342,7 +323,7 @@ exports.postAddToUserWishList = (req, res, next) => {
       res.status(200).json({ message: "Success!" });
     })
     .catch((err) => {
-      res.status(500).json({ message: "Deleting Plant failed." });
+      res.status(500).json({ message: "Adding Plant failed." });
     });
 };
 

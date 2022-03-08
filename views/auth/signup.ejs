@@ -2,164 +2,174 @@
 <link rel="stylesheet" href="/css/forms.css" />
 <link rel="stylesheet" href="/css/auth.css" />
 </head>
-
 <body>
-  <%- include('../includes/navigation.ejs') %>
-
   <main>
-    <% if (errMessage) { %>
-    <div class="user-message user-message--error"><%= errMessage %></div>
-    <% } %>
+    <div class="wrapper">
+      <%- include('../includes/header.ejs') %>
+      <div class="signup auth">
+        <div class="signup__card">
+          <div class="title"><h1>Sign Up</h1></div>
+          <div class="card__content">
+            <div class="welcome__container">
+              <div class="welcome"><h2>Welcome to Plant Parent!</h2></div>
+              <div class="form__notification"><p>All fields are required</p></div>
+              <form class="auth-form" action="/auth/signup" method="POST">
 
-    <div class="login-container">
-      <h1>Create your account</h1>
-      <div class="third-party-login card">
-        <div class="login-button-container google-auth" onclick="googleClicked(this)">
-          <a href="/auth/google" title="Google Login">
-            <div class="abcRioButton abcRioButtonLightBlue">
-              <div class="abcRioButtonContentWrapper">
-                <div class="abcRioButtonIcon" style="padding: 8px">
-                  <div
-                    style="width: 18px; height: 18px"
-                    class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"
-                  >
-                    <svg
-                      version="1.1"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="18px"
-                      height="18px"
-                      viewBox="0 0 48 48"
-                      class="abcRioButtonSvg google"
-                    >
-                      <g>
-                        <path
-                          fill="#EA4335"
-                          d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
-                        ></path>
-                        <path
-                          fill="#4285F4"
-                          d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
-                        ></path>
-                        <path
-                          fill="#FBBC05"
-                          d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
-                        ></path>
-                        <path
-                          fill="#34A853"
-                          d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
-                        ></path>
-                        <path fill="none" d="M0 0h48v48H0z"></path>
-                      </g>
-                    </svg>
+                <div class="form-control">
+                  <label for="firstName">First Name</label>
+                  <div class="input">
+                    <input type="text" name="firstName" id="firstName" value="<%= oldInput.firstName %>"/><i class="fas fa-times-circle firstName-fail"></i><i class="fas fa-check-circle firstName-pass"></i>
                   </div>
+                  <div class="firstName-popover"></div>
                 </div>
-                <span class="abcRioButtonContents"><span>Sign up with Google</span></span>
-                <!-- <img src="/images/Spinner-1s-40px.svg" alt=""> -->
-              </div>
-            </div>
-          </a>
-          <img class="spinner" src="/images/Spinner-1s-40px.svg" alt="Loading spinner" />
-        </div>
-
-        <div class="login-button-container" onclick="facebookClicked(this)">
-          <a href="/auth/facebook" title="Facebook Login">
-            <div class="abcRioButton abcRioButtonLightBlue">
-              <div class="abcRioButtonContentWrapper">
-                <div class="abcRioButtonIcon" style="padding: 8px">
-                  <div
-                    style="width: 18px; height: 18px"
-                    class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"
-                  >
-                    <img class="facebook" src="/images/Facebook_f_logo_(2021).svg.png" alt="facebook logo" />
+                <div class="form-control">
+                  <label for="lastName">Last Name</label>
+                  <div class="input">
+                    <input type="text" name="lastName" id="lastName" value="<%= oldInput.lastName %>" /><i class="fas fa-times-circle lastName-fail"></i><i class="fas fa-check-circle lastName-pass"></i>
                   </div>
+                  <div class="lastName-popover"></div>
                 </div>
-                <span class="abcRioButtonContents"><span>Sign up with Facebook</span></span>
+                                <div class="form-control">
+                  <label for="email">E-Mail</label>
+                  <div class="input">
+                    <input
+                      class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
+                      type="email"
+                      name="email"
+                      id="email"
+                      value="<%= oldInput.email %>"
+                    /><i class="fas fa-times-circle email-fail"></i><i class="fas fa-check-circle email-pass"></i>
+                  </div>
+                  <div class="email-popover"></div>
+                </div>
+                <div class="form-control">
+                  <label for="password">Password</label>
+                  <div class="input">
+                    <input
+                      class="password <%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"
+                      type="password"
+                      name="password"
+                      id="password"
+                      value="<%= oldInput.password %>"
+                    /><button
+                      aria-label="show password"
+                      type="button"
+                      class="far fa-eye-slash togglePassword"
+                      onclick="togglePassword(this)"
+                    ></button
+                    ><i class="fas fa-times-circle password-fail"></i><i class="fas fa-check-circle password-pass"></i>
+                  </div>
+                  <div class="password-popover"></div>
+                  <p class="password-requirements__title">Password must contain:</p>
+                  <p class="password-requirements__text">
+                    minimum eight characters, <br>
+                    at least one uppercase letter (a-Z), <br>
+                    one lowercase letter (A-Z) <br>
+                    one number (0-9) <br>
+                    one special character (!@#$%^&*)
+                  </p>
+                </div>
+                <div class="form-control">
+                  <label for="confirmPassword">Confirm Password</label>
+                  <div class="input">
+                    <input
+                      class="password <%= validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>"
+                      type="password"
+                      name="confirmPassword"
+                      id="confirmPassword"
+                      value="<%= oldInput.confirmPassword %>"
+                    /><button
+                      aria-label="show password"
+                      type="button"
+                      class="far fa-eye-slash togglePassword"
+                      onclick="togglePassword(this)"
+                    ></button
+                    ><i class="fas fa-times-circle confirmPassword-fail"></i
+                    ><i class="fas fa-check-circle confirmPassword-pass"></i>
+                  </div>
+                  <div class="confirmPassword-popover"></div>
+                </div>
+                <p>Have an account? <a href="/auth/login">Log in now</a></p>
+                
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+                <button class="action__btn submit__btn" type="submit">Create Account</button>
+              </form>
+              <div class="divider"><span class="divider-text">or</span></div>
+              <div class="third-party-login">
+                <div class="login-button__container google-auth" onclick="googleClicked(this)">
+                  <a href="/auth/google" title="Google Login">
+                    <div class="abcRioButton abcRioButtonLightBlue">
+                      <div class="abcRioButtonContentWrapper">
+                        <div class="abcRioButtonIcon" style="padding: 8px">
+                          <div
+                            style="width: 18px; height: 18px"
+                            class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"
+                          >
+                            <svg
+                              version="1.1"
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="18px"
+                              height="18px"
+                              viewBox="0 0 48 48"
+                              class="abcRioButtonSvg google"
+                            >
+                              <g>
+                                <path
+                                  fill="#EA4335"
+                                  d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"
+                                ></path>
+                                <path
+                                  fill="#4285F4"
+                                  d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"
+                                ></path>
+                                <path
+                                  fill="#FBBC05"
+                                  d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"
+                                ></path>
+                                <path
+                                  fill="#34A853"
+                                  d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"
+                                ></path>
+                                <path fill="none" d="M0 0h48v48H0z"></path>
+                              </g>
+                            </svg>
+                          </div>
+                        </div>
+                        <span class="abcRioButtonContents"><span>Continue with Google</span></span>
+                      </div>
+                    </div>
+                  </a>
+                  <img class="spinner" src="/images/Spinner-1s-40px.svg" alt="Loading spinner" />
+                </div>
+        
+                <div class="login-button__container" onclick="facebookClicked(this)">
+                  <a href="/auth/facebook" title="Facebook Login">
+                    <div class="abcRioButton abcRioButtonLightBlue">
+                      <div class="abcRioButtonContentWrapper">
+                        <div class="abcRioButtonIcon" style="padding: 8px">
+                          <div
+                            style="width: 18px; height: 18px"
+                            class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18"
+                          >
+                            <img class="facebook" src="/images/Facebook_f_logo_(2021).svg.png" alt="facebook logo" />
+                          </div>
+                        </div>
+                        <span class="abcRioButtonContents"><span>Continue with Facebook</span></span>
+                      </div>
+                    </div> </a
+                  ><img class="spinner" src="/images/Spinner-1s-40px.svg" alt="Loading spinner" />
+                </div>
               </div>
-            </div> </a
-          ><img class="spinner" src="/images/Spinner-1s-40px.svg" alt="Loading spinner" />
+              
+            
+            
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="divider"><span class="divider-text">or</span></div>
-      <div class="login card">
-        <form class="login-form" action="/auth/signup" method="POST">
-          <div class="form-control">
-            <label for="email">E-Mail</label>
-            <div class="input">
-              <input
-                class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
-                type="email"
-                name="email"
-                id="email"
-                value="<%= oldInput.email %>"
-              /><i class="fas fa-times-circle email-fail"></i><i class="fas fa-check-circle email-pass"></i>
-            </div>
-            <div class="email-popover"></div>
-          </div>
-          <div class="form-control">
-            <label for="firstName">First Name</label>
-            <div class="input">
-              <input type="text" name="firstName" id="firstName" value="<%= oldInput.firstName %>"/><i class="fas fa-times-circle firstName-fail"></i><i class="fas fa-check-circle firstName-pass"></i>
-            </div>
-            <div class="firstName-popover"></div>
-          </div>
-          <div class="form-control">
-            <label for="lastName">Last Name</label>
-            <div class="input">
-              <input type="text" name="lastName" id="lastName" value="<%= oldInput.lastName %>" /><i class="fas fa-times-circle lastName-fail"></i><i class="fas fa-check-circle lastName-pass"></i>
-            </div>
-            <div class="lastName-popover"></div>
-          </div>
-          <div class="form-control">
-            <label for="password">Password</label>
-            <div class="input">
-              <input
-                class="password <%= validationErrors.find(e => e.param === 'password') ? 'invalid' : '' %>"
-                type="password"
-                name="password"
-                id="password"
-                value="<%= oldInput.password %>"
-              /><button
-                aria-label="show password"
-                type="button"
-                class="far fa-eye-slash togglePassword"
-                onclick="togglePassword(this)"
-              ></button
-              ><i class="fas fa-times-circle password-fail"></i><i class="fas fa-check-circle password-pass"></i>
-            </div>
-            <div class="password-popover"></div>
-            <p>
-              Password must contain minimum eight characters, at least one uppercase letter, one lowercase letter, one
-              number and one special character
-            </p>
-          </div>
-          <div class="form-control">
-            <label for="confirmPassword">Confirm Password</label>
-            <div class="input">
-              <input
-                class="password <%= validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>"
-                type="password"
-                name="confirmPassword"
-                id="confirmPassword"
-                value="<%= oldInput.confirmPassword %>"
-              /><button
-                aria-label="show password"
-                type="button"
-                class="far fa-eye-slash togglePassword"
-                onclick="togglePassword(this)"
-              ></button
-              ><i class="fas fa-times-circle confirmPassword-fail"></i
-              ><i class="fas fa-check-circle confirmPassword-pass"></i>
-            </div>
-            <div class="confirmPassword-popover"></div>
-          </div>
-          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-          <button class="btn" type="submit">Sign Up</button>
-        </form>
-        <p>Have an account?</p>
-        <a href="/auth/login">Log in now</a>
       </div>
     </div>
   </main>
+  <%- include('../includes/footer.ejs') %> 
   <script src="/js/validation.js"></script>
   <%- include('../includes/end.ejs') %>
 

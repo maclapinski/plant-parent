@@ -83,13 +83,13 @@
               <p class="value"><%= plant.petSafe ? "Yes" : "No"%></p>
             </div>
           </div>
-          <div class="card__actions">
+          <div class="actions">
             <a href="/plants/<%= plant._id %>" class="btn">Details</a>
             <% if (isAuthenticated) { if (userPlants.includes(plant._id.toString())) { %>
-              <div class="text-container"><p>Your Plant</p></div>
+              <div class="text__container"><p>Your Plant</p></div>
               <% } else { %> <%- include('../includes/add-to-user-plant-list.ejs', {plant: plant}) %> <% if
               (userWishList.includes(plant._id.toString())) { %>
-              <div class="text-container"><p>On your wish list</p></div>
+              <div class="text__container"><p>On your wish list</p></div>
               <% } else { %> <%- include('../includes/add-to-user-wish-list.ejs', {plant: plant}) %> <% }} } %>
           </div>
         </article>

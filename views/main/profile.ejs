@@ -1,8 +1,7 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/css/profile.css" />
-<link rel="stylesheet" href="/css/css/plant-card.css" />
-<link rel="stylesheet" href="/css/css/profile.css" />
-<!-- </head> -->
+<link rel="stylesheet" href="/styles/css/plant-card.css" />
+<link rel="stylesheet" href="/styles/css/profile.css" />
+</head>
 <body>
   <main>
     <div class="wrapper">
@@ -14,8 +13,10 @@
         <div class="profile__container">
           <div class="profile__card">
             <div class="avatar"><img src=" <%= avatar  %>  " alt="User avatar" /></div>
+            <!-- <div class="avatar"><img src="/images/avatar.png  " alt="User avatar" /></div> -->
             <a href="">Update Photo</a>
-            <button type="button" class="upgrade__btn actions__btn btn">Upgrade to Premium</button>
+            <% if(user.isPremium) {%><p class="profile-premium__notification"> <i class="fas fa-star"></i> Premium Member</p><% } else { %>
+            <button type="button" class="upgrade__btn action__btn btn">Upgrade to Premium</button> <% } %> 
             <div class="stats">
               <div class="row">
                 <div class="icon">
@@ -51,7 +52,34 @@
               </div>
             </div>
           </div>
-          <div class="profile__details"></div>
+          <div class="profile__details">
+            <div class="name">
+              <h1>
+                <% if (user.displayName) { %><%= user.displayName %><% } else{ %> <%= user.firstName + " " +
+                user.lastName %> <% } %>
+              </h1>
+            </div>
+            <div class="profile-details__section">
+              <p>Joined <%= user.createdAt.toLocaleDateString('en-GB') %></p>
+              <a href="">Edit profile</a>
+            </div>
+            <div class="about">
+              <div class="title"><h2>About</h2></div>
+              <div class="about__content">
+                <p>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere distinctio voluptates hic est ipsa
+                  quasi! Consequuntur recusandae quisquam totam fugit libero ipsa! Doloremque non explicabo eligendi
+                  quae quos inventore nisi facilis, vero ab.
+                </p>
+              </div>
+            </div>
+            <div class="email">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="black"/>
+                </svg>
+              <p><% if (user.email) { %><%= user.email %><% } else{ %> No email address available <% } %></p>                
+            </div>
+          </div>
         </div>
       </div>
     </div>

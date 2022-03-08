@@ -50,14 +50,14 @@ th {
   text-align: center;
 }
 
-.card__actions .text-container {
+.card__actions .text__container {
   border: 1px solid lightgray;
   padding: 5px 20px;
   border-radius: 3px;
   margin: auto;
   width: fit-content;
 }
-.card__actions .text-container p {
+.card__actions .text__container p {
   margin: 0;
 }
 
@@ -74,5 +74,5 @@ th {
   text-align: left;
 }
 .plant__details a {
-  margin: 1rem auto
+  margin: 1rem auto;
 }

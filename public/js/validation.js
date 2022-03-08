@@ -82,7 +82,7 @@ const validate = () => {
     if (emailValidation) {
       setValidationPass("email");
     } else {
-      setValidationFail("email", "<p>Invalid email address.</p>");
+      setValidationFail("email", "<p>Invalid e-mail address.</p>");
     }
   }
 
