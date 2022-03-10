@@ -6,28 +6,15 @@ const menuToggle = document.querySelector("#side-menu-toggle");
 const dropDown = document.querySelectorAll("._16takj0");
 const headerProfileMenu = document.querySelector(".header-profile-menu");
 const footer = document.querySelector("footer");
-let intViewportHeight = window.innerHeight;
-let footerHeight = footer.offsetHeight;
-const mainStylesheet = document.getElementById('main__stylesheet')
+
 
 const year = (document.getElementById("year").innerHTML = new Date().getFullYear());
 let searchTabOpen = false;
 let profileMenuOpen = false;
 
-if (currentURL.includes("localhost")){
-  mainStylesheet.setAttribute('href', '/styles/css/main.css')
-}
-else {
-  mainStylesheet.setAttribute('href', '/css/main.css')
-}
-
-window.addEventListener('resize', mainHeightCalc);
-
-
 function mainHeightCalc() {
   const footerHeight = footer.offsetHeight;
-  const documentHeight = root.offsetHeight;
-
+  const intViewportHeight = window.innerHeight;
   const mainHeight = intViewportHeight - footerHeight 
 
   root.style.setProperty('--main-height', mainHeight + 'px');

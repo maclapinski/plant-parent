@@ -9,5 +9,6 @@
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
     
     <link href="/fontawesome/css/all.css" rel="stylesheet">
+    
     <!-- <link rel="stylesheet" href="/css/main.css"> -->
-    <link id="main__stylesheet" rel="stylesheet">
+    <link rel="stylesheet" href="<%= env === 'development' ? '/styles/css/main.css' : '/css/main.css' %> ">
