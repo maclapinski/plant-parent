@@ -58,16 +58,6 @@ input[type="checkbox"]:checked {
   padding: 0 20px;
 }
 
-.grid {
-  display: grid;
-  grid-gap: 40px;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 0.6fr));
-  justify-content: space-around;
-  margin: 30px auto 50px;
-  width: 100%;
-  max-width: 1100px;
-}
-
 .row {
   display: flex;
 }
@@ -336,6 +326,16 @@ footer .footer__container .footer-link__container a {
   margin-left: 20px;
 }
 
+.grid {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 0.6fr));
+  justify-content: space-around;
+  margin: 30px auto 50px;
+  width: 100%;
+  max-width: 1100px;
+}
+
 .plant-card {
   border-radius: 20px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
@@ -410,7 +410,7 @@ footer .footer__container .footer-link__container a {
 
 .plant-card .card__content {
   margin: 0 auto;
-  width: 300px;
+  width: 306px;
 }
 
 .plant-card .card__content .row {

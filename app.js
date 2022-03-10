@@ -63,6 +63,8 @@ app.use((req, res, next) => {
   next();
 });
 
+console.log(process.env.NODE_ENV)
+
 app.use((req, res, next) => {
   if (!req.session.user) {
     return next();
