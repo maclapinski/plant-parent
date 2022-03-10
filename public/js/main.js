@@ -10,16 +10,17 @@ const year = (document.getElementById("year").innerHTML = new Date().getFullYear
 const searchBar = document.getElementById("plant-search__form");
 let searchTabOpen = false;
 let profileMenuOpen = false;
-let difficulty
+let difficulty;
 
-searchBar.addEventListener("click", (e) => {
-  console.log('click')
-});
+if (searchBar) {
+  searchBar.addEventListener("click", (e) => {
+    console.log("click");
+  });
+}
 
 document.onclick = function (e) {
   if (searchTabOpen || profileMenuOpen) {
     if (!e.target.closest(".search-tabpanel") && !e.target.closest(".profile-button_container")) {
-      console.log("close tab");
       const elems = document.querySelectorAll(".active");
       [].forEach.call(elems, function (el) {
         el.className = el.className.replace(/\bactive\b/, "");
