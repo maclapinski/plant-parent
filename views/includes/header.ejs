@@ -55,11 +55,12 @@
       <a href="/auth/login" class="menu-item"><div class="label label-slim">Log in</div></a>
       <% } else { %>
       <a href="/profile" class="menu-item"><div class="label label-slim">Profile</div></a>
+      <a href="/search" class="menu-item"><div class="label label-slim">Search</div></a>
       <a href="/plants" class="menu-item"><div class="label label-slim">All Plants</div></a>
       <a href="/user-wish-list" class="menu-item"><div class="label label-slim">My Wish List</div></a>
-      <a href="/user-plant-list" class="menu-item"><div class="label label-slim">My plants</div></a>
+      <a href="/user-plant-list" class="menu-item"><div class="label label-slim">My Plants</div></a>
 
-      <form action="/auth/logout" class="menu-item" method="post">
+      <form action="/auth/logout" class="" method="post">
         <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
         <button val="Logout" class="label label-slim" type="submit">Log out</button>
       </form>

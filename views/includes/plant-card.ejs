@@ -1,7 +1,24 @@
 <a class="plant-card" id="<%= plant._id %>" href="/plant-details/<%= plant._id %>">
   <header class="card__header">
     <h1 class="plant__title"><%= plant.name %></h1>
-    <% if(path !== '/user-plant-list') {%>
+    <% if(path === '/user-wish-list') {%>
+      <div class="add-to-wishlist_container btn" onclick="toggleWishList(this)">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <input type="hidden" value="<%= plant._id %>" name="plantId" />
+        <svg
+          class="checked"
+          width="22"
+          height="19"
+          viewBox="0 0 22 19"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 17.8812L2.41415 9.01375C1.10265 7.65924 0.656087 5.64167 1.27423 3.82676C2.42301 0.453883 6.50754 -0.589841 9.04264 1.79781L10.6572 3.31845L11 3.64132L11.3428 3.31845L12.9574 1.79781C15.4925 -0.58984 19.577 0.453883 20.7258 3.82676C21.3439 5.64167 20.8973 7.65924 19.5858 9.01375L11 17.8812Z"
+          />
+        </svg>
+      </div>
+      <% } else if (path !== '/user-plant-list') {%>
     <div class="add-to-wishlist_container btn" onclick="toggleWishList(this)">
       <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
       <input type="hidden" value="<%= plant._id %>" name="plantId" />
@@ -81,26 +98,22 @@
     </div>
   </div>
   <div class="actions">
-    <% if (isAuthenticated) { if (!userPlants.includes(plant._id.toString()) && showAddBtn) { %>
+    <% if (isAuthenticated) { 
+       if (path === '/user-wish-list') { %>
     <button type="button" class="action__btn primary__btn btn" onclick="addToMyPlants(this)">
       Add to My Plants <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
       <input type="hidden" value="<%= plant._id %>" name="plantId" />
     </button>
-    <%} else { if(path !== '/user-plant-list'){ %>
-    <div class="actions__message">
-      <svg width="25" height="19" viewBox="0 0 25 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path
-          d="M8.4911 18.2766L0.366101 10.1516C-0.122034 9.66351 -0.122034 8.87206 0.366101 8.38387L2.13383 6.6161C2.62196 6.12792 3.41346 6.12792 3.9016 6.6161L9.37499 12.0894L21.0984 0.366101C21.5865 -0.122034 22.378 -0.122034 22.8662 0.366101L24.6339 2.13387C25.122 2.62201 25.122 3.41346 24.6339 3.90165L10.2589 18.2767C9.77069 18.7648 8.97924 18.7648 8.4911 18.2766Z"
-          fill="#0D986A"
-        />
-      </svg>
-      <p>My Plant</p>
-    </div>
-    <%} else{%>
-    <button type="button" class="action__btn danger__btn btn" onclick="deletePlantHandler(this)">
-      Delete<input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    <%} else if (!userPlants.includes(plant._id.toString()) && showAddBtn) { %>
+    <button type="button" class="action__btn primary__btn btn" onclick="addToMyPlants(this)">
+      Add to My Plants <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
       <input type="hidden" value="<%= plant._id %>" name="plantId" />
     </button>
-    <% }} }%>
+    <%} else {%>
+    <button type="button" class="action__btn danger__btn btn" onclick="deletePlantHandler(this)">
+      Delete from My Plants<input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      <input type="hidden" value="<%= plant._id %>" name="plantId" />
+    </button>
+    <% } }%>
   </div>
 </a>

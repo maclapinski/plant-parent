@@ -5,19 +5,16 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   email: {
     type: String,
-    required: false,
   },
   googleId: {
     type: String,
-    required: false,
   },
   facebookId: {
     type: String,
-    required: false,
   },
   image: {
     type: String,
-    required: false,
+    required: true,
   },
   password: {
     type: String,
@@ -32,19 +29,26 @@ const userSchema = new Schema({
   displayName: {
     type: String,
   },
+  about: {
+    type: String,
+    default: "Tell us something about yourself...",
+    required: true,
+  },
   plantList: [{ plant: { type: Schema.Types.ObjectId, ref: "Plant", required: true } }],
   wishList: [{ plant: { type: Schema.Types.ObjectId, ref: "Plant", required: true } }],
   isAdmin: {
     type: Boolean,
     default: false,
+    required: true,
   },
   createdAt: {
     type: Date,
     default: Date.now,
   },
-  isPremium:  {
+  isPremium: {
     type: Boolean,
     default: false,
+    required: true,
   },
   premiumSubscriptionToken: String,
   premiumSubscriptionTokenExpiration: Date,

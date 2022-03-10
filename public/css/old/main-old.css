@@ -482,23 +482,23 @@ a.skip-main:active {
   color: white;
 }
 
-.user-message {
-  background: #b9c9ff;
-  border: 1px solid #4771fa;
-  border-radius: 3px;
+.user__message {
+  border-radius: 20px;
   height: fit-content;
   margin: 2rem auto;
-  padding: 0.5rem;
+  padding: 10px;
   text-align: center;
   width: 90%;
+  max-width: 450px;
 }
 
-.user-message--error {
-  background: rgb(255, 176, 176);
-  border-color: red;
-  color: red;
+.user__message--error {
+  box-shadow: 0px 1px 3px rgba(230, 25, 25, 0.6);
+  border-color: #e61919;
+  color: #e61919;
+  border: 2px solid #e61919;
 }
-.user-message--success {
+.user__message--success {
   background: rgb(113, 251, 109);
   border-color: green;
   color: green;
@@ -526,7 +526,7 @@ a.skip-main:active {
     display: none;
   }
 
-  .user-message {
+  .user__message {
     width: 30rem;
   }
 }

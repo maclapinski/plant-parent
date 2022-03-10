@@ -61,12 +61,14 @@ const validateName = (input) => {
 const setInputChange = (inputName) => {};
 
 const setValidationPass = (element) => {
+  document.querySelector(`.${element}`).classList.remove("fail");
   document.querySelector(`.${element}-fail`).removeAttribute("style");
   document.querySelector(`.${element}-pass`).style.display = "block";
   document.querySelector(`.${element}-popover`).classList.remove("slidedown");
   eval(`${element}Validated = true`);
 };
 const setValidationFail = (element, errorMessage) => {
+  document.querySelector(`.${element}`).classList.add("fail");
   document.querySelector(`.${element}-pass`).removeAttribute("style");
   document.querySelector(`.${element}-fail`).style.display = "block";
   document.querySelector(
@@ -82,7 +84,7 @@ const validate = () => {
     if (emailValidation) {
       setValidationPass("email");
     } else {
-      setValidationFail("email", "<p>Invalid e-mail address.</p>");
+      setValidationFail("email", "<p>Invalid email address.</p>");
     }
   }
 

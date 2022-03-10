@@ -6,15 +6,20 @@
   <main>
     <div class="wrapper">
       <%- include('../includes/header.ejs') %>
-      <div class="signup auth">
-        <div class="signup__card">
+      <% if (errMessage) { %>
+        <div class="user__message user__message--error"><%= errMessage %></div>
+        <% } %> <% if (successMessage) { %>
+        <div class="user__message user__message--success"><%= successMessage %></div>
+        <% } %>
+      <div class="auth">
+        <div class="auth__card">
           <div class="title"><h1>Log in</h1></div>
           <div class="card__content">
             <div class="welcome__container">
               <div class="welcome"><h2>Welcome Back!</h2></div>
-              <form class="auth-form" action="/auth/login" method="POST">
+              <form class="auth__form" action="/auth/login" method="POST">
                 <div class="form-control">
-                  <label for="email">Email</label>
+                  <label for="email">Email <Address></Address></label>
                   <div class="input">
                     <input
                       class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"
@@ -43,10 +48,11 @@
                     ></button>
                   </div>
                 </div>
+                <p class="forgot__password">Forgot your password? </p><a href="/auth/reset">Reset Password</a>
                 <p>Don't have an account? <a href="/auth/signup">Sign Up</a></p>
 
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
-                <button class=" action__btn submit__btn" type="submit">Login</button>
+                <button class=" action__btn primary__btn" type="submit">Login</button>
               </form>
               <div class="divider"><span class="divider-text">or</span></div>
               <div class="third-party-login">

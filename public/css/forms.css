@@ -20,7 +20,13 @@
 
 .form-control input:focus,
 .form-control textarea:focus {
-  outline-color: #00695c;
+  outline-color: #124c5f;
+}
+.form-control .fail:focus{
+  outline-color: red !important;
+}
+.form-control .fail{
+  border: 1px solid red;
 }
 
 .form-control .input {

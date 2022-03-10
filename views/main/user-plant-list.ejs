@@ -4,7 +4,11 @@
 <body>
   <main>
     <div class="wrapper">
-      <%- include('../includes/header.ejs') %> <% if (plants.length > 0) { %>
+      <%- include('../includes/header.ejs') %> 
+      <div class="header">
+        <h1>My Plants</h1>
+      </div>
+      <% if (plants.length > 0) { %>
       <div class="grid">
         <% for (let item of plants) { %> <%- include('../includes/plant-card.ejs', {plant: item.plant, showAddBtn:
         false, showWishListBtn: false}) %> <% } %>

@@ -1,5 +1,5 @@
-.signup {
-  .signup__card {
+.auth {
+  .auth__card {
     margin: 40px auto;
     width: 100%;
     max-width: 450px;
@@ -24,13 +24,16 @@
           }
         }
       }
-      .auth-form {
+      .card__message {
+        margin-bottom: 30px;
+      }
+      .auth__form {
         label {
           font-weight: 600;
           font-size: 1.05rem;
         }
-        a{
-            text-decoration: underline;
+        a {
+          text-decoration: underline;
         }
         .password-requirements__title {
           font-weight: 600;
@@ -38,7 +41,7 @@
         .password-requirements__text {
           line-height: 1.2rem;
         }
-        .submit__btn {
+        .primary__btn {
           width: 100%;
           justify-content: center;
           display: block;

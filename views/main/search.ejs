@@ -4,14 +4,23 @@
 <body>
   <main>
     <div class="wrapper">
-      <%- include('../includes/header.ejs') %> <%- include('../includes/search-bar.ejs') %> <% if (plants.length > 0) {
+      <%- include('../includes/header.ejs') %> 
+      <div class="header">
+        <h1>Search</h1>
+      </div>
+      <%- include('../includes/search-bar.ejs') %> <% if (plants.length > 0) {
       %>
       <div class="grid">
         <% for (let plant of plants) { %> <%- include('../includes/plant-card.ejs', {plant: plant, showAddBtn: true, showWishListBtn: true}) %> <% } %>
       </div>
-      <% } %>
+      <% } else{ %> 
+        <div class="placeholder__container"><img src="/images/placeholder.png" alt="" class="placeholder__img"></div>
+        
+        <% } %> 
+
+        
     </div>
   </main>
   <%- include('../includes/footer.ejs') %>
    <%- include('../includes/end.ejs') %>
-</body>
+

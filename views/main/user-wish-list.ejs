@@ -1,55 +1,20 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/css/plant.css" />
+
 </head>
 <body>
-    <%- include('../includes/navigation.ejs') %>
   <main>
-    <h1>My Wish List</h1>
-    <% if (plants.length > 0) { %>
-
-        <div class="grid">
-            <% for (let p of plants) { %>
-                <article class="card plant-item">
-                    <header class="card__header">
-                        <h1 class="plant__title">
-                            <%= p.plant.name %>
-                        </h1>
-                    </header>
-                    <div class="card__image">
-                        <img src="/images/plants/<%= p.plant.image %>" alt="<%= p.plant.title %>">
-                    </div>
-                    <div class="card__content">
-                        <div class="row">
-                          <p class="label">Difficulty:</p>
-                          <p class="value"><%= p.plant.difficulty %></p>
-                        </div>
-                        <div class="row">
-                          <p class="label">Light:</p>
-                          <div class="value">
-                            <% if(p.plant.light.includes('low')) { %> <i title="low" class="fas fa-cloud"></i>
-                            <p>low</p>
-                            <% } %> <% if(p.plant.light.includes('medium')) { %> <i title="medium" class="fas fa-cloud-sun"></i>
-                            <p>medium</p>
-                            <% } %> <% if(p.plant.light.includes('bright')) { %> <i title="bright" class="fas fa-sun"></i>
-                            <p>bright</p>
-                            <% } %>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <p class="label">Pet-Safe:</p>
-                          <p class="value"><%= p.plant.petSafe ? "Yes" : "No"%></p>
-                        </div>
-                      </div>
-                    <div class="actions">
-                        <a href="/plants/<%= p.plant._id %>" class="btn">Details</a>
-                        <%- include('../includes/add-to-user-plant-list.ejs', {plant: p.plant, deleteFromWishList: true}) %>
-                        <%- include('../includes/delete-plant.ejs', {plant: p.plant, action: "/delete-from-wish-list"}) %>
-                    </div>
-                </article>
-                <% } %>
-        </div>
-    <% } else { %>
-    <h1>Your wish list is empty.</h1>
-    <% } %>
+    <div class="wrapper">
+      <%- include('../includes/header.ejs') %> 
+      <div class="header">
+        <h1>My Wish List</h1>
+      </div>
+      <% if (userWishList.length > 0) { %>
+      <div class="grid">
+        <% for (let item of userWishList) { %> <%- include('../includes/plant-card.ejs', {plant: item.plant, showAddBtn:
+        false, showWishListBtn: false}) %> <% } %>
+      </div>
+      <% } %>
+    </div>
   </main>
-  <%- include('../includes/end.ejs') %>
+  <%- include('../includes/footer.ejs') %> <%- include('../includes/end.ejs') %>
+</body>

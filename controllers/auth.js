@@ -45,8 +45,6 @@ exports.getLogin = (req, res, next) => {
 
 exports.getGoogleCallback = (req, res) => {
   req.session.isLoggedIn = true;
-  console.log('user from auth *********************************************')
-  console.log(req.user)
    req.session.user = req.user;
   req.session.save((err) => {
     if (err) {
@@ -171,11 +169,12 @@ exports.postSignup = (req, res, next) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    console.log(errors.array());
+    console.log(errors);
     return res.status(422).render("auth/signup", {
       path: "/signup",
       pageTitle: "Signup",
-      errMessage: errors.array()[0].msg,
+      // errMessage: errors.array()[0].msg,
+      errMessage: errors.array(),
       successMessage: null,
       oldInput: {
         email: email,
@@ -310,9 +309,10 @@ exports.getNewPassword = (req, res, next) => {
           userId: user._id.toString(),
           passwordToken: token,
           oldInput: {
-            password: password,
-            confirmPassword: confirmPassword,
+            password: '',
+            confirmPassword: '',
           },
+          validationErrors: [],
         });
       })
       .catch((err) => {

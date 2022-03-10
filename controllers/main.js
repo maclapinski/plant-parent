@@ -128,11 +128,10 @@ exports.getPlantDetails = async (req, res, next) => {
 exports.getUserWishList = async (req, res, next) => {
   try {
     const user = await req.user.populate("wishList.plant");
-    const plants = user.wishList;
     res.render("main/user-wish-list", {
       path: "/user-wish-list",
       pageTitle: "My Wishlist",
-      plants: plants,
+      userWishList: user.wishList,
       errorMessage: req.flash("error"),
     });
   } catch (err) {
@@ -144,7 +143,7 @@ exports.getUserPlantList = async (req, res, next) => {
   try {
     const user = await req.user.populate("plantList.plant");
     const plants = user.plantList;
-    console.log(plants)
+    console.log(plants);
     res.render("main/user-plant-list", {
       path: "/user-plant-list",
       pageTitle: "My Plants",
@@ -188,7 +187,7 @@ exports.getSearch = (req, res, next) => {
 exports.getProfile = (req, res, next) => {
   const user = req.user;
 
-console.log(user)
+  console.log(user);
   res.render("main/profile", {
     path: "/profile",
     pageTitle: "User Profile",
@@ -286,7 +285,7 @@ exports.getSubscribe = (req, res, next) => {
 exports.postAddToUserPlantList = (req, res, next) => {
   const plantId = req.params.plantId;
   let onUserWishList = false;
-  
+
   for (item of req.user.wishList) {
     if (item.plant.toString() === plantId) {
       onUserWishList = true;

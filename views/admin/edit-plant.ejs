@@ -7,7 +7,7 @@
   <%- include('../includes/navigation.ejs') %>
   <main>
     <% if (successMessage) { %>
-      <div class="user-message user-message--success"><%= successMessage %></div>
+      <div class="user__message user__message--success"><%= successMessage %></div>
   <% } %>
     <form class="plant-form" action="/admin/<% if (editing) { %>edit-plant<% } else { %>add-plant<% } %>" method="POST">
       <div class="form-control">

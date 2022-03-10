@@ -58,22 +58,22 @@ router.post(
     body("firstName")
       .trim()
       .isLength({ min: 2 })
-      .withMessage("First Name must be 2 characters long")
+      .withMessage("First Name must be at least 2 characters long.")
       .isAlpha()
-      .withMessage("First Name must be alphabetic"),
+      .withMessage("First Name must be alphabetic."),
     body("lastName")
       .trim()
       .isLength({ min: 2 })
-      .withMessage("First Name must be 2 characters long")
+      .withMessage("Last Name must be at least 2 characters long.")
       .isAlpha()
-      .withMessage("First Name must be alphabetic"),
+      .withMessage("Last Name must be alphabetic."),
     body("email")
       .isEmail()
       .withMessage("Please enter a valid email.")
       .custom((value, { req }) => {
         return User.findOne({ email: value }).then((userDoc) => {
           if (userDoc) {
-            return Promise.reject(`${userDoc.email} has already been used, please pick a different e-mail or Log-in`);
+            return Promise.reject(`${userDoc.email} has already been used, please pick a different e-mail or Log-in.`);
           }
         });
       })
@@ -82,8 +82,8 @@ router.post(
       "password",
       "Please enter a password with minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character."
     )
-      .isLength({ min: 8 })
-      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/)
+      .isLength({ min: 8 }).withMessage("Please enter a password with minimum eight characters.")
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/).withMessage("Please enter a password with at least one uppercase letter, one lowercase letter, one number and one special character.")
       .trim(),
     body("confirmPassword")
       .trim()

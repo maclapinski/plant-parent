@@ -235,7 +235,8 @@ input[type="checkbox"]:checked {
   border-radius: 7px 7px 0 0;
 }
 
-.header .profile-button_container .header-profile-menu .menu-item button, .header .profile-button_container .header-profile-menu .menu-item form {
+.header .profile-button_container .header-profile-menu .menu-item button,
+.header .profile-button_container .header-profile-menu .menu-item form {
   border: none;
   background: none;
   padding: 0;
@@ -768,7 +769,7 @@ footer .footer_container .footer-contact_link {
   background-color: #104252;
 }
 
-.signup .signup__card {
+.signup .auth__card {
   margin: 40px auto;
   width: 100%;
   max-width: 450px;
@@ -778,39 +779,39 @@ footer .footer_container .footer-contact_link {
   color: #282a2d;
 }
 
-.signup .signup__card .title {
+.signup .auth__card .title {
   text-align: center;
   padding: 15px;
   border-bottom: 1px solid #d4d4d4;
 }
 
-.signup .signup__card .title h1 {
+.signup .auth__card .title h1 {
   font-size: 1.5rem;
   margin: 0;
 }
 
-.signup .signup__card .card__content {
+.signup .auth__card .card__content {
   padding: 25px 35px;
 }
 
-.signup .signup__card .card__content .auth-form label {
+.signup .auth__card .card__content .auth__form label {
   font-weight: 600;
   font-size: 1.05rem;
 }
 
-.signup .signup__card .card__content .auth-form a {
+.signup .auth__card .card__content .auth__form a {
   text-decoration: underline;
 }
 
-.signup .signup__card .card__content .auth-form .password-requirements__title {
+.signup .auth__card .card__content .auth__form .password-requirements__title {
   font-weight: 600;
 }
 
-.signup .signup__card .card__content .auth-form .password-requirements__text {
+.signup .auth__card .card__content .auth__form .password-requirements__text {
   line-height: 1.2rem;
 }
 
-.signup .signup__card .card__content .auth-form .submit__btn {
+.signup .auth__card .card__content .auth__form .submit__btn {
   width: 100%;
   justify-content: center;
   display: block;

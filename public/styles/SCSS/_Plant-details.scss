@@ -1,7 +1,7 @@
 .plant-details__body {
-  margin: 30px auto 60px;
   display: flex;
   flex-direction: column;
+  margin: 30px auto 60px;
 
   .plant-details__header {
     font-size: 2.2rem;
@@ -9,20 +9,20 @@
     margin-bottom: 30px;
   }
   .plant-details__content {
+    color: #002140;
     display: flex;
     flex-direction: column;
-    color: #002140;
     .plant__image {
-      margin-bottom: 30px;
       display: flex;
+      margin-bottom: 30px;
       img {
-        max-width: 80%;
         margin: auto;
+        max-width: 80%;
       }
     }
     .plant__text {
-      flex-direction: column;
       display: flex;
+      flex-direction: column;
       .title {
         font-size: 1.5rem;
         font-weight: 600;
@@ -36,32 +36,33 @@
           display: flex;
           flex-direction: column;
           .section {
-            margin: 5px;
             display: flex;
+            margin: 5px;
 
             .icon {
               display: flex;
-              width: 28px;
               margin-right: 10px;
+              width: 28px;
               svg {
-                width: 100%;
                 height: 100%;
+                width: 100%;
               }
             }
             .label {
-              font-weight: 600;
               color: #757575;
+              font-weight: 600;
               margin-right: 10px !important;
             }
             .value {
+              color: #0d986a;
+              display: flex;
               font-size: 1.2rem;
+              font-weight: 600;
               padding: 5px;
               padding-left: 0;
-              color: #0d986a;
-              font-weight: 600;
-              display: flex;
               p {
                 margin: 0;
+                text-transform: capitalize;
               }
             }
           }
@@ -76,11 +77,11 @@
       }
       .actions {
         display: flex;
+        justify-content: end;
         margin-top: 20px;
       }
     }
   }
-
   @media screen and (min-width: 610px) {
     .plant-details__header {
     }
@@ -116,11 +117,11 @@
       .plant__image {
         display: flex;
         margin-bottom: 0;
-        width: 50%;
         margin-right: 5%;
+        width: 50%;
         img {
-          max-width: 100%;
           margin: auto;
+          max-width: 100%;
         }
       }
       .plant__text {
@@ -151,16 +152,16 @@
 
       .plant__image {
         display: flex;
-        width: 35%;
         margin-right: 5%;
+        width: 35%;
         img {
-          max-width: 100%;
           margin: auto;
+          max-width: 100%;
         }
       }
       .plant__text {
-        flex-direction: column;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         width: 70%;
 
@@ -175,6 +176,7 @@
         .details {
         }
         .actions {
+          margin-right: 30px;
         }
       }
     }

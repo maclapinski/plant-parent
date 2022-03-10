@@ -8,7 +8,7 @@
 
   <main>
     <% if (errMessage) { %>
-    <div class="user-message user-message--error"><%= errMessage %></div>
+    <div class="user__message user__message--error"><%= errMessage %></div>
     <% } %>
 
     <div class="login__container">
@@ -83,7 +83,7 @@
       <div class="login card">
         <form class="login-form" action="/auth/signup" method="POST">
           <div class="form-control">
-            <label for="email">E-Mail</label>
+            <label for="email">Email Address</label>
             <div class="input">
               <input
                 class="<%= validationErrors.find(e => e.param === 'email') ? 'invalid' : '' %>"

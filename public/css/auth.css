@@ -26,6 +26,11 @@
   margin: 20px 0px;
   width: 100%;
 }
+.auth .divider-text {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
 
 .auth .divider-text::before,
 .divider-text::after {
@@ -33,8 +38,8 @@
   content: "";
   display: inline-block;
   flex: 0 1 100%;
-  margin: 4px 10px;
-  width: 135px;
+  margin: 4px 15px;
+  width: 113px;
 }
 
 .auth .google-auth {
@@ -65,12 +70,12 @@
   padding: 2rem; */
 }
 
-.auth-form {
+.auth__form {
   display: block;
   margin: auto;
 }
 
-.auth-form .btn {
+.auth__form .btn {
   float: right;
 }
 
@@ -189,3 +194,8 @@
   transform: translateY(-50%);
 }
 /* ******************** */
+@media screen and (min-width: 405px) {
+  .forgot__password {
+    display: inline;
+  }
+}

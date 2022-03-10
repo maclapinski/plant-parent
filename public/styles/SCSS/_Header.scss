@@ -84,11 +84,22 @@
           font-weight: 400 !important;
         }
       }
-      .menu-item:hover {
+      .menu-item:hover, button:hover {
         background-color: #f3f3f3;
       }
       form {
-        border-radius: 0 0 7px 7px;
+        button{
+          border: none;
+          background-color: white;
+          text-align: left;
+          padding: 7px 15px;
+          font-size: 14px;
+          margin-top: 5px;
+          font-family: inherit;
+          width: 100%;
+          border-radius: 0 0 7px 7px;
+          cursor: pointer;
+        }
         margin-top: 5px !important;
       }
     }

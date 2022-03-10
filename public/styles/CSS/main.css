@@ -1,11 +1,12 @@
-@import url("https://fonts.googleapis.com/css?family=Hind:400,500,600,700");
+@import url("https://fonts.googleapis.com/css?family=Rubik:400,500,600,700");
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: "Hind, Helvetica", sans-serif;
+  font-family: "Rubik", sans-serif;
   font-size: 16px;
+  color: #222222;
   margin: 0;
   padding: 0;
   min-height: 100vh;
@@ -16,7 +17,7 @@ body {
 
 main {
   width: 100%;
-  min-height: calc(100vh - 70px);
+  min-height: var(--main-height, 100px);
 }
 
 fieldset {
@@ -48,9 +49,13 @@ input[type="checkbox"]:checked {
 
 .wrapper {
   margin: 0 auto;
-  max-width: 1400px;
+  max-width: 1100px;
   padding: 0 20px;
   width: 100%;
+}
+
+.content__header {
+  padding: 0 20px;
 }
 
 .grid {
@@ -81,6 +86,15 @@ input[type="checkbox"]:checked {
 .card__content h2,
 .card__content p {
   margin: 0.2rem 0;
+}
+
+.placeholder__container {
+  display: flex;
+  justify-content: center;
+}
+
+.placeholder__container .placeholder__img {
+  max-width: 400px;
 }
 
 .action__btn {
@@ -125,6 +139,29 @@ input[type="checkbox"]:checked {
 
 .secondary__btn:hover {
   background-color: whitesmoke;
+}
+
+.user__message {
+  border-radius: 20px;
+  height: fit-content;
+  margin: 2rem auto;
+  padding: 15px 35px;
+  width: 90%;
+  max-width: 450px;
+}
+
+.user__message--error {
+  box-shadow: 0px 1px 3px rgba(230, 25, 25, 0.6);
+  border-color: #e61919;
+  color: #e61919;
+  border: 2px solid #e61919;
+}
+
+.user__message--success {
+  box-shadow: 0px 1px 3px rgba(13, 95, 10, 0.6);
+  border-color: #0d5f0a;
+  color: #0d5f0a;
+  border: 2px solid #0d5f0a;
 }
 
 .actions__message {
@@ -255,13 +292,25 @@ input[type="checkbox"]:checked {
   font-weight: 400 !important;
 }
 
-.header .profile-button_container .header-profile-menu .menu-item:hover {
+.header .profile-button_container .header-profile-menu .menu-item:hover, .header .profile-button_container .header-profile-menu button:hover {
   background-color: #f3f3f3;
 }
 
 .header .profile-button_container .header-profile-menu form {
-  border-radius: 0 0 7px 7px;
   margin-top: 5px !important;
+}
+
+.header .profile-button_container .header-profile-menu form button {
+  border: none;
+  background-color: white;
+  text-align: left;
+  padding: 7px 15px;
+  font-size: 14px;
+  margin-top: 5px;
+  font-family: inherit;
+  width: 100%;
+  border-radius: 0 0 7px 7px;
+  cursor: pointer;
 }
 
 footer {
@@ -270,30 +319,33 @@ footer {
   background-color: #e2e8d4;
   color: #222222;
   display: flex;
-  height: 70px;
   width: 100%;
 }
 
-footer .footer_container {
+footer .footer__container {
   align-items: center;
   display: flex;
   justify-content: space-between;
 }
 
-footer .footer_container .footer-contact_link {
+footer .footer__container .footer-link__container {
   text-decoration: underline;
 }
 
+footer .footer__container .footer-link__container a {
+  margin-left: 20px;
+}
+
 .plant-card {
-  padding: 10px;
   border-radius: 20px;
-  cursor: pointer;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  padding: 10px;
 }
 
 .plant-card:hover {
-  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.8);
   background-color: #fafafa;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.8);
 }
 
 .plant-card .card__header,
@@ -315,14 +367,14 @@ footer .footer_container .footer-contact_link {
 }
 
 .plant-card .card__header .add-to-wishlist_container {
+  background-color: #ffffff;
   border-radius: 13px;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
-  padding: 10px;
-  background-color: #ffffff;
-  padding-bottom: 7px;
-  padding-top: 12px;
   display: flex;
   height: fit-content;
+  padding: 10px;
+  padding-bottom: 7px;
+  padding-top: 12px;
   transition: all 0.1s ease-in-out;
 }
 
@@ -332,8 +384,8 @@ footer .footer_container .footer-contact_link {
 }
 
 .plant-card .card__header .add-to-wishlist_container svg {
-  transition: all 0.1s ease-in-out;
   stroke: #404040;
+  transition: all 0.1s ease-in-out;
 }
 
 .plant-card .card__header .add-to-wishlist_container svg path {
@@ -351,9 +403,9 @@ footer .footer_container .footer-contact_link {
 .plant-card .card__image {
   align-items: center;
   display: flex;
+  height: 300px;
   justify-content: center;
   width: 100%;
-  height: 300px;
 }
 
 .plant-card .card__content {
@@ -366,16 +418,16 @@ footer .footer_container .footer-contact_link {
 }
 
 .plant-card .card__content .label {
-  font-weight: 600;
   color: #757575;
+  font-weight: 600;
   margin-right: 10px !important;
 }
 
 .plant-card .card__content .value {
-  padding: 0 5px;
   color: #0d986a;
-  font-weight: 600;
   display: flex;
+  font-weight: 600;
+  padding: 0 5px;
   padding-left: 5px;
   text-transform: capitalize;
 }
@@ -389,16 +441,16 @@ footer .footer_container .footer-contact_link {
 }
 
 .plant-card .actions {
-  padding: 1rem;
-  text-align: center;
   display: flex;
   justify-content: end;
+  padding: 1rem;
+  text-align: center;
 }
 
 .plant-details__body {
-  margin: 30px auto 60px;
   display: flex;
   flex-direction: column;
+  margin: 30px auto 60px;
 }
 
 .plant-details__body .plant-details__header {
@@ -408,24 +460,24 @@ footer .footer_container .footer-contact_link {
 }
 
 .plant-details__body .plant-details__content {
+  color: #002140;
   display: flex;
   flex-direction: column;
-  color: #002140;
 }
 
 .plant-details__body .plant-details__content .plant__image {
-  margin-bottom: 30px;
   display: flex;
+  margin-bottom: 30px;
 }
 
 .plant-details__body .plant-details__content .plant__image img {
-  max-width: 80%;
   margin: auto;
+  max-width: 80%;
 }
 
 .plant-details__body .plant-details__content .plant__text {
-  flex-direction: column;
   display: flex;
+  flex-direction: column;
 }
 
 .plant-details__body .plant-details__content .plant__text .title {
@@ -445,38 +497,39 @@ footer .footer_container .footer-contact_link {
 }
 
 .plant-details__body .plant-details__content .plant__text .overview .overview__content .section {
-  margin: 5px;
   display: flex;
+  margin: 5px;
 }
 
 .plant-details__body .plant-details__content .plant__text .overview .overview__content .section .icon {
   display: flex;
-  width: 28px;
   margin-right: 10px;
+  width: 28px;
 }
 
 .plant-details__body .plant-details__content .plant__text .overview .overview__content .section .icon svg {
-  width: 100%;
   height: 100%;
+  width: 100%;
 }
 
 .plant-details__body .plant-details__content .plant__text .overview .overview__content .section .label {
-  font-weight: 600;
   color: #757575;
+  font-weight: 600;
   margin-right: 10px !important;
 }
 
 .plant-details__body .plant-details__content .plant__text .overview .overview__content .section .value {
+  color: #0d986a;
+  display: flex;
   font-size: 1.2rem;
+  font-weight: 600;
   padding: 5px;
   padding-left: 0;
-  color: #0d986a;
-  font-weight: 600;
-  display: flex;
 }
 
 .plant-details__body .plant-details__content .plant__text .overview .overview__content .section .value p {
   margin: 0;
+  text-transform: capitalize;
 }
 
 .plant-details__body .plant-details__content .plant__text .details {
@@ -490,6 +543,7 @@ footer .footer_container .footer-contact_link {
 
 .plant-details__body .plant-details__content .plant__text .actions {
   display: flex;
+  justify-content: end;
   margin-top: 20px;
 }
 
@@ -513,12 +567,12 @@ footer .footer_container .footer-contact_link {
   .plant-details__body .plant-details__content .plant__image {
     display: flex;
     margin-bottom: 0;
-    width: 50%;
     margin-right: 5%;
+    width: 50%;
   }
   .plant-details__body .plant-details__content .plant__image img {
-    max-width: 100%;
     margin: auto;
+    max-width: 100%;
   }
   .plant-details__body .plant-details__content .plant__text {
     justify-content: center;
@@ -539,16 +593,16 @@ footer .footer_container .footer-contact_link {
   }
   .plant-details__body .plant-details__content .plant__image {
     display: flex;
-    width: 35%;
     margin-right: 5%;
+    width: 35%;
   }
   .plant-details__body .plant-details__content .plant__image img {
-    max-width: 100%;
     margin: auto;
+    max-width: 100%;
   }
   .plant-details__body .plant-details__content .plant__text {
-    flex-direction: column;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     width: 70%;
   }
@@ -558,10 +612,14 @@ footer .footer_container .footer-contact_link {
   .plant-details__body .plant-details__content .plant__text .overview .overview__content .section {
     margin: 0 20px 0 0;
   }
+  .plant-details__body .plant-details__content .plant__text .actions {
+    margin-right: 30px;
+  }
 }
 
 .profile__main {
   max-width: 800px;
+  padding: 20px;
   margin: 0 auto;
 }
 
@@ -570,12 +628,10 @@ footer .footer_container .footer-contact_link {
   text-decoration: underline;
 }
 
-.profile__main .header h1 {
-  font-size: 3rem;
-}
-
 .profile__main .profile__container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .profile__main .profile__container .profile__card {
@@ -655,6 +711,16 @@ footer .footer_container .footer-contact_link {
 
 .profile__main .profile__container .profile__details .email svg {
   margin: auto 15px auto 0;
+}
+
+@media screen and (min-width: 756px) {
+  .profile__main .profile__container {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .profile__main .profile__container .profile__card {
+    margin: 30px 30px 30px 0;
+  }
 }
 
 .home {
@@ -768,7 +834,7 @@ footer .footer_container .footer-contact_link {
   background-color: #104252;
 }
 
-.signup .signup__card {
+.auth .auth__card {
   margin: 40px auto;
   width: 100%;
   max-width: 450px;
@@ -778,39 +844,43 @@ footer .footer_container .footer-contact_link {
   color: #282a2d;
 }
 
-.signup .signup__card .title {
+.auth .auth__card .title {
   text-align: center;
   padding: 15px;
   border-bottom: 1px solid #d4d4d4;
 }
 
-.signup .signup__card .title h1 {
+.auth .auth__card .title h1 {
   font-size: 1.5rem;
   margin: 0;
 }
 
-.signup .signup__card .card__content {
+.auth .auth__card .card__content {
   padding: 25px 35px;
 }
 
-.signup .signup__card .card__content .auth-form label {
+.auth .auth__card .card__content .card__message {
+  margin-bottom: 30px;
+}
+
+.auth .auth__card .card__content .auth__form label {
   font-weight: 600;
   font-size: 1.05rem;
 }
 
-.signup .signup__card .card__content .auth-form a {
+.auth .auth__card .card__content .auth__form a {
   text-decoration: underline;
 }
 
-.signup .signup__card .card__content .auth-form .password-requirements__title {
+.auth .auth__card .card__content .auth__form .password-requirements__title {
   font-weight: 600;
 }
 
-.signup .signup__card .card__content .auth-form .password-requirements__text {
+.auth .auth__card .card__content .auth__form .password-requirements__text {
   line-height: 1.2rem;
 }
 
-.signup .signup__card .card__content .auth-form .submit__btn {
+.auth .auth__card .card__content .auth__form .primary__btn {
   width: 100%;
   justify-content: center;
   display: block;
