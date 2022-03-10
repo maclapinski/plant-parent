@@ -326,6 +326,32 @@ footer .footer__container .footer-link__container a {
   margin-left: 20px;
 }
 
+.home {
+  background: url(/images/unsplash_8ZELrodSvTc.png) no-repeat center;
+  background-size: cover;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.home .title {
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 54px;
+  text-align: center;
+}
+
+.home .subtitle {
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-top: 1rem;
+  text-align: center;
+}
+
 .grid {
   display: grid;
   grid-gap: 40px;
@@ -721,33 +747,6 @@ footer .footer__container .footer-link__container a {
   .profile__main .profile__container .profile__card {
     margin: 30px 30px 30px 0;
   }
-}
-
-.home {
-  background: url(/images/unsplash_8ZELrodSvTc.png) no-repeat center;
-  background-size: cover;
-  color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
-}
-
-.home .title {
-  font-size: 48px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 54px;
-  text-align: center;
-}
-
-.home .subtitle {
-  font-size: 23px;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  line-height: 54px;
-  margin-top: 1rem;
-  text-align: center;
 }
 
 .search {

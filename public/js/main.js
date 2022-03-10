@@ -6,29 +6,14 @@ const menuToggle = document.querySelector("#side-menu-toggle");
 const dropDown = document.querySelectorAll("._16takj0");
 const headerProfileMenu = document.querySelector(".header-profile-menu");
 const footer = document.querySelector("footer");
-
-
 const year = (document.getElementById("year").innerHTML = new Date().getFullYear());
+const searchBar = document.getElementById("plant-search__form");
 let searchTabOpen = false;
 let profileMenuOpen = false;
+let difficulty
 
-function mainHeightCalc() {
-  const footerHeight = footer.offsetHeight;
-  const intViewportHeight = window.innerHeight;
-  const mainHeight = intViewportHeight - footerHeight 
-
-  root.style.setProperty('--main-height', mainHeight + 'px');
-}
-mainHeightCalc();
-$(window).resize(function () {
-  mainHeightCalc();
-});
-
-const buttons = document.querySelectorAll(".btn");
-[].forEach.call(buttons, function (el) {
-  el.addEventListener("click", (e) => {
-    e.preventDefault();
-  });
+searchBar.addEventListener("click", (e) => {
+  console.log('click')
 });
 
 document.onclick = function (e) {
@@ -44,6 +29,21 @@ document.onclick = function (e) {
     }
   }
 };
+
+function mainHeightCalc() {
+  const footerHeight = footer.offsetHeight;
+  const intViewportHeight = window.innerHeight;
+  const mainHeight = intViewportHeight - footerHeight;
+
+  root.style.setProperty("--main-height", mainHeight + "px");
+}
+
+const buttons = document.querySelectorAll(".btn");
+[].forEach.call(buttons, function (el) {
+  el.addEventListener("click", (e) => {
+    e.preventDefault();
+  });
+});
 
 const addToMyPlants = (btn) => {
   const actions = btn.parentNode;
@@ -119,11 +119,9 @@ const deletePlant = (btn) => {
 
   if (currentURL.includes("user-wish-list")) {
     reqTarget = "/delete-from-wish-list/";
-  }
-  else if (currentURL.includes("admin")) {
+  } else if (currentURL.includes("admin")) {
     reqTarget = "/admin/delete-plant/";
-  }
-  else  {
+  } else {
     reqTarget = "/delete-from-plant-list/";
   }
 
@@ -138,15 +136,14 @@ const deletePlant = (btn) => {
     })
     .then((data) => {
       removeOverlay();
-      if (currentURL.includes("user-plant-list")) {document.querySelector(".grid").removeChild(plantElement);
-        
+      if (currentURL.includes("user-plant-list")) {
+        document.querySelector(".grid").removeChild(plantElement);
       } else {
         if (currentURL.includes("plant-details")) {
           document.querySelector(".actions").removeChild(document.querySelector(".danger__btn"));
           document.querySelector(".actions").appendChild(addPlantBtn);
-        }
-        else {
-          const deleteBtn = plantElement.querySelector('.danger__btn')
+        } else {
+          const deleteBtn = plantElement.querySelector(".danger__btn");
           plantElement.querySelector(".actions").removeChild(deleteBtn);
           plantElement.querySelector(".actions").appendChild(addPlantBtn);
         }
@@ -270,4 +267,7 @@ const facebookClicked = (btn) => {
   spinner.classList.add("active");
 };
 
-
+mainHeightCalc();
+$(window).resize(function () {
+  mainHeightCalc();
+});
