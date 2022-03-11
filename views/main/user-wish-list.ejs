@@ -13,7 +13,12 @@
         <% for (let item of userWishList) { %> <%- include('../includes/plant-card.ejs', {plant: item.plant, showAddBtn:
         false, showWishListBtn: false}) %> <% } %>
       </div>
-      <% } %>
+      <% }  else{ %> <div class="placeholder__container">
+        <div class="placeholder-img__container"><img src="/images/placeholder.png" alt="" class="placeholder__img"></div>
+        
+        <div class="placeholder-text__container"><h2>There are no plants on your wish list yet...</h2> <h3>Click search to find plants perfect for you.</h3> <a class="action__btn primary__btn"
+          href="/search">Search</a></div>
+      </div> <% } %> 
     </div>
   </main>
   <%- include('../includes/footer.ejs') %> <%- include('../includes/end.ejs') %>

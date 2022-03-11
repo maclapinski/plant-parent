@@ -13,8 +13,22 @@ let profileMenuOpen = false;
 let difficulty;
 
 if (searchBar) {
-  searchBar.addEventListener("click", (e) => {
+  const difficultyCard = document.getElementById('difficulty__card');
+  difficultyCard.addEventListener("click", (e) => {
     console.log("click");
+    const difficultyBeginner = document.getElementById('difficulty-easy').checked;
+    const difficultyIntermediate = document.getElementById('difficulty-medium').checked;
+    const difficultyValue = document.querySelector('._uh2dzp');
+    
+    if (difficultyBeginner) {
+      difficultyValue.innerHTML = 'Beginner'
+    } else if (difficultyIntermediate){
+      difficultyValue.innerHTML = 'Intermediate'
+    } else {
+      difficultyValue.innerHTML = 'Experienced'
+    }
+
+    console.log(difficultyValue)
   });
 }
 
@@ -35,8 +49,12 @@ function mainHeightCalc() {
   const footerHeight = footer.offsetHeight;
   const intViewportHeight = window.innerHeight;
   const mainHeight = intViewportHeight - footerHeight;
+  const homeHeight = mainHeight * 0.7;
+  const subscribeHeight = mainHeight * 0.3;
 
   root.style.setProperty("--main-height", mainHeight + "px");
+  root.style.setProperty("--home-height", homeHeight + "px");
+  root.style.setProperty("--subscribe-height", subscribeHeight + "px");
 }
 
 const buttons = document.querySelectorAll(".btn");

@@ -13,7 +13,7 @@
             <div class="avatar"><img src=" <%= user.image  %>  " alt="User avatar" /></div> 
             <a href="">Update Photo</a>
             <% if(user.isPremium) {%><p class="profile-premium__notification"> <i class="fas fa-star"></i> Premium Member</p><% } else { %>
-            <button type="button" class="upgrade__btn action__btn btn">Upgrade to Premium</button> <% } %> 
+            <a href="/premium" class="primary__btn action__btn">Upgrade to Premium</a> <% } %> 
             <div class="stats">
               <div class="row">
                 <div class="icon">
@@ -63,10 +63,7 @@
             <div class="about">
               <div class="title"><h2>About</h2></div>
               <div class="about__content">
-                <p>
-                  Tell us something about yourself...
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. In eum adipisci reprehenderit temporibus, ipsum quis sint placeat sit. Ipsa, atque. Recusandae aliquam harum esse quibusdam eligendi, eveniet voluptatem magnam commodi!
-                </p>
+                <p> <%=user.about  %>  </p>
               </div>
             </div>
             <div class="email">

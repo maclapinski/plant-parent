@@ -74,7 +74,7 @@ exports.getPlants = async (req, res, next) => {
   const usrPlants = [];
   const usrWishList = [];
   try {
-    const plants = await Plant.find();
+    const plants = await Plant.find().sort({name:1});
 
     if (req.user) {
       for (item of req.user.plantList) {
@@ -213,9 +213,9 @@ exports.getPremium = (req, res, next) => {
       .then((result) => {
         const items = [
           {
-            name: "Premium membership",
+            name: "Plant Parent Premium Membership",
             description:
-              "Premium membership gives the user access to user forum. CAUTION! THIS IS JUST A TEST. USE FAKE CREDIT CARD DETAILS",
+              "Premium membership gives the user access to user forum. CAUTION! THIS IS JUST A TEST. USE FAKE CREDIT CARD NUMBER 5454 5454 5454 5454",
             amount: 99,
             currency: "usd",
             quantity: 1,

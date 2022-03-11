@@ -75,13 +75,7 @@ input[type="checkbox"]:checked {
 .card__content p {
   margin: 0.2rem 0;
 }
-.placeholder__container {
-  display: flex;
-  justify-content: center;
-  .placeholder__img {
-    max-width: 400px;
-  }
-}
+
 .action__btn {
   height: 37px;
   border: none;
@@ -94,6 +88,7 @@ input[type="checkbox"]:checked {
   align-items: center;
   cursor: pointer;
   text-align: center;
+  text-decoration: none !important;
 }
 .danger__btn {
   color: #ffffff;
@@ -118,6 +113,10 @@ input[type="checkbox"]:checked {
   &:hover {
     background-color: darken($color: #ffffff, $amount: 4%);
   }
+}
+.btn__center{
+  margin-left: auto;
+  margin-right: auto;
 }
 .user__message {
   border-radius: 20px;
@@ -147,6 +146,94 @@ input[type="checkbox"]:checked {
 
   svg {
     margin-right: 15px;
+  }
+}
+
+.placeholder__container {
+  display: flex;
+  align-items: center;
+  flex-direction: column-reverse;
+  .placeholder-img__container {
+    width: 90%;
+    margin: 30px 0;
+    .placeholder__img {
+      max-width: 400px;
+
+      width: 100%;
+    }
+  }
+  .placeholder-text__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h2 {
+      margin: 10px 0;
+    }
+    h3 {
+      font-weight: 400;
+      margin: 10px 0;
+    }
+    .action__btn{
+      margin: 20px auto;
+    }
+  }
+  @media screen and (min-width: 400px) {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    .placeholder-img__container {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+
+      .placeholder__img {
+        max-width: 400px;
+
+        margin-bottom: 30px;
+      }
+    }
+    .placeholder-text__container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 50%;
+      h3 {
+        width: 65%;
+      }
+      
+    }
+  }
+  @media screen and (min-height: 1000px) {
+    display: flex;
+    justify-content: center;
+    flex-direction: column-reverse;
+    align-items: center;
+    .placeholder-img__container {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+
+      .placeholder__img {
+        max-width: 400px;
+
+        margin-bottom: 30px;
+      }
+    }
+    .placeholder-text__container {
+      display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 510px;
+      h2 {
+        margin: 10px 0;
+      }
+      h3 {
+        font-weight: 400;
+        width: 100%;
+        margin: 10px 0;
+      }
+    }
   }
 }
 

@@ -14,7 +14,11 @@
         <% for (let plant of plants) { %> <%- include('../includes/plant-card.ejs', {plant: plant, showAddBtn: true, showWishListBtn: true}) %> <% } %>
       </div>
       <% } else{ %> 
-        <div class="placeholder__container"><img src="/images/placeholder.png" alt="" class="placeholder__img"></div>
+        <div class="placeholder__container">
+          <div class="placeholder-img__container"><img src="/images/placeholder.png" alt="" class="placeholder__img"></div>
+          
+          <div class="placeholder-text__container"><h2>Nothing to see here...</h2> <h3>Choose your search options to find plants perfect for you.</h3> </div>
+        </div>
         
         <% } %> 
 

@@ -1,4 +1,4 @@
-<a class="plant-card" id="<%= plant._id %>" href="/plant-details/<%= plant._id %>">
+<div class="plant-card" id="<%= plant._id %>" ">
   <header class="card__header">
     <h1 class="plant__title"><%= plant.name %></h1>
     <% if(path === '/user-wish-list') {%>
@@ -98,6 +98,7 @@
     </div>
   </div>
   <div class="actions">
+    <a class="action__btn primary__btn " href="/plant-details/<%= plant._id %>">Details</a>
     <% if (isAuthenticated) { 
        if (path === '/user-wish-list') { %>
     <button type="button" class="action__btn primary__btn btn" onclick="addToMyPlants(this)">
@@ -116,4 +117,4 @@
     </button>
     <% } }%>
   </div>
-</a>
+</div>
