@@ -65,10 +65,13 @@ const buttons = document.querySelectorAll(".btn");
 });
 
 const addToMyPlants = (btn) => {
-  const actions = btn.parentNode;
+  const actions = btn.parentNode; 
   const plantId = btn.parentNode.querySelector("[name=plantId]").value;
   const csrf = btn.parentNode.querySelector("[name=_csrf]").value;
-
+  const plantCard = document.getElementById(`${plantId}`)
+  console.log(plantCard)
+  const addToWishListBtn = plantCard.querySelector('.add-to-wishlist-btn__icon');
+  
   fetch("/add-to-plant-list/" + plantId, {
     method: "POST",
     headers: {
@@ -89,7 +92,9 @@ const addToMyPlants = (btn) => {
       deletePlantBtn.addEventListener("click", (e) => {
         e.preventDefault();
       });
-
+      if (addToWishListBtn.classList.contains('checked')) {
+        addToWishListBtn.classList.remove('checked')
+      }
       actions.removeChild(btn);
       actions.appendChild(deletePlantBtn);
     })
@@ -239,16 +244,6 @@ const toggleProfileMenu = () => {
     headerProfileMenu.classList.add("active");
   }
 };
-
-function backdropClickHandler() {
-  backdrop.style.display = "none";
-  sideDrawer.classList.remove("open");
-}
-
-function menuToggleClickHandler() {
-  backdrop.style.display = "block";
-  sideDrawer.classList.add("open");
-}
 
 function signOut() {
   var auth2 = gapi.auth2.getAuthInstance();

@@ -36,6 +36,10 @@ a {
   text-decoration: none;
 }
 
+h1{
+  letter-spacing: .1px;
+}
+
 input {
   background-color: #fff !important;
   border: 0.125rem solid #757575;
@@ -55,9 +59,9 @@ input[type="checkbox"]:checked {
   width: 100%;
 }
 
-.content__header{
-  padding: 0 20px;
-}
+// .content__header{
+//   padding: 0 20px;
+// }
 
 .row {
   display: flex;

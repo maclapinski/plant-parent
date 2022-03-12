@@ -473,10 +473,8 @@ exports.postSearch = (req, res, next) => {
 };
 
 exports.postSubscribe = (req, res, next) => {
-  if (!req.user.email && !req.body.email) {
-    return res.redirect("/subscribe");
-  }
-  const email = req.body.email ? req.body.email : req.user.email;
+  
+  const email = req.body.email;
 
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
@@ -490,7 +488,7 @@ exports.postSubscribe = (req, res, next) => {
       .then((subscriber) => {
         if (subscriber !== null) {
           req.flash("error", `Subscription for ${email} already active`);
-          return res.redirect("/subscribe");
+          return res.redirect("/");
         }
         const newSubscriber = new Subscriber({
           email: email,

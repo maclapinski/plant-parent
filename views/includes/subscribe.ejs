@@ -9,8 +9,11 @@
           fill="#414141"
         />
       </svg>
-      <input type="text" placeholder="Your email address" />
-      <button class="email-submit_btn">Submit</button>
+      <form action="/subscribe" method="post">
+      <input type="text" name="email" placeholder="Your email address" />
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        <button class="email-submit_btn" onclick="toggleSpinner()" type="submit">Subscribe</button>
+      </form>
     </div>
   </div>
 </div>

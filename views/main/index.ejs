@@ -4,6 +4,25 @@
 </head>
 <body>
   <main>
+    <% if (successMessage) { %>
+      <div id="overlay">
+         <div class="alert__card card">
+        <p class="message"><%= successMessage %></p>
+        <div class="alert__actions">
+          <button class="btn secondary__btn action__btn" type="button" onclick="removeOverlay()">OK</button>
+        </div>
+      </div>
+      </div>
+      <% } %> <% if (errorMessage) { %>
+        <div id="overlay">
+          <div class="alert__card card">
+         <p class="message"><%= errorMessage %></p>
+         <div class="alert__actions">
+           <button class="btn primary__btn action__btn" type="button" onclick="removeOverlay()">OK</button>
+         </div>
+       </div>
+       </div>
+      <% } %>
     <div class="home">
       <div class="wrapper">
         <%- include('../includes/header.ejs') %>

@@ -83,7 +83,7 @@ router.post(
       "Please enter a password with minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character."
     )
       .isLength({ min: 8 }).withMessage("Please enter a password with minimum eight characters.")
-      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/).withMessage("Please enter a password with at least one uppercase letter, one lowercase letter, one number and one special character.")
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$#!%*?&])[A-Za-z\d@$#!%*?&]/).withMessage("Please enter a password with at least one uppercase letter, one lowercase letter, one number and one special character.")
       .trim(),
     body("confirmPassword")
       .trim()

@@ -12,6 +12,7 @@ let confirmPasswordEdited = false;
 const validationDelay = 1500;
 let editedInput;
 let typingTimer;
+let initialPasswordCheck = true;
 
 const validateEmail = (email) => {
   return email.match(
@@ -20,30 +21,43 @@ const validateEmail = (email) => {
 };
 
 const validatePassword = (password) => {
-  let errorMessage = [];
+  let passwordValid = true
   const hasEightChar = password.length;
   const hasLowerCaseLetter = password.match(/[a-z]/);
   const hasUpperCaseLetter = password.match(/[A-Z]/);
   const hasSpecialChar = password.match(/[@$!%*?&]/);
   const hasNumber = password.match(/[0-9]/);
+  const eightChar = document.getElementById('eight-char');
+  const upperCase = document.getElementById('upper-case');
+  const lowerCase = document.getElementById('lower-case');
+  const specialChar = document.getElementById('special-char');
+  const oneNumber = document.getElementById('one-number');
 
-  if (hasEightChar < 8) {
-    errorMessage.push("<li>Password must contain at least 8 characters</li>");
+  if (hasEightChar < 8  ) {
+    eightChar.innerHTML = '<i class="fas fa-times-circle"></i>'; passwordValid= false;
   }
-  if (!hasLowerCaseLetter) {
-    errorMessage.push("<li>Password must contain a lower case letter</li>");
+  else { eightChar.innerHTML = '<i class="fas fa-check-circle"></i>' }
+  
+  if (!hasLowerCaseLetter ) {
+    lowerCase.innerHTML= '<i class="fas fa-times-circle"></i>'; passwordValid= false;
   }
-  if (!hasUpperCaseLetter) {
-    errorMessage.push("<li>Password must contain an upper case letter</li>");
+  else { lowerCase.innerHTML = '<i class="fas fa-check-circle"></i>' }
+
+  if (!hasUpperCaseLetter ) {
+    upperCase.innerHTML= '<i class="fas fa-times-circle"></i>'; passwordValid= false;
   }
-  if (!hasSpecialChar) {
-    errorMessage.push("<li>Password must contain a special character e.g., @, $, !, %, *, ?, &</li>");
+  else { upperCase.innerHTML = '<i class="fas fa-check-circle"></i>' }
+
+  if (!hasSpecialChar ) {
+    specialChar.innerHTML= '<i class="fas fa-times-circle"></i>'; passwordValid= false;
   }
-  if (!hasNumber) {
-    errorMessage.push("<li>Password must contain a number</li>");
+  else { specialChar.innerHTML = '<i class="fas fa-check-circle"></i>' }
+
+  if (!hasNumber ) {
+    oneNumber.innerHTML= '<i class="fas fa-times-circle"></i>'; passwordValid= false;
   }
-  console.log(errorMessage);
-  return errorMessage;
+  else { oneNumber.innerHTML = '<i class="fas fa-check-circle"></i>' }
+  return passwordValid
 };
 
 const validateConfirmPassword = () => {
@@ -99,16 +113,6 @@ const validate = () => {
     }
   }
 
-  if (!passwordValidated && password.value !== "") {
-    const passwordValidation = validatePassword(password.value);
-    const errorMessage = passwordValidation.join("");
-    if (passwordValidation.length === 0) {
-      setValidationPass("password");
-    } else {
-      setValidationFail("password", `<ul>${errorMessage}</ul>`);
-    }
-  }
-
   if (!lastNameValidated && lastName.value !== "") {
     if (validateName(lastName.value)) {
       setValidationPass("lastName");
@@ -131,6 +135,16 @@ const inputEventHandler = (event) => {
 
   if (editedInput === "confirmPassword") {
     confirmPasswordEdited = true;
+  }
+
+  if (!passwordValidated) {
+    const passwordValidation = validatePassword(password.value);
+    
+    if (passwordValidation) {
+      setValidationPass("password");
+    } else {
+      setValidationFail("password", '');
+    }
   }
 
   eval(`${event.currentTarget.name}Validated = false`);

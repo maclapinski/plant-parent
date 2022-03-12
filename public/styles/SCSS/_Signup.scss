@@ -40,6 +40,16 @@
         }
         .password-requirements__text {
           line-height: 1.2rem;
+          display: inline;
+        }
+        .password__check{
+          display: inline;
+        }
+        .fa-times-circle{
+          color: red;
+        }
+        .fa-check-circle{
+          color: green;
         }
         .primary__btn {
           width: 100%;
