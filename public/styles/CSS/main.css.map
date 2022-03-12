@@ -11,7 +11,7 @@
         "../SCSS/_Plant-details.scss",
         "../SCSS/_Profile.scss",
         "../SCSS/_Search.scss",
-        "../SCSS/_Signup.scss",
+        "../SCSS/_Auth.scss",
         "../SCSS/_PasswordReset.scss",
         "../SCSS/_Overlay.scss"
     ],

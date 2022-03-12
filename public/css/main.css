@@ -35,6 +35,10 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  letter-spacing: .1px;
+}
+
 input {
   background-color: #fff !important;
   border: 0.125rem solid #757575;
@@ -52,10 +56,6 @@ input[type="checkbox"]:checked {
   max-width: 1100px;
   padding: 0 20px;
   width: 100%;
-}
-
-.content__header {
-  padding: 0 20px;
 }
 
 .row {
@@ -399,6 +399,7 @@ footer {
   background-color: #e2e8d4;
   color: #222222;
   display: flex;
+  margin-top: 15px;
   width: 100%;
 }
 
@@ -814,7 +815,7 @@ footer .footer__container .footer-link__container a {
 
 .profile__main {
   max-width: 800px;
-  padding: 20px;
+  padding: 0 20px;
   margin: 0 auto;
 }
 
@@ -832,13 +833,13 @@ footer .footer__container .footer-link__container a {
 .profile__main .profile__container .profile__card {
   padding: 10px;
   border-radius: 20px;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.6);
   display: flex;
   flex-direction: column;
   min-width: 300px;
   height: fit-content;
   align-items: center;
-  margin: 30px;
+  margin: 10px;
 }
 
 .profile__main .profile__container .profile__card .avatar {
@@ -885,6 +886,10 @@ footer .footer__container .footer-link__container a {
   margin: 5px 0;
 }
 
+.profile__main .profile__container .profile__details {
+  margin-right: auto;
+}
+
 .profile__main .profile__container .profile__details .name h1 {
   font-size: 2rem;
 }
@@ -901,9 +906,10 @@ footer .footer__container .footer-link__container a {
   .profile__main .profile__container {
     flex-direction: row;
     align-items: flex-start;
+    justify-content: center;
   }
   .profile__main .profile__container .profile__card {
-    margin: 30px 30px 30px 0;
+    margin: 0 30px 30px 0;
   }
 }
 
@@ -960,6 +966,19 @@ footer .footer__container .footer-link__container a {
 
 .auth .auth__card .card__content .auth__form .password-requirements__text {
   line-height: 1.2rem;
+  display: inline;
+}
+
+.auth .auth__card .card__content .auth__form .password__check {
+  display: inline;
+}
+
+.auth .auth__card .card__content .auth__form .fa-times-circle {
+  color: red;
+}
+
+.auth .auth__card .card__content .auth__form .fa-check-circle {
+  color: green;
 }
 
 .auth .auth__card .card__content .auth__form .primary__btn {
