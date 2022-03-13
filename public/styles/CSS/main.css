@@ -954,6 +954,10 @@ footer .footer__container .footer-link__container a {
   }
 }
 
+.auth .auth__card .card__content .welcome__container {
+  margin-bottom: 15px;
+}
+
 .auth .auth__card .card__content .card__message {
   margin-bottom: 30px;
 }
