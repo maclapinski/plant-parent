@@ -3,6 +3,81 @@
   flex-direction: column;
   margin: 30px auto 60px;
 
+  @media screen and (min-width: 610px) {
+    .plant-details__content {
+      .plant__text {
+        .overview {
+          .overview__content {
+            display: flex;
+            flex-direction: row;
+            .section {
+              margin: 0 15px 0 0;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width: 756px) {
+    padding: 0 2rem;
+    .plant-details__content {
+      flex-direction: row;
+      .plant__image {
+        display: flex;
+        margin-bottom: 0;
+        margin-right: 5%;
+        width: 50%;
+        img {
+          margin: auto;
+          max-width: 100%;
+        }
+      }
+      .plant__text {
+        justify-content: center;
+        width: 50%;
+        .overview {
+          .overview__content {
+            display: flex;
+            flex-direction: column;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (min-width: 1024px) {
+    padding: 0 2rem;
+    .plant-details__content {
+      flex-direction: row;
+      .plant__image {
+        display: flex;
+        margin-right: 5%;
+        width: 35%;
+        img {
+          margin: auto;
+          max-width: 100%;
+        }
+      }
+      .plant__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 70%;
+        .overview {
+          .overview__content {
+            flex-direction: row;
+            .section {
+              margin: 0 20px 0 0;
+            }
+          }
+        }
+        .actions {
+          margin-right: 30px;
+        }
+      }
+    }
+  }
+
   .plant-details__header {
     font-size: 2.2rem;
     font-weight: 600;
@@ -30,15 +105,13 @@
       }
       .overview {
         display: flex;
-        flex-direction: column;
-      
+        flex-direction: column; 
         .overview__content {
           display: flex;
           flex-direction: column;
           .section {
             display: flex;
             margin: 5px;
-
             .icon {
               display: flex;
               margin-right: 10px;
@@ -79,105 +152,6 @@
         display: flex;
         justify-content: end;
         margin-top: 20px;
-      }
-    }
-  }
-  @media screen and (min-width: 610px) {
-    .plant-details__header {
-    }
-    .plant-details__content {
-      .plant__image {
-        img {
-        }
-      }
-      .plant__text {
-        .overview {
-          .overview__content {
-            display: flex;
-            flex-direction: row;
-            .section {
-              margin: 0 15px 0 0;
-            }
-          }
-        }
-        .details {
-        }
-        .actions {
-        }
-      }
-    }
-  }
-  @media screen and (min-width: 756px) {
-    padding: 0 2rem;
-    .plant-details__header {
-    }
-    .plant-details__content {
-      flex-direction: row;
-
-      .plant__image {
-        display: flex;
-        margin-bottom: 0;
-        margin-right: 5%;
-        width: 50%;
-        img {
-          margin: auto;
-          max-width: 100%;
-        }
-      }
-      .plant__text {
-        justify-content: center;
-        width: 50%;
-
-        .overview {
-          .overview__content {
-            display: flex;
-            flex-direction: column;
-            .section {
-            }
-          }
-        }
-        .details {
-        }
-        .actions {
-        }
-      }
-    }
-  }
-  @media screen and (min-width: 1024px) {
-    padding: 0 2rem;
-    .plant-details__header {
-    }
-    .plant-details__content {
-      flex-direction: row;
-
-      .plant__image {
-        display: flex;
-        margin-right: 5%;
-        width: 35%;
-        img {
-          margin: auto;
-          max-width: 100%;
-        }
-      }
-      .plant__text {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 70%;
-
-        .overview {
-          .overview__content {
-            flex-direction: row;
-            .section {
-              margin: 0 20px 0 0;
-            }
-          }
-        }
-        .details {
-        }
-        .actions {
-          margin-right: 30px;
-        }
       }
     }
   }

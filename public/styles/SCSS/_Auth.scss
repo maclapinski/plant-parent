@@ -1,36 +1,203 @@
 .auth {
   .auth__card {
-    margin: 40px auto;
-    width: 100%;
-    max-width: 450px;
     border-radius: 20px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
-    min-height: 300px;
     color: #282a2d;
+    margin: 40px auto;
+    max-width: 450px;
+    min-height: 300px;
+    width: 100%;
     .title {
-      text-align: center;
-      padding: 15px;
       border-bottom: 1px solid #d4d4d4;
+      padding: 15px;
+      text-align: center;
       h1 {
         font-size: 1.5rem;
         margin: 0;
       }
     }
     .card__content {
-      padding: 25px 35px;
-      .welcome__container {
-        .welcome {
-          h2 {
-          }
+      padding: 25px 33px;
+
+      @media screen and (min-width: 405px) {
+        .forgot__password {
+          display: inline;
         }
       }
+
       .card__message {
         margin-bottom: 30px;
       }
+
+      .divider {
+        align-items: center;
+        -webkit-box-align: center;
+        display: flex;
+        justify-content: center;
+        margin: 20px 0px;
+        width: 100%;
+      }
+
+      .divider-text {
+        align-items: center;
+        display: flex;
+        width: 100%;
+      }
+
+      .divider-text::before,
+      .divider-text::after {
+        border-bottom: 1px solid rgb(184, 196, 194);
+        content: "";
+        display: inline-block;
+        flex: 0 1 100%;
+        margin: 4px 15px;
+        width: 113px;
+      }
+
+      .google-auth {
+        margin-bottom: 1.5rem;
+      }
+
+      .third-party-login {
+        height: fit-content;
+        .login-button__container {
+          display: flex;
+          height: fit-content;
+          position: relative;
+          a {
+            width: 100%;
+          }
+        }
+      }
+
+      /*Form input validation popover */
+      .email-popover,
+      .password-popover,
+      .confirmPassword-popover,
+      .firstName-popover,
+      .lastName-popover {
+        max-height: 0;
+        overflow-y: hidden;
+        position: relative;
+        -webkit-transition: max-height 0.5s ease-in-out;
+        -moz-transition: max-height 0.5s ease-in-out;
+        -o-transition: max-height 0.5s ease-in-out;
+        transition: max-height 0.5s ease-in-out;
+        width: 100%;
+      }
+
+      .popover__content {
+        opacity: 0;
+        position: relative;
+        visibility: hidden;
+        width: auto;
+      }
+
+      .slidedown {
+        max-height: 600px;
+      }
+
+      .popover__content ul {
+        margin: 0;
+        padding: 1rem;
+        padding-left: 2rem;
+      }
+
+      .popover__content p {
+        color: red;
+        margin: 0;
+      }
+
+      .popover__content {
+        opacity: 1;
+        transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+        visibility: visible;
+        z-index: 10;
+      }
+
+      .popover__message {
+        text-align: center;
+      }
+
+      .popover__message p {
+        margin: 1rem;
+      }
+
+      /* Google and Facebook login button */
+      .abcRioButton {
+        -webkit-appearance: none;
+        background-color: #fff;
+        background-image: none;
+        border-radius: 3px;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.35);
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        color: #262626;
+        cursor: pointer;
+        height: 36px;
+        outline: none;
+        overflow: hidden;
+        padding: 0 1rem;
+        position: relative;
+        text-align: center;
+        -webkit-transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
+        transition: background-color 0.218s, border-color 0.218s, box-shadow 0.218s;
+        -webkit-user-select: none;
+        vertical-align: middle;
+        white-space: nowrap;
+        width: auto;
+      }
+
+      .abcRioButtonContentWrapper {
+        height: 100%;
+        margin: 0 auto;
+        width: fit-content;
+      }
+
+      .abcRioButtonLightBlue {
+        background-color: #fff;
+        color: #757575;
+      }
+
+      .abcRioButtonIcon {
+        float: left;
+        padding: 8px;
+      }
+
+      .abcRioButtonIconImage img {
+        height: 18px;
+        width: 18px;
+      }
+
+      .abcRioButtonContents {
+        font-family: Roboto, arial, sans-serif;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.21px;
+        line-height: 39px;
+        line-height: 39px;
+        margin-left: 6px;
+        margin-right: 6px;
+        vertical-align: top;
+      }
+
+      .abcRioButton:hover {
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);
+      }
+
+      .spinner {
+        display: none;
+        height: 36px;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
       .auth__form {
         label {
-          font-weight: 600;
           font-size: 1.05rem;
+          font-weight: 600;
         }
         a {
           text-decoration: underline;
@@ -39,24 +206,25 @@
           font-weight: 600;
         }
         .password-requirements__text {
+          display: inline;
           line-height: 1.2rem;
+          font-size: 15px;
+        }
+        .password__check {
           display: inline;
         }
-        .password__check{
-          display: inline;
-        }
-        .fa-times-circle{
+        .fa-times-circle {
           color: red;
         }
-        .fa-check-circle{
+        .fa-check-circle {
           color: green;
         }
         .primary__btn {
-          width: 100%;
-          justify-content: center;
           display: block;
-          margin: 20px auto;
           font-size: 1rem;
+          justify-content: center;
+          margin: 20px auto;
+          width: 100%;
         }
       }
     }

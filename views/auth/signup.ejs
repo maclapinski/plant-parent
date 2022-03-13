@@ -68,18 +68,18 @@
                   <div class="password-popover"></div>
                   <p class="password-requirements__title">Password must contain:</p>
                   <p class="password-requirements__text">
-                    minimum eight characters, <div class="password__check" id="eight-char"></div> <br>
-                    at least one uppercase letter (A-Z), <div class="password__check" id="upper-case"></div><br>
-                    one lowercase letter (a-z) <div class="password__check" id="lower-case" ></div><br>
-                    one number (0-9) <div class="password__check" id="one-number" ></div><br>
-                    one special character (@$#!%*?&) <div class="password__check" id="special-char" ></div></i>
-                  </p>
+                    minimum eight characters, <div class="password__check" id="eight-char"></div></p>
+                    <p class="password-requirements__text">at least one uppercase letter (A-Z), <div class="password__check" id="upper-case"></div></p>
+                    <p class="password-requirements__text">one lowercase letter (a-z) <div class="password__check" id="lower-case" ></div></p>
+                     <p class="password-requirements__text">one number (0-9) <div class="password__check" id="one-number" ></div></p>
+                     <p class="password-requirements__text">one special character (@$#!%*?&) <div class="password__check" id="special-char" ></div></p>
+
                 </div>
                 <div class="form-control">
                   <label for="confirmPassword">Confirm Password</label>
                   <div class="input">
                     <input
-                      class="confirmPassword <%= validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>"
+                      class="confirmPassword password <%= validationErrors.find(e => e.param === 'confirmPassword') ? 'invalid' : '' %>"
                       type="password"
                       name="confirmPassword"
                       id="confirmPassword"
