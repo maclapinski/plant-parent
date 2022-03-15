@@ -818,17 +818,6 @@ footer .footer__container .footer-link__container a {
   max-width: 800px;
 }
 
-@media screen and (min-width: 756px) {
-  .profile__main .profile__container {
-    align-items: flex-start;
-    flex-direction: row;
-    justify-content: center;
-  }
-  .profile__main .profile__container .profile__card {
-    margin: 0 30px 30px 0;
-  }
-}
-
 .profile__main a {
   cursor: pointer;
   text-decoration: underline;
@@ -910,6 +899,17 @@ footer .footer__container .footer-link__container a {
 
 .profile__main .profile__container .profile__details .email svg {
   margin: auto 15px auto 0;
+}
+
+@media screen and (min-width: 756px) {
+  .profile__main .profile__container {
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: center;
+  }
+  .profile__main .profile__container .profile__card {
+    margin: 0 30px 30px 0;
+  }
 }
 
 .search {
