@@ -9,7 +9,7 @@ exports.getAdminPage = (req, res, next) => {
     successMsg = null;
   }
 
-  Plant.find()
+  Plant.find().sort({name:1})
     .then((plants) => {
       res.render("admin/admin", {
         plants: plants,

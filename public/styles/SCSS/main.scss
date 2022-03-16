@@ -1,0 +1,24 @@
+@import "Global";
+@import "Header";
+@import "Footer";
+@import "Index";
+@import "Plant-card";
+@import "Plant-details";
+@import "Profile";
+@import "Search";
+@import "Auth";
+@import "Overlay";
+
+
+@media (prefers-color-scheme: dark) {
+    @import "Global";
+    @import "Header";
+    @import "Footer";
+    @import "Index";
+    @import "Plant-card";
+    @import "Plant-details";
+    @import "Profile";
+    @import "Search";
+    @import "Auth";
+    @import "Overlay";
+}

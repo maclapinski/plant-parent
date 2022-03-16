@@ -44,7 +44,7 @@
           >My Wish List</a
         >
       </li>
-      <% } %> 
+     
       <% if(path === '/admin') {%>
       <li class="main-header__item">
         <a
@@ -63,9 +63,8 @@
           >Admin Dashboard
         </a>
       </li>
-      <% } %>
-    </ul>
-    <ul class="main-header__item-list">
+      <% }} %>
+
       <% if (!isAuthenticated) { %>
       <li class="main-header__item">
         <a
@@ -130,16 +129,16 @@
     </li>
     <li class="mobile-nav__item">
       <a tabindex="-1" aria-hidden="true"
-        class="<%= path === '/admin/add-product' ? 'active' : '' %>"
-        href="/admin/add-product"
-        >Add Plant
+        class="<%= path === '/admin/add-plant' ? 'active' : '' %>"
+        href="/admin/add-plant"
+        >Add Dashboard
       </a>
     </li>
     <li class="mobile-nav__item">
       <a tabindex="-1" aria-hidden="true"
         class="<%= path === '/admin/products' ? 'active' : '' %>"
         href="/admin/products"
-        >Admin Products
+        >Admin Panel
       </a>
     </li>
     <% } %> <% if (!isAuthenticated) { %>

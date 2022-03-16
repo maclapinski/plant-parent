@@ -1,25 +1,36 @@
 <%- include('../includes/head.ejs') %>
-    <link rel="stylesheet" href="/css/forms.css">
-    <link rel="stylesheet" href="/css/auth.css">
+<link rel="stylesheet" href="/css/forms.css" />
+
 </head>
-
 <body>
-   <%- include('../includes/navigation.ejs') %>
-
-    <main>
-        <% if (errMessage) { %>
-            <div class="user-message user-message--error"><%= errMessage %></div>
-        <% } %>
-        <% if (successMessage) { %>
-            <div class="user-message user-message--success"><%= successMessage %></div>
-        <% } %>
-        <form class="login-form" action="/reset" method="POST">
-            <div class="form-control">
-                <label for="email">E-Mail</label>
-                <input type="email" name="email" id="email">
-            </div>
-            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="btn" type="submit">Reset Password</button>
+  <main>
+    <div class="wrapper">
+      <%- include('../includes/header.ejs') %> <% if (errMessage) { %>
+      <div class="user__message user__message--error"> <p><%= errMessage %></p> </div>
+      <% } %> <% if (successMessage) { %>
+      <div class="user__message user__message--success"><%= successMessage %></div>
+      <% } %>
+      <div class=" auth">
+          <div class="auth__card">
+            <div class="title"><h1>Reset your password</h1></div>
+            <div class="card__content">
+        <p class="card__message">
+            To reset your password, enter your email below and submit.<br> An email will be sent to you with instructions
+          about how to complete the process.
+        </p>
+        <form class="auth__form" action="/auth/reset" method="POST">
+          <div class="form-control">
+            <label for="email">Email Address</label>
+            <input type="email" name="email" id="email" />
+          </div>
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          <button class=" primary__btn action__btn" type="submit">Reset Password</button>
         </form>
-    </main>
-<%- include('../includes/end.ejs') %>
+      </div>
+      </div>
+    </div>
+        
+    </div>
+  </main>
+  <%- include('../includes/footer.ejs') %> <%- include('../includes/end.ejs') %>
+

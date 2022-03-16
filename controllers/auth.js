@@ -45,7 +45,7 @@ exports.getLogin = (req, res, next) => {
 
 exports.getGoogleCallback = (req, res) => {
   req.session.isLoggedIn = true;
-  req.session.user = req.body.user;
+   req.session.user = req.user;
   req.session.save((err) => {
     if (err) {
       console.log(err);
@@ -56,7 +56,7 @@ exports.getGoogleCallback = (req, res) => {
 
 exports.getFacebookCallback = (req, res) => {
   req.session.isLoggedIn = true;
-  req.session.user = req.body.user;
+  req.session.user = req.user;
   req.session.save((err) => {
     if (err) {
       console.log(err);
@@ -91,7 +91,6 @@ exports.getSignup = (req, res, next) => {
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
-
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -165,15 +164,17 @@ exports.postSignup = (req, res, next) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
   const password = req.body.password;
+  const image = `https://ui-avatars.com/api/?name=${firstName}+${lastName}&rounded=true&background=0D986A&color=fff`;
 
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    console.log(errors.array());
+    console.log(errors);
     return res.status(422).render("auth/signup", {
       path: "/signup",
       pageTitle: "Signup",
-      errMessage: errors.array()[0].msg,
+      // errMessage: errors.array()[0].msg,
+      errMessage: errors.array(),
       successMessage: null,
       oldInput: {
         email: email,
@@ -192,6 +193,7 @@ exports.postSignup = (req, res, next) => {
         email: email,
         firstName: firstName,
         lastName: lastName,
+        image: image,
         password: hashedPassword,
         plantList: [],
       });
@@ -307,9 +309,10 @@ exports.getNewPassword = (req, res, next) => {
           userId: user._id.toString(),
           passwordToken: token,
           oldInput: {
-            password: password,
-            confirmPassword: confirmPassword,
+            password: '',
+            confirmPassword: '',
           },
+          validationErrors: [],
         });
       })
       .catch((err) => {
@@ -375,6 +378,7 @@ exports.postNewPassword = (req, res, next) => {
       })
       .then((result) => {
         req.session.isLoggedIn = false;
+        req.session.isAdmin = false;
 
         return req.session.save((err) => {
           if (err) {

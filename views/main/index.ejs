@@ -1,88 +1,44 @@
 <%- include('../includes/head.ejs') %>
-<link rel="stylesheet" href="/css/plant.css" />
-<body>
-  <a class="skip-main" href="#main">Skip to main content</a>
-  <%- include('../includes/navigation.ejs') %>
-  <main id='main'>
-    <% if (successMessage) { %>
-      <div class="user-message user-message--success"><%= successMessage %></div>
-  <% } %>
-    <% if (errorMessage) { %>
-      <div class="user-message user-message--error"><%= errorMessage %></div>
-  <% } %>
-    <div class="container container-row">
-      <div class="container__text">
-        <h1 class="display-4">How to Become a Plant Parent</h1>
-        
-        <form action="/subscribe" method="post">
-          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-          <button class="btn" onclick="toggleSpinner()" type="submit">Subscribe</button>
-      </form>
-        <p class="lead" onclick="toggleSpinner()">
-          The house plants we grow come from a huge range of habitats and
-          ecologies around the worlds. Their home can be a reinforces floor or a
-          mountaintop. they can survive in a bleakest desert and the wettest
-          swamps, and it is these conditions we need to emulate at home if the
-          plants are to thrive. 
-          
-        </p><p>Plant Parent helps you find perfect plants for your home environment
-          and manage your plants by keeping all the information about your
-          plants in one place.</p>
-      </div>
-      <div class="container__image">
-        <img src="/images/cat_plants2.jpg" alt="" />
-      </div>
-    </div>
-    <div class="">
-      <div class="container align-center">
-        <h2 class="card-title">Find a perfect baby-plant</h2>
-        <p class="card-text">
-          Confused what kind of plant is the best fit for your home? Make first
-          step to become a plant parent and click the search button
-        </p>
-        <p class="lead">
-          <a class="btn btn-outline-success" href="/search" role="button"
-            >Search</a
-          >
-        </p>
-      </div>
-      <div class="container">
-        <h4 class="card-title">Light</h4>
-        <p class="card-text">
-          This is a crucial source of energy for all plants. Although the amount
-          of light an individual plant needs varies, all plants require some
-          during the day. The majority of plants we grow in our homes need
-          bright, indirect light rather than direct sunlight, but there are
-          plenty than prefer a shadier spot. The amount of light a room receives
-          depends on the size of the windows, whether the light source is direct
-          or indirect.
-        </p>
-      </div>
-      <div class="container">
-        <h4 class="card-title">Watering</h4>
-        <p class="card-text">
-          Many plants, particulary those from the tropics, require a warm, moist
-          atmosphere, with vapour levels in the air that are much higher than we
-          can achieve normally in our centrally heated homes. Without the
-          appropriate humidity level, plant leaves shrivel, turn brown and drop
-          off, and growth can be stuned. Steamy bathrooms and kitchen are the
-          obvious choice for plants such as these.
-        </p>
-      </div>
-      <div class="container">
-        <br />
-        <h4 class="card-title">Temperature</h4>
-        <p class="card-text">
-          Almost all house plants like temperatures that are warm during the day
-          and cooler at night. Some such a tropical plants want a hotter spot,
-          while others such as palms and carnivotous plnants prefer life a
-          little cooler. However, none likes dramatic swing of hot or cold, so
-          avoid any draughts near doors and windowsills and keep plants away
-          from ovens, radiators, fires and heaters. Note that some plants may
-          need a cooler winter temperature, to promote flowering.
-        </p>
-      </div>
-    </div>
-  </main>
-  <%- include('../includes/end.ejs') %>
+<link rel="stylesheet" href="/css/search-bar.css" />
 
+</head>
+<body>
+  <main>
+    <% if (successMessage) { %>
+      <div id="overlay">
+         <div class="alert__card card">
+        <p class="message"><%= successMessage %></p>
+        <div class="alert__actions">
+          <button class="btn secondary__btn action__btn" type="button" onclick="removeOverlay()">OK</button>
+        </div>
+      </div>
+      </div>
+      <% } %> <% if (errorMessage) { %>
+        <div id="overlay">
+          <div class="alert__card card">
+         <p class="message"><%= errorMessage %></p>
+         <div class="alert__actions">
+           <button class="btn primary__btn action__btn" type="button" onclick="removeOverlay()">OK</button>
+         </div>
+       </div>
+       </div>
+      <% } %>
+    <div class="home">
+      <div class="wrapper">
+        <%- include('../includes/header.ejs') %>
+        <div class="search">
+          <div class="title">
+            <span>Become a Plant Parent</span>
+          </div>
+          <div class="subtitle">
+            <span>There's a right plant for everyone!</span>
+          </div>
+          <%- include('../includes/search-bar.ejs') %>
+        </div>
+      </div>
+    </div>
+    <%- include('../includes/subscribe.ejs') %>
+  </main>
+  <%- include('../includes/footer.ejs') %>
+   <%- include('../includes/end.ejs') %>
+</body>

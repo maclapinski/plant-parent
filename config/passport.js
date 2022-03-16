@@ -49,7 +49,8 @@ module.exports = function (passport) {
           facebookId: profile.id,
           email: profile.email,
           image: profile.photos[0].value,
-          plantList: [],displayName: profile.displayName,
+          plantList: [],
+          displayName: profile.displayName,
         });
 
         try {

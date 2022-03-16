@@ -1,0 +1,109 @@
+.grid {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 0.6fr));
+  justify-content: space-around;
+  margin: 30px auto 50px;
+  max-width: 1100px;
+  width: 100%;
+}
+
+.plant-card {
+  border-radius: 20px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.6);
+  padding: 10px 15px;
+  .card__header,
+  .card__content {
+    padding: 13px;
+  }
+  .card__header {
+    display: flex;
+    height: 95px;
+    justify-content: space-between;
+    h1 {
+      font-size: 1.7rem;
+      font-weight: 500;
+      margin: 0.2rem 0;
+      padding-right: 10px;
+    }
+    .add-to-wishlist_container {
+      background-color: #ffffff;
+      border-radius: 13px;
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+      display: flex;
+      height: fit-content;
+      padding: 10px;
+      padding-bottom: 7px;
+      padding-top: 12px;
+      transition: all 0.1s ease-in-out;
+      .checked {
+        fill: #fa2323;
+        stroke: #fa2323;
+      }
+
+      svg {
+        stroke: #404040;
+        transition: all 0.1s ease-in-out;
+        path {
+          stroke: inherit;
+        }
+      }
+      &:hover {
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.7);
+      }
+      &:hover svg {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  .card__image {
+    align-items: center;
+    display: flex;
+    height: 300px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .card__content {
+    margin: 0 auto;
+    width: 301px;
+    .row {
+      margin: 5px 0;
+    }
+    .label {
+      color: #757575;
+      font-weight: 600;
+      margin-right: 10px !important;
+    }
+    .value {
+      color: #0d986a;
+      display: flex;
+      font-weight: 600;
+      padding: 0 5px;
+      padding-left: 5px;
+      text-transform: capitalize;
+      p {
+        text-transform: capitalize;
+      }
+    }
+    .icon {
+      margin-right: 10px;
+    }
+  }
+  
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: end;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: 7px;
+    max-width: 100%;
+    text-align: center;
+    width: fit-content;
+    .action__btn{
+      margin: 5px 7px;
+    }
+  }
+}

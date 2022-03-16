@@ -1,12 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Plant Parent</title>
+    <meta name="author" content="Mac Lapinski">
+    <meta name="image" property="og:image" content="https://plant-parent-app.herokuapp.com/images/preview2.jpg" />
+    <meta
+      property="og:description"
+      content="• Plant Parent is an app for plant lowers that helps to discover new plants and manage owned plants.
+      •	Plant Parent app includes features such as authentication, authorization, CSRF protection, POST action protection, route protection, password encryption, MongoDB storage, sending emails, and online payments.
+      •	Future features include a user’s forum and a plant-trading platform. 
+      "
+    />
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title><%= pageTitle %></title>
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
-    
-    <link href="/fontawesome/css/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/main.css">
+    <link href="/fontawesome/css/all.css" rel="stylesheet" />
+
+    <!-- <link rel="stylesheet" href="/css/main.css"> -->
+    <link rel="stylesheet" href="<%= env === 'development' ? '/styles/css/main.css' : '/css/main.css' %> " />
+  </head>
+</html>

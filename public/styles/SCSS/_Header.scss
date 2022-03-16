@@ -1,0 +1,107 @@
+.header {
+  align-items: center;
+  display: flex;
+  height: 90px;
+  justify-content: space-between;
+  margin: 0 auto;
+  width: 100%;
+
+  .profile-button_container {
+    position: relative;
+
+    .profile-button {
+      align-items: center;
+      background-color: #ffffff;
+      border: 1px solid #dddddd;
+      border-radius: 30px;
+      color: #717171;
+      cursor: pointer;
+      display: flex;
+      height: 42px;
+      justify-content: space-between;
+      min-width: 77px;
+      padding-bottom: 3px;
+      padding-left: 10px;
+      padding-right: 3px;
+      padding-top: 3px;
+      position: relative;
+      width: fit-content;
+      transition: box-shadow 0.2s ease !important;
+      &:hover {
+        background-color: #fafafa;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
+      }
+      .avatar {
+        height: 35px;
+        border-radius: 50px;
+      }
+    }
+    .accordion_container {
+      color: #124c5f;
+    }
+    .avatar_container {
+      height: 100%;
+    }
+    .header-profile-menu {
+      background-color: #ffffff;
+      color: inherit;
+      display: none;
+      min-height: 96px;
+      margin-top: 10px;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      width: 200px;
+      z-index: 100;
+      .menu-item {
+        display: block;
+        margin: 0;
+        color: inherit;
+        padding: 7px 15px;
+        text-decoration: none;
+        &:first-of-type:not(:last-of-type) {
+          padding-top: 12px;
+          &:hover {
+            border-radius: 7px 7px 0 0;
+          }
+        }
+        button, form {
+          border: none;
+          background: none;
+          padding: 0;
+          color: inherit;
+          font-family: inherit;
+        }
+
+        .label {
+          color: #222222;
+          font-size: 14px;
+          letter-spacing: 0.04em;
+          line-height: 16px;
+          padding-bottom: 2px;
+        }
+        .label-slim {
+          font-weight: 400 !important;
+        }
+      }
+      .menu-item:hover, button:hover {
+        background-color: #f3f3f3;
+      }
+      form {
+        button{
+          border: none;
+          background-color: white;
+          text-align: left;
+          padding: 7px 15px;
+          font-size: 14px;
+          margin-top: 5px;
+          font-family: inherit;
+          width: 100%;
+          border-radius: 0 0 7px 7px;
+          cursor: pointer;
+        }
+        margin-top: 5px !important;
+      }
+    }
+  }
+}

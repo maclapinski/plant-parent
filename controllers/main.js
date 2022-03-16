@@ -39,6 +39,28 @@ exports.getIndexPage = (req, res, next) => {
     successMessage: successMsg,
   });
 };
+exports.getNewIndexPage = (req, res, next) => {
+  let successMsg = req.flash("success");
+  let errMsg = req.flash("error");
+
+  if (successMsg.length > 0) {
+    successMsg = successMsg[0];
+  } else {
+    successMsg = null;
+  }
+
+  if (errMsg.length > 0) {
+    errMsg = errMsg[0];
+  } else {
+    errMsg = null;
+  }
+  res.render("main/new_index", {
+    path: "/",
+    pageTitle: "Index",
+    errorMessage: errMsg,
+    successMessage: successMsg,
+  });
+};
 exports.getPrivacyPolicy = (req, res, next) => {
   let successMsg = req.flash("success");
   let errMsg = req.flash("error");
@@ -52,7 +74,7 @@ exports.getPlants = async (req, res, next) => {
   const usrPlants = [];
   const usrWishList = [];
   try {
-    const plants = await Plant.find();
+    const plants = await Plant.find().sort({name:1});
 
     if (req.user) {
       for (item of req.user.plantList) {
@@ -75,7 +97,7 @@ exports.getPlants = async (req, res, next) => {
   }
 };
 
-exports.getPlant = async (req, res, next) => {
+exports.getPlantDetails = async (req, res, next) => {
   const plantId = req.params.plantId;
   let inUsrPlants = false;
 
@@ -106,11 +128,10 @@ exports.getPlant = async (req, res, next) => {
 exports.getUserWishList = async (req, res, next) => {
   try {
     const user = await req.user.populate("wishList.plant");
-    const plants = user.wishList;
     res.render("main/user-wish-list", {
       path: "/user-wish-list",
       pageTitle: "My Wishlist",
-      plants: plants,
+      userWishList: user.wishList,
       errorMessage: req.flash("error"),
     });
   } catch (err) {
@@ -122,10 +143,13 @@ exports.getUserPlantList = async (req, res, next) => {
   try {
     const user = await req.user.populate("plantList.plant");
     const plants = user.plantList;
+    console.log(plants);
     res.render("main/user-plant-list", {
       path: "/user-plant-list",
       pageTitle: "My Plants",
       plants: plants,
+      userPlants: plants,
+      userWishList: [],
       errorMessage: req.flash("error"),
     });
   } catch (err) {
@@ -162,9 +186,8 @@ exports.getSearch = (req, res, next) => {
 
 exports.getProfile = (req, res, next) => {
   const user = req.user;
-  user.avatar = user.image
-    ? user.image
-    : `https://ui-avatars.com/api/?name=${user.firstName}+${user.lastName}&rounded=true`;
+
+  console.log(user);
   res.render("main/profile", {
     path: "/profile",
     pageTitle: "User Profile",
@@ -190,9 +213,9 @@ exports.getPremium = (req, res, next) => {
       .then((result) => {
         const items = [
           {
-            name: "Premium membership",
+            name: "Plant Parent Premium Membership",
             description:
-              "Premium membership gives the user access to user forum. CAUTION! THIS IS JUST A TEST. USE FAKE CREDIT CARD DETAILS",
+              "Premium membership gives the user access to user forum. CAUTION! THIS IS JUST A TEST. USE FAKE CREDIT CARD NUMBER 5454 5454 5454 5454",
             amount: 99,
             currency: "usd",
             quantity: 1,
@@ -260,9 +283,8 @@ exports.getSubscribe = (req, res, next) => {
 };
 
 exports.postAddToUserPlantList = (req, res, next) => {
-  const plantId = req.body.plantId;
+  const plantId = req.params.plantId;
   let onUserWishList = false;
-  const referer = req.headers.referer.split(req.headers.origin)[1];
 
   for (item of req.user.wishList) {
     if (item.plant.toString() === plantId) {
@@ -279,28 +301,28 @@ exports.postAddToUserPlantList = (req, res, next) => {
         req.user.deleteFromUserWishList(plantId);
       }
     })
-    .then((result) => {
-      res.redirect(referer);
+    .then(() => {
+      console.log("ADDED PLANT");
+      res.status(200).json({ message: "Success!" });
     })
     .catch((err) => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
+      res.status(500).json({ message: "Adding Plant failed." });
     });
 };
+
 exports.postAddToUserWishList = (req, res, next) => {
-  const plantId = req.body.plantId;
+  const plantId = req.params.plantId;
+
   Plant.findById(plantId)
     .then((plant) => {
       return req.user.addToUserWishList(plant);
     })
-    .then((result) => {
-      res.redirect("/user-wish-list");
+    .then(() => {
+      console.log("ADDED PLANT");
+      res.status(200).json({ message: "Success!" });
     })
     .catch((err) => {
-      const error = new Error(err);
-      error.httpStatusCode = 500;
-      return next(error);
+      res.status(500).json({ message: "Adding Plant failed." });
     });
 };
 
@@ -451,10 +473,8 @@ exports.postSearch = (req, res, next) => {
 };
 
 exports.postSubscribe = (req, res, next) => {
-  if (!req.user.email && !req.body.email) {
-    return res.redirect("/subscribe");
-  }
-  const email = req.body.email ? req.body.email : req.user.email;
+  
+  const email = req.body.email;
 
   crypto.randomBytes(32, (err, buffer) => {
     if (err) {
@@ -468,7 +488,7 @@ exports.postSubscribe = (req, res, next) => {
       .then((subscriber) => {
         if (subscriber !== null) {
           req.flash("error", `Subscription for ${email} already active`);
-          return res.redirect("/subscribe");
+          return res.redirect("/");
         }
         const newSubscriber = new Subscriber({
           email: email,
